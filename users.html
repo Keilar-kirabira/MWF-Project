@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MWF Users</title>
+    <!--bootstrap CSS-->
+    <link rel="stylesheet" href="CSS/bootstrap-5.3.7-dist/css/bootstrap.css" />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="CSS2/users.css"/>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand d-flex flex-column" href="dashboard.html">
+          <img src="images/mwflogo.png" alt="MWF Logo" width="40" height="40" />
+          <span>MWF Ltd</span>
+          <small class="text-muted" style="font-size: 12px"
+            >Strong Wood. Strong Partnerships.</small
+          >
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="suppliers.html">Suppliers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="stock.html">Stock</a>
+            </li>
+           <li class="nav-item">
+              <a class="nav-link" href="sales.html">Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="users.html">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="customers.html">Customers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="index.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container mt-5 mb-5">
+      <h2 class=" mb-4">Manage Users</h2>
+
+      <!-- Add User Form -->
+      <div class="card mb-5">
+        <div class="card-header bg-green text-white">Add New User</div>
+        <div class="card-body">
+          <form id="addUserForm">
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label for="userName" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userName"
+                  placeholder="Enter full name"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="userEmail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="userEmail"
+                  placeholder="Enter email"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="userRole" class="form-label">Role</label>
+                <select class="form-select" id="userRole" required>
+                  <option value="" disabled selected>Select role</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Sales Agent">Sales Agent</option>
+                  <option value="Attendant">Attendant</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add User</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Users Table -->
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody">
+            <tr>
+              <td>Sarah Mukasa</td>
+              <td>sarah.mukasa@example.com</td>
+              <td>Manager</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-1" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>John Kato</td>
+              <td>john.kato@example.com</td>
+              <td>Sales Agent</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-1" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <!-- More sample users here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.minjs"></script>
+  </body>
+</html>

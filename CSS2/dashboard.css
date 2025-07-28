@@ -1,0 +1,75 @@
+/*  General Layout  */
+body {
+  background-color: #F9F6EF;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333333;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
+}
+
+h2, h4, h5 {
+  color: #245A36; /* Deep green titles */
+}
+
+p {
+  color: #333333;
+}
+
+/* ========== Navbar Branding ========== */
+.navbar-brand span {
+  font-weight: bold;
+  color: #D4A373; /* Soft wood tone */
+}
+
+.navbar-brand small {
+  color: #A85D26; /* Warm brown slogan */
+}
+
+/* ========== Summary Cards ========== */
+.card.bg-success {
+  background-color: #245A36 !important;
+}
+
+.card.bg-primary {
+  background-color: #A85D26 !important;
+}
+
+.card.bg-warning {
+  background-color: #D4A373 !important;
+  color: #000;
+}
+
+.card.bg-danger {
+  background-color: #a83232 !important;
+}
+
+/* ========== Buttons ========== */
+.btn-outline-dark {
+  border-color: #245A36;
+  color: #245A36;
+}
+
+.btn-outline-dark:hover {
+  background-color: #245A36;
+  color: white;
+}
+
+
+/* ========== Footer ========== */
+footer {
+  font-size: 14px;
+  color: #666;
+}

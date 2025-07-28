@@ -1,0 +1,54 @@
+/* ---------- Global Theme Colors ---------- */
+body {
+  background-color:  #F9F6EF;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333333;
+}
+/* ---- Navbar ---- */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
+}
+
+h2, h4 {
+  color: #6B4226; /* Deep wood brown */
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #45a049;
+}
+
+/* ---------- Table Styles ---------- */
+table th {
+  background-color: #6B4226 !important;
+  color: #fff;
+}
+
+.bg-light {
+  background-color: #f0f0f0 !important;
+}
+
+.text-muted {
+  font-size: 14px;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background-color: #eee;
+  font-size: 14px;
+}

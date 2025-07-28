@@ -1,0 +1,93 @@
+
+
+/* ---- General Styling ---- */
+body {
+  background-color: #F9F6EF; /* Light Cream */
+  color: #333333; /* Dark Gray text */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
+}
+
+/* ---- Headings ---- */
+h2 {
+  color: #245A36 !; /* Deep Green */
+  font-weight: 600;
+}
+
+/* ---- Card/Form Styling ---- */
+.card {
+  box-shadow: 0 0 10px rgba(36, 90, 54, 0.1); /* Soft green shadow */
+  border: 1px solid #D4A373;
+  border-radius: 12px;
+}
+
+.card-header {
+  background-color: #245A36; /* Deep Green */
+  color: #F9F6EF; /* Light text */
+  font-weight: 500;
+}
+
+/* ---- Buttons ---- */
+.btn-primary {
+  background-color: #A85D26; /* Warm Brown */
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #87491F; /* Darker brown on hover */
+}
+
+.btn-warning {
+  background-color: #D4A373; /* Wood/Gold Tone */
+  color: #333333;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #A85D26; /* Warm Brown */
+  border: none;
+}
+
+/* ---- Table Styling ---- */
+.table th,
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #245A36; /* Deep Green */
+  color: #F9F6EF;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f3ede4; /* Subtle cream stripe */
+}
+
+/* ---- Footer ---- */
+footer {
+  background-color: #F9F6EF;
+  color: #333333;
+  padding-top: 10px;
+}
+
+footer i {
+  color: #245A36;
+  font-size: 1.2rem;
+  margin: 5px;
+}

@@ -1,0 +1,90 @@
+/* ========== General ========== */
+body {
+  background-color: #F9F6EF;
+  color: #333333;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2, h4, h5 {
+  color: #245A36;
+}
+
+a {
+  color: #A85D26;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ========== Navbar Branding ========== */
+.navbar-brand span {
+  font-weight: bold;
+  color: #D4A373;
+}
+
+.navbar-brand small {
+  color: #A85D26;
+}
+
+/* ---- General Styling ---- */
+body {
+  background-color: #F9F6EF; /* Light Cream */
+  color: #333333; /* Dark Gray text */
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
+}
+
+
+/* ========== Buttons ========== */
+.btn-outline-dark {
+  border-color: #245A36;
+  color: #245A36;
+}
+
+.btn-outline-dark:hover {
+  background-color: #245A36;
+  color: white;
+}
+
+/* ========== Product Cards ========== */
+.card-title {
+  color: #A85D26;
+}
+
+.card-text {
+  font-size: 14px;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+
+/* ========== Section Titles ========== */
+section h4, section h5 {
+  color: #245A36;
+}
+
+/* ========== Footer ========== */
+footer {
+  font-size: 14px;
+  color: #666;
+}
