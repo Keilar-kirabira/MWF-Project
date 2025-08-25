@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MWF login</title>
-    <!--bootstrap CSS-->
-    <link rel="stylesheet" href="CSS/bootstrap-5.3.7-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="CSS2/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MWF Login</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="CSS/bootstrap-5.3.7-dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="CSS2/index.css" />
 </head>
 <body>
-   <div class="login-card">
-    <h3 class="text-center mb-3">Mayondo Wood and Funiture Ltd</h3>
+  <div class="login-card container mt-5">
+    <h3 class="text-center mb-3">Mayondo Wood and Furniture Ltd</h3>
     <p class="text-center text-muted">Login to continue</p>
-   
-    <form action="dashboard.html" method="get">
-  <div class="mb-3">
-    <label for="email" class="form-label">Email or Username</label>
-    <input type="text" class="form-control" id="email" placeholder="Enter email or username">
-  </div>
-  
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Enter password">
+
+    <!-- <form id="loginForm" action="dashboard.html" method="get" novalidate> -->
+    <form id="loginForm" novalidate>  
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email or Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter email or username"
+          required
+        />
+        <div class="invalid-feedback">Please enter your valid email or username.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          minlength="6"
+       required />
+        <div class="invalid-feedback">Password must be at least 6 characters.</div>
+      </div>
+
+      <div class="mb-3 ">
+        <label for="role" class="form-label">Select Role</label>
+        <select id="role" name="role" class="form-select" required>
+          <option value=""selected disabled>Select your role</option>
+          <option value="manager">Manager</option>
+           <option value="sales attendant">Sales Attendant</option>
+        </select>
+            <div class="invalid-feedback">Please select your role.</div>
+
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success">Login</button>
+      </div>
+
+      <p class="text-center mt-3"><a href="#">Forgot password?</a></p>
+    </form>
   </div>
 
-  <div class="d-grid">
-    <button type="submit" class="btn btn-success">Login</button>
-  </div>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <p class="text-center mt-3"><a href="#">Forgot password?</a></p>
-</form>
-
-      
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.minjs"></script>  
+  <script src="Scripts/index.js"></script>
 </body>
 </html>

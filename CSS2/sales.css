@@ -1,0 +1,66 @@
+/* General Layout */
+body {
+  background-color: #F9F6EF; /* Light Cream */
+  font-family: 'Segoe UI', sans-serif;
+  color: #333333;
+}
+
+h2, h4, h3 {
+  color: #245A36; /* Deep Green */
+}
+
+/* Navbar */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar .nav-link {
+  color: #fff !important;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Soft Wood Tone */
+}
+
+.navbar-brand span {
+  font-weight: bold;
+  color: #D4A373; /* Soft Wood Tone */
+}
+
+.navbar-brand small {
+  color: #A85D26; /* Warm Brown */
+}
+
+/* Cart Table */
+#cart-items td {
+  vertical-align: middle;
+}
+
+.btn-danger {
+  background-color: #a83232;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #8a2828;
+}
+
+/* Buttons */
+.btn-outline-dark {
+  border-color: #245A36;
+  color: #245A36;
+}
+
+.btn-outline-dark:hover {
+  background-color: #245A36;
+  color: #fff;
+}
+
+/* Footer */
+footer {
+  font-size: 14px;
+  color: #666;
+  background-color: #f1f1f1;
+  
+}

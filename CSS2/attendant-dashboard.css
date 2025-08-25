@@ -1,0 +1,94 @@
+/* ========== General Layout ========== */
+body {
+  background-color: #F9F6EF; /* Light Cream */
+  font-family: 'Segoe UI', sans-serif;
+  color: #333333;
+}
+
+h2, h4, h5 {
+  color: #245A36; /* Deep Green titles */
+}
+
+p {
+  color: #333333;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.navbar .nav-link {
+  color: #fff !important;
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+  color: #D4A373 !important; /* Soft Wood Tone on hover */
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Soft Wood Tone highlight */
+}
+
+/* Branding */
+.navbar-brand span {
+  font-weight: bold;
+  color: #D4A373; /* Soft Wood Tone */
+}
+
+.navbar-brand small {
+  color: #A85D26; /* Warm Brown slogan */
+}
+
+/* ========== Summary Cards ========== */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card.bg-success {
+  background-color: #245A36 !important; /* Deep Green */
+  color: #fff !important;
+}
+
+.card.bg-primary {
+  background-color: #A85D26 !important; /* Warm Brown */
+  color: #fff !important;
+}
+
+.card.bg-warning {
+  background-color: #D4A373 !important; /* Gold / Wood Tone */
+  color: #000 !important;
+}
+
+.card.bg-danger {
+  background-color: #a83232 !important; /* Red for alerts */
+  color: #fff !important;
+}
+
+/* ========== Buttons ========== */
+.btn-outline-dark {
+  border-color: #245A36;
+  color: #245A36;
+  transition: 0.3s;
+}
+
+.btn-outline-dark:hover {
+  background-color: #245A36;
+  color: white;
+}
+
+/* ========== Footer ========== */
+footer {
+  font-size: 14px;
+  color: #A85D26 ;
+  /* background-color: black;
+  border-top: 2px solid #D4A373; Accent wood tone */
+}

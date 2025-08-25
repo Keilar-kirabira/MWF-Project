@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendant Dashboard | MWF</title>
+    <!--bootstrap CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="CSS2/attendant-dashboard.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand d-flex flex-column" href="attendant-dashboard.html">
+          <img src="images/mwflogo.png" alt="MWF Logo" width="40" height="40" />
+          <span>MWF Ltd</span> <small class="text-muted">Attendant</small>
+        </a>
+
+        <!-- Toggler for mobile -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="attendant-dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sales.html">Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item"><a class="nav-link text-danger" href="index.html">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container my-4">
+      <h2 class="welcome">Welcome, Attendant!</h2>
+      <p class="text-muted">Here is your dashboard overview.</p>
+
+      <!-- Summary Cards -->
+      <div class="row my-4">
+        <div class="col-md-4">
+          <div class="card text-center p-3 bg-success text-white">
+            <h5>Today's Sales</h5>
+            <p class="display-6">UGX 0</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center p-3 bg-primary text-white">
+            <h5>Total Sales This Week</h5>
+            <p class="display-6">UGX 0</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center p-3 bg-warning">
+            <h5>Products Available</h5>
+            <p class="display-6">0</p>
+          </div>
+        </div>
+      </div>
+      <!--quick links-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card p-4 text-center">
+            <h4>Record New Sale</h4>
+            <p>Enter customer details and record transactions.</p>
+            <a href="sales.html" class="btn btn-outline-dark">Go to Sales</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card p-4 text-center">
+            <h4>View Products</h4>
+            <p>Check available stock and product details.</p>
+            <a href="products.html" class="btn btn-outline-dark"
+              >View Products</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--about,contact and social-->
+    <section class="mt-5">
+      <h4>About MWF</h4>
+      <p>
+        Mayondo Wood and Furniture (MWF) is a B2B company that outsources
+        timber, poles, and both hard and soft woods from rural suppliers. We
+        also manufacture quality home and office furniture in our workshop.
+      </p>
+      <p>
+        Our goal is to provide durable, affordable wood products to construction
+        firms and furniture dealers across Uganda.
+      </p>
+
+      <div class="mt-4">
+        <h5>Contact Us</h5>
+        <p><strong>Phone:</strong> +256 789 123 456</p>
+        <p><strong>Email:</strong> info@mwfuganda.com</p>
+        <p><strong>Location:</strong> Kampala Industrial Area, Uganda</p>
+      </div>
+
+      <div class="mt-3">
+        <h5>Follow Us</h5>
+        <a href="#" class="me-3"><i class="bi bi-facebook"></i> Facebook</a>
+        <a href="#" class="me-3"><i class="bi bi-instagram"></i> Instagram</a>
+        <a href="#"><i class="bi bi-twitter-x"></i> X (Twitter)</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 mt-5 bg-dark">
+      <p>&copy; 2025 Mayondo Wood and Furniture (MWF). All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.minjs"></script>
+  </body>
+</html>
