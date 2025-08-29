@@ -1,0 +1,39 @@
+/*  General Layout  */
+body {
+  background-color: #F9F6EF;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333333;
+}
+
+/* ---- Navbar ---- */
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
+}
+
+h2, h4, h5 {
+  color: #245A36; /* Deep green titles */
+}
+
+p {
+  color: #333333;
+}
+
+/* ========== Navbar Branding ========== */
+.navbar-brand span {
+  font-weight: bold;
+  color: #D4A373; /* Soft wood tone */
+}
+
+.navbar-brand small {
+  color: #A85D26; /* Warm brown slogan */
+}

@@ -79,6 +79,7 @@
                   type="text"
                   class="form-control"
                   id="userName"
+                  name="userName"
                   placeholder="Enter full name"
                   required
                 />
@@ -89,13 +90,14 @@
                   type="email"
                   class="form-control"
                   id="userEmail"
+                  name="userEmail"
                   placeholder="Enter email"
                   required
                 />
               </div>
               <div class="col-md-4">
                 <label for="userRole" class="form-label">Role</label>
-                <select class="form-select" id="userRole" required>
+                <select class="form-select" id="userRole" name="userRole" required>
                   <option value="" disabled selected>Select role</option>
                   <option value="Manager">Manager</option>
                   <option value="Sales Agent">Sales Agent</option>

@@ -1,0 +1,33 @@
+body {
+  background-color: #F9F6EF;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.navbar {
+  background-color: #245A36; /* Deep Green */
+}
+
+.navbar-brand span {
+  color: #D4A373; /* Wood tone */
+  font-weight: bold;
+}
+
+h2, h4 {
+  color: #245A36;
+}
+
+.btn-outline-dark {
+  border-color: #245A36;
+  color: #245A36;
+}
+.btn-outline-dark:hover {
+  background-color: #245A36;
+  color: #fff;
+}
+
+footer {
+  font-size: 14px;
+  color: #666;
+  background-color: #F1ECE4;
+}

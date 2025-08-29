@@ -38,7 +38,7 @@
     <!-- Cart Section -->
     <div class="card p-4 mb-4">
       <h4>Cart</h4>
-        <table class="table table-bordered mt-3">
+        <table class="table table-bordered mt-3 table-striped">
         <thead class="table-light">
           <tr>
             <th>Product Type</th>
@@ -53,7 +53,7 @@
           <!-- Dynamic rows will be added here -->
         </tbody>
       </table>
-      <button id="addItemBtn" type="button" class="btn btn-outline-dark btn-sm">+ Add Item</button>
+      <button id="addItemBtn" type="button" class="btn btn-outline-dark btn-sm"> Add Item</button>
       <p class="fw-bold mt-3">Cart Subtotal: <span id="cart-subtotal">0</span> UGX</p>
     </div>
         
@@ -62,19 +62,19 @@
       <!-- Customer Name -->
       <div class="mb-3">
         <label class="form-label">Customer Name</label>
-        <input type="text" id="customerName" class="form-control" placeholder="Enter customer name" required>
+        <input type="text" id="customerName" class="form-control" name="name"  placeholder="Enter customer name" required>
       </div>
 
       <!-- Sales Agent -->
       <div class="mb-3">
         <label class="form-label">Sales Agent</label>
-        <input type="text" id="salesAgent" class="form-control" placeholder="Attendant name" value="Current Attendant" >
+        <input type="text" id="salesAgent" class="form-control"  name="salesAgent"   placeholder="Attendant name" value="Current Attendant" >
       </div>
 
       <!-- Transport Option -->
       <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="transportCheck">
         <label class="form-check-label" for="transportCheck">Add 5% Transport Fee</label>
+       <input type="checkbox" class="form-check-input" id="transportCheck" name="transportCheck">
       </div>
 
       <!-- Payment Method -->
