@@ -1,4 +1,4 @@
-/* General Layout */
+
 body {
   background-color: #F9F6EF; /* Light Cream */
   font-family: 'Segoe UI', sans-serif;
@@ -25,7 +25,7 @@ h2, h4, h3 {
 
 .navbar-brand span {
   font-weight: bold;
-  color: #D4A373; /* Soft Wood Tone */
+  color: #D4A373; 
 }
 
 .navbar-brand small {

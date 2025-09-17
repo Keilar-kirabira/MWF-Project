@@ -5,7 +5,7 @@ body {
   color: #333333;
 }
 
-/* ---- Navbar ---- */
+/*  Navbar  */
 .navbar {
   background-color: #245A36; /* Deep Green */
 }
@@ -28,7 +28,7 @@ p {
   color: #333333;
 }
 
-/* ========== Navbar Branding ========== */
+/*  Navbar Branding  */
 .navbar-brand span {
   font-weight: bold;
   color: #D4A373; /* Soft wood tone */
@@ -38,7 +38,7 @@ p {
   color: #A85D26; /* Warm brown slogan */
 }
 
-/* ========== Summary Cards ========== */
+/*  Summary Cards  */
 .card.bg-success {
   background-color: #245A36 !important;
 }
@@ -56,7 +56,7 @@ p {
   background-color: #a83232 !important;
 }
 
-/* ========== Buttons ========== */
+/*  Buttons  */
 .btn-outline-dark {
   border-color: #245A36;
   color: #245A36;
@@ -68,7 +68,7 @@ p {
 }
 
 
-/* ========== Footer ========== */
+/*  Footer */
 footer {
   font-size: 14px;
   color: #666;

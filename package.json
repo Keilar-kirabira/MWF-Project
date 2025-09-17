@@ -1,0 +1,31 @@
+{
+  "name": "mwf-project",
+  "version": "1.0.0",
+  "description": "**Mayondo Wood and Furniture** is a B2B management system designed for the wood and furniture industry. The project helps businesses manage their **products, stock, suppliers,sales,users of the system, loging in, reports for both sales and stock.**\r ---\r #summary of the files or pages and their uses\r - **`login.html` (Login Page)**  \r   Handles authentication so only authorized users can access the system.  forexample manager and sales attendants.\r   - **`dashboard.html` (Manager's Dashboard)**  \r   The manager is directed here after loging in.\r   The central navigation hub where the manager can move to Products, Sales, Stock, Suppliers, Customers, and Users pages.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keilar-kirabira/MWF-Project.git"
+  },
+  "keywords": [
+    "mayondo",
+    "wood",
+    "furniture",
+    "project"
+  ],
+  "author": "keilar kirabira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keilar-kirabira/MWF-Project/issues"
+  },
+  "homepage": "https://github.com/Keilar-kirabira/MWF-Project#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "pug": "^3.0.3"
+  }
+}
