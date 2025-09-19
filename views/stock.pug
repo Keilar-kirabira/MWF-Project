@@ -1,0 +1,90 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title MWF Stock Entry Form
+  link(rel='stylesheet' href='	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css')
+  link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css' rel='stylesheet')
+  link(rel='stylesheet' href='/css/stock.css')
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container
+    img(src='/images/mwflogo.png' alt='MWF Logo' width='40' height='40')
+    span MWF Ltd
+    small.text-muted(style='font-size: 12px') Strong Wood. Strong Partnerships.
+    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav')
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.ms-auto
+        li.nav-item
+          a.nav-link(href='dashboard.html') Dashboard
+        li.nav-item
+          a.nav-link(href='products.html') Products
+        li.nav-item
+          a.nav-link(href='suppliers.html') Suppliers
+        li.nav-item
+          a.nav-link.active(href='stock.html') Stock
+        li.nav-item
+          a.nav-link(href='users.html') Users
+        li.nav-item
+          a.nav-link(href='salesreports.html') Sales Reports
+        li.nav-item
+          a.nav-link.text-danger(href='index.html') Logout
+.container.mt-5
+  h2.mb-4 Stock Entry Form
+  form#stockForm(action='/stock' method='post')
+    .row.g-3
+      .col-md-6
+        label.form-label(for='productName') Product Name
+        select#productName.form-select(name='productName' required='')
+          option(value='' disabled='' selected='') Choose...
+          option(value='Timber') Timber
+          option(value='Pole') Pole
+          option(value='Hardwood') Hardwood
+          option(value='Softwood') Softwood
+          option(value='Bed') Bed
+          option(value='Sofa') Sofa
+          option(value='Chair') Chair
+          option(value='Tables') Tables
+          option(value='Cupboards') Cupboards
+          option(value='Office Chairs') Office Chairs
+          option(value='Dining Tables') Dining Tables
+      .col-md-6
+        label.form-label(for='productType') Type of Product
+        select#productType.form-select(name='productType' required='')
+          option(value='' disabled='' selected='') Choose...
+          option(value='Wood') Wood
+          option(value='Furniture') Furniture
+      .col-md-4
+        label.form-label(for='quantity') Quantity
+        input#quantity.form-control(type='number' name='quantity' min='1' placeholder='Enter quantity' required='')
+      .col-md-4
+        label.form-label(for='costPrice') Cost Price (UGX)
+        input#costPrice.form-control(type='number' name='costPrice' placeholder='Enter cost price' required='')
+      .col-md-4
+        label.form-label(for='productPrice') Product Price (UGX)
+        input#productPrice.form-control(type='number' name='productPrice' placeholder='Enter Product price' required='')
+      .col-md-6
+        label.form-label(for='supplierName') Supplier Name
+        input#supplierName.form-control(type='text' name='supplierName' placeholder='Enter supplier name' required='')
+      .col-md-6
+        label.form-label(for='entryDate') Date
+        input#entryDate.form-control(type='date' name='entryDate' required='')
+      .col-md-6
+        label.form-label(for='quality') Quality
+        select#quality.form-select(name='quality' required='')
+          option(value='' disabled='' selected='') Choose...
+          option(value='High') High
+          option(value='Medium') Medium
+          option(value='Low') Low
+      .col-md-3
+        label.form-label(for='color') Color
+        input#color.form-control(type='text' name='color' placeholder='Enter color')
+      .col-md-3
+        label.form-label(for='measurements') Measurements
+        input#measurements.form-control(type='text' name='measurements' placeholder='Enter 200cm x 150cm x 90cm')
+      .col-12
+        button.btn.btn-success(type='submit') Submit Stock
+footer.text-center.text-muted.mt-5.mb-3
+  | &copy; 2025 MWF Ltd. All rights reserved.
+script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
+script(src='Scripts/stock.js')
