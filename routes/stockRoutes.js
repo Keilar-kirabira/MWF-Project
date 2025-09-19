@@ -6,7 +6,7 @@ router.get("/stock", (req, res)=>{
 });
 
 router.post("/stock", (req, res)=>{
-
+   console.log(req.body);
 });
 
 
