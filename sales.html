@@ -1,108 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Record Sale | MWF</title>
-  <!--bootsrap 5.3.7 css-->
-  <link href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!--external css-->
-    <link rel="stylesheet" href="/public/css/sales.css">
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-       <img src="/public/images/mwflogo.png" alt="MWF Logo" width="40" height="40" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Record Sale | MWF</title>
+    <link
+      href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/css/sales.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <img
+          src="/public/images/mwflogo.png"
+          alt="MWF Logo"
+          width="40"
+          height="40"
+        />
         <span>MWF</span> <small>Sales</small>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="attendant-dashboard.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link active" href="sales.html">Sales</a></li>
-          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link text-danger" href="index.html">Logout</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-<div class="container mt-5">
-  <h2 class="mb-4  text-center" >Record New Sale</h2>
-  <p> Fill in the customer details and finalize the sale.</p>
-  <h2>Sale Entry Form</h2>
-  <form id="saleForm" action="/sales" method="post">
-    <div class="row g-3">
-      <div class="col-md-6">
-        <label for="customerName" class="form-label">Customer Name</label>
-        <input type="text" class="form-control" id="customerName" name="customerName" required/>
-      </div>
-      <div class="col-md-6">
-        <label for="productType" class="form-label"> Type of Product</label>
-        <select class="form-select" id="productType" name="productType" required>
-          <option value="" selected disabled>Choose...</option>
-          <option value="Wood">Wood</option>
-          <option value="Furniture">Furniture</option>
-        </select>
-      </div>
-       <div class="col-md-6">
-        <label for="productName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="productName" name="productName" required/>
-      </div>
-      <div class="col-md-6">
-        <label for="quantity" class="form-label">Quantity</label>
-        <input type="number" class="form-control" id="quantity" name="quantity" required/>
-      </div>
-      <div class="col-md-6">
-        <label for="unitPrice" class="form-label">Unit Price (UGX)</label>
-        <input type="number" class="form-control" id="unitPrice" name="unitPrice" required/>
-      </div>
-      <div class="col-md-6">
-        <label for="subtotal" class="form-label">sub Total (UGX)</label>
-        <input type="text" class="form-control" id="subtotal" name="subtotal" readonly/>
-      </div>
-      <div class="col-md-6">
-        <label for="transportCheck" class="form-check-label">Add 5% Transport Fee</label>
-        <input type="checkbox" class="form-check-input" id="transportCheck" name="transportCheck"/>
-      </div>
-      <div class="col-md-6">
-        <label for="totalPrice" class="form-label">Total Price (UGX)</label>
-        <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly/>
-      </div>
-      <div class="col-md-6">
-        <label for="paymentType" class="form-label"> Type of Payment</label>
-        <select class="form-select" id="paymentType" name="paymentType" required>
-          <option value="" selected disabled>Choose...</option>
-          <option value="cash">Cash</option>
-          <option value="cheque">Cheque</option>
-          <option value="bank overdraft">Bank Overdraft</option>
-        </select>
-      </div>
-      <div class="col-md-6">
-          <label for="saleDate" class="form-label">Date</label>
-          <input type="date" class="form-control" id="saleDate"  name="saleDate" required/>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="attendant-dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="sales.html">Sales</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-danger" href="index.html">Logout</a>
+            </li>
+          </ul>
         </div>
-      <div class="col-md-6">
-        <label for="salesagentName" class="form-label">Salesagent Name</label>
-        <input type="text" class="form-control" id="salesagentName" name="salesagentName" required/>
       </div>
-      <div class="col-md-6">
+    </nav>
+    <div class="container mt-5">
+      <h2 class="mb-4 text-center">Record New Sale</h2>
+      <p class="text-center">
+        Fill in the customer details and finalize the sale.
+      </p>
+      <h2>Sale Entry Form</h2>
+      <form id="saleForm" action="/Addsale" method="post">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="customerName" class="form-label">Customer Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="customerName"
+              name="customerName"
+              placeholder="Enter Customer Name"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="productType" class="form-label"> Type of Product</label>
+            <select
+              class="form-select"
+              id="productType"
+              name="productType"
+              required
+            >
+              <option value="" selected disabled>Choose...</option>
+              <option value="Wood">Wood</option>
+              <option value="Furniture">Furniture</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="productName" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              name="productName"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              name="quantity"
+              min="1"
+              placeholder="Enter quantity"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="unitPrice" class="form-label">Unit Price (UGX)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="unitPrice"
+              name="unitPrice"
+              placeholder="Enter unit price"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="totalPrice" class="form-label">Total Price (UGX)</label>
+            <input
+              type="text"
+              class="form-control"
+              id="totalPrice"
+              name="totalPrice"
+              readonly
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="transportCheck" class="form-check-label"
+              >Add 5% Transport Fee</label
+            >
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="transportCheck"
+              name="transportCheck"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="paymentType" class="form-label"> Type of Payment</label>
+            <select
+              class="form-select"
+              id="paymentType"
+              name="paymentType"
+              required
+            >
+              <option value="" selected disabled>
+                --Select Payment Type--
+              </option>
+              <option value="cash">Cash</option>
+              <option value="cheque">Cheque</option>
+              <option value="bank overdraft">Bank Overdraft</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="paymentDate" class="form-label">Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="paymentDate"
+              name="paymentDate"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="salesagentName" class="form-label"
+              >Salesagent Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="salesagentName"
+              name="salesagentName"
+              required
+            />
+          </div>
+          <!-- <div class="col-md-6">
         <label for="receiptNumber" class="form-label">Receipt Number</label>
         <input type="text" class="form-control" id="receiptNumber" name="receiptNumber" value="Auto-generated" readonly>
-      </div>
-      <div class="col-12">
-            <button type="submit" class="btn btn-success">Submit Sale</button>
+      </div> -->
+          <div class="col-12">
+            <button type="submit" class="btn btn-dark">Submit Sale</button>
           </div>
+        </div>
+      </form>
     </div>
-  </form>
-
-</div>
-  <!-- Footer -->
-  <footer class="text-center py-3 mt-5">
-    <p>&copy; 2025 Mayondo Wood and Furniture (MWF). All Rights Reserved.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="text-center py-3 mt-5">
+      <p>&copy; 2025 Mayondo Wood and Furniture (MWF). All Rights Reserved.</p>
+    </footer>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="js/sales.js"></script>
-</body>
+    <script src="js/sales.js"></script>
+  </body>
 </html>
