@@ -1,0 +1,110 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title MWF Dashboard
+link(rel="stylesheet", href="CSS/bootstrap-5.3.7-dist/css/bootstrap.css")
+link(href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css", rel="stylesheet")
+link(rel="stylesheet", href="CSS2/dashboard.css")
+//  Navbar 
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container
+    a.navbar-brand.d-flex.flex-column(href="dashboard.html")
+      img(src="images/mwflogo.png", alt="MWF Logo", width="40", height="40")
+      span MWF Ltd
+      small.text-muted(style="font-size: 12px") Strong Wood. Strong Partnerships.
+    button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarNav")
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarNav
+      ul.navbar-nav.ms-auto
+        li.nav-item
+          a.nav-link.active(href="dashboard.html") Dashboard
+        li.nav-item
+          a.nav-link(href="products.html") Products
+        li.nav-item
+          a.nav-link(href="suppliers.html") Suppliers
+        li.nav-item
+          a.nav-link(href="stock.html") Stock
+        li.nav-item
+          a.nav-link(href="sales.html") Sales
+        li.nav-item
+          a.nav-link(href="users.html") Users
+        li.nav-item
+          a.nav-link(href="salesreports.html") Sales Reports
+        li.nav-item
+          a.nav-link.text-danger(href="index.html") Logout
+//  Main Content 
+.container.mt-5
+  //  Welcome 
+  h2.mb-3 Welcome to MWF Dashboard, Manager
+  p.text-muted.
+    
+    Manage your furniture and wood inventory with ease.
+    
+  // cards
+  .row.mt-4
+    .col-md-3.mb-4
+      .card.text-white.bg-success.h-100
+        .card-body
+          h5.card-title Total Products
+          p.card-text 132 in stock
+    .col-md-3.mb-4
+      .card.text-white.bg-primary.h-100
+        .card-body
+          h5.card-title Total Sales
+          p.card-text UGX 12,000,000 in July
+    .col-md-3.mb-4
+      .card.text-white.bg-warning.h-100
+        .card-body
+          h5.card-title Pending Deliveries
+          p.card-text 4 orders awaiting transport
+    .col-md-3.mb-4
+      .card.text-white.bg-danger.h-100
+        .card-body
+          h5.card-title Low Stock
+          p.card-text 5 items below reorder level
+  //  Quick Links 
+  .row.mt-4
+    .col-md-4.mb-3
+      a.btn.btn-outline-dark.w-100(href="products.html") View Products
+    .col-md-4.mb-3
+      a.btn.btn-outline-dark.w-100(href="stock.html") Manage Stock
+    .col-md-4.mb-3
+      a.btn.btn-outline-dark.w-100(href="stockreports.html") View Stock Reports
+  // about,contact and social
+  section.mt-5
+    h4 About MWF
+    p.
+      
+      Mayondo Wood and Furniture (MWF) is a B2B company that outsources timber, poles, and both hard and soft woods from rural suppliers. We also manufacture quality home and office furniture in our workshop.
+      
+    p.
+      
+      Our goal is to provide durable, affordable wood products to construction firms and furniture dealers across Uganda.
+      
+    .mt-4
+      h5 Contact Us
+      p
+        strong Phone:
+        |  +256 789 123 456
+      p
+        strong Email:
+        |  info@mwfuganda.com
+      p
+        strong Location:
+        |  Kampala Industrial Area, Uganda
+    .mt-3
+      h5 Follow Us
+      a.me-3(href="#")
+        i.bi.bi-facebook
+        |  Facebook
+      a.me-3(href="#")
+        i.bi.bi-instagram
+        |  Instagram
+      a(href="#")
+        i.bi.bi-twitter-x
+        |  X (Twitter)
+  //  Footer 
+  footer.text-center.text-muted.mt-5.mb-3.
+    
+    © 2025 MWF Ltd. All rights reserved.
+    
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.minjs")

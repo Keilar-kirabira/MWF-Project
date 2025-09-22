@@ -1,7 +1,7 @@
 extends layout 
 block content
   .container.mt-5
-    h2.mb-4 Stock Entry Form
+    h2.mb-4.text-center Stock Entry Form
     form#stockForm(action='/stock' method='post')
       .row.g-3
         .col-md-6
@@ -38,8 +38,8 @@ block content
           label.form-label(for='supplierName') Supplier Name
           input#supplierName.form-control(type='text' name='supplierName' placeholder='Enter supplier name' required='')
         .col-md-6
-          label.form-label(for='entryDate') Date
-          input#entryDate.form-control(type='date' name='entryDate' required='')
+          label.form-label(for='dateBought') Date
+          input#dateBought.form-control(type='date' name='dateBought' required='')
         .col-md-6
           label.form-label(for='quality') Quality
           select#quality.form-select(name='quality' required='')
@@ -54,7 +54,7 @@ block content
           label.form-label(for='measurements') Measurements
           input#measurements.form-control(type='text' name='measurements' placeholder='Enter 200cm x 150cm x 90cm')
         .col-12
-          button.btn.btn-success(type='submit') Submit Stock
+          button.btn.btn-dark(type='submit') Submit Stock
   footer.text-center.text-muted.mt-5.mb-3
   | &copy; 2025 MWF Ltd. All rights reserved.
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')

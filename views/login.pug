@@ -10,10 +10,10 @@ head
   p.text-center.text-muted Login to continue
   form#loginForm(action='/login' method='post' novalidate='')
     .mb-3
-      label.form-label(for='email') Email or Username
+      label.form-label(for='email') Email 
       input#email.form-control(type='text' name='email' placeholder='Enter email or username' required='')
       .invalid-feedback
-        | Please enter your valid email or username.
+        | Please enter your valid email.
     .mb-3
       label.form-label(for='password') Password
       input#password.form-control(type='password' name='password' placeholder='Enter password' minlength='6' required='')

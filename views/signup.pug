@@ -8,23 +8,23 @@ link(rel="stylesheet", href="/css/signup.css")
   p.text-center.text-muted Signup Form
   form#signupForm(action="/signup", method="post", novalidate)
     .mb-3
-      label.form-label(for="username") UserName:
+      label.form-label(for="username") Username
       input.form-control#userName(type="text", name="userName", placeholder="Enter Username", required)
       .invalid-feedback Please enter your valid username.
     .mb-3
-      label.form-label(for="email") Email:
+      label.form-label(for="email") Email
       input.form-control#email(type="text", name="email", placeholder="Enter email", required)
       .invalid-feedback.
         
         Please enter your valid email.    
     .mb-3
-      label.form-label(for="password") Password:
+      label.form-label(for="password") Password
       input.form-control#password(type="password", name="password", placeholder="Enter password", minlength="6", required)
       .invalid-feedback.
         
         Password must be at least 6 characters.   
     .mb-3
-      label.form-label(for="role") Select Role:
+      label.form-label(for="role") Select Role
       select#role.form-select(name="role", required)
         option(value="", selected, disabled) Select your role
         option(value="manager") Manager
