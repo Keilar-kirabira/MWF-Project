@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const passport = require("passport");
 const expressSession = require("express-session");
 const MongoStore = require("connect-mongo");
+const moment = require("moment"); 
 
 require('dotenv').config();
 const UserModel = require("./models/userModel");
@@ -14,11 +15,13 @@ const authRoutes = require("./routes/authRoutes");
 const stockRoutes = require("./routes/stockRoutes");
 const salesRoutes = require("./routes/salesRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const suppliersRoutes = require("./routes/supplierRoutes");
 //2.Instantiations
 const app = express();
 const port = 3000;
 
 //3.Configurations
+app.locals.moment = moment;
 //settingup mongodb connections
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,
@@ -65,6 +68,7 @@ app.use("/",authRoutes);
 app.use("/",stockRoutes);
 app.use("/",salesRoutes);
 app.use("/",dashboardRoutes);
+app.use("/",suppliersRoutes);
 
 
 
