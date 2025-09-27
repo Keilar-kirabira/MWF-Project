@@ -38,7 +38,12 @@ const stockSchema = new mongoose.Schema({
     },
     measurements:{
         type:String,
-    }
+    },
+     phoneNumber:{
+       type: String,
+       required : true,
+       trim : true,
+    },
 });
 
 module.exports = mongoose.model("StockModel",stockSchema)

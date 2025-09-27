@@ -1,0 +1,66 @@
+extends layout2.pug 
+
+block content
+  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
+    // Sidebar
+    div(style="width: 25%; height: 100%;")
+      include includes/sidebar.pug
+
+    // Main content
+    div(style="width: 75%; padding: 20px; overflow-y: auto;")  
+      .container.mt-5
+        h2.mb-4 Supplier Management Form
+        form#supplierForm.mb-4(action='/Addsupplier' method='post')
+          .row.g-3
+            .col-md-6
+              label.form-label(for='supplierName') Supplier Name
+              input#supplierName.form-control(type='text' placeholder='Supplier Name' name='supplierName' required='')
+
+            .col-md-6
+              label.form-label(for='supplierCategory') Supplier Category
+              select.form-select(name='supplierCategory' required='')
+                option(value='' selected='' disabled='') Select Category
+                option(value='Wood') Wood
+                option(value='Furniture') Furniture
+
+            .col-md-6
+              label.form-label(for='productName') Product Name
+              input#productName.form-control(type='text' placeholder='Product Name' name='productName' required='')
+
+            .col-md-6
+              label.form-label(for='quantity') Quantity
+              input#quantity.form-control(type='number' name='quantity' min='1' placeholder='Enter quantity' required='')
+
+            .col-md-6
+              label.form-label(for='dateSupplied') Date
+              input#dateBought.form-control(type='date' name='dateSupplied' required='')
+
+            .col-md-6
+              label.form-label(for='phoneNumber') Phone Number
+              input#phoneNumber.form-control(type='tel' placeholder='Phone Number' name='phoneNumber' required='')
+
+            .col-md-6
+              label.form-label(for='email') Email
+              input#email.form-control(type='email' placeholder='Email' name='email' required='')
+
+            .col-md-6
+              label.form-label(for='physicaladdress') Physical Address
+              input#physicaladdress.form-control(type='text' placeholder='Physical Address' name='physicaladdress' required='')
+
+            //- .col-md-6
+            //-   label.form-label(for='status') Select Status
+            //-   select#status.form-select(name='status' required='')
+            //-     option(value='' selected='' disabled='') Select Status
+            //-     option(value='Active') Active
+            //-     option(value='Inactive') Inactive
+            //-     option(value='Pending') Pending
+
+            .col-12
+              button#addsupplier.btn.btn-dark(type='submit') Add Supplier
+
+      footer.text-center.text-muted.mt-5.mb-3
+        | © 2025 MWF Ltd. All rights reserved.
+
+      // Scripts
+      script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+      script(src='Scripts/suppliers.js')

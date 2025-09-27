@@ -1,0 +1,52 @@
+.container
+  .navigation
+    ul
+      li
+        a(href='')
+          span.icon
+            img(src='/images/mwflogo.png' alt='icon' width='30' height='30')
+          span.title MWF Ltd
+      li
+        a(href='/dashboard')
+          span.icon
+            ion-icon(name='home-outline')
+          span.title Dashboard
+      li
+        a(href='/stock')
+          span.icon
+            ion-icon(name='cube-outline')
+          span.title Stock
+      li
+        a(href='/registeruser')
+          span.icon
+            ion-icon(name='people-outline')
+          span.title Users
+      li
+        a(href='/saleslist')
+          span.icon
+            ion-icon(name='cart-outline')
+          span.title Sales
+      li
+        a(href='/Addsupplier')
+          span.icon
+            ion-icon(name='people-circle-outline')
+          span.title Suppliers
+      li
+        a(href='/stocklists')
+          span.icon
+            ion-icon(name="storefront-outline")
+          span.title Products
+      li
+        a(href='/logout')
+          span.icon
+            ion-icon(name='log-out-outline')
+          span.title Logout
+  div(style="position: absolute; top: 10px; right: 20px; padding: 10px")
+    span#toggle.icon
+      ion-icon(name='grid-outline' style="font-size: 30px")
+
+// scripts
+script(src='/js/main.js')
+// ion icons
+script(type='module' src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js')
+script(nomodule='' src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js')

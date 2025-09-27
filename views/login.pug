@@ -8,7 +8,7 @@ head
 .login-card.container.mt-5
   h3.text-center.mb-3 Mayondo Wood and Furniture Ltd
   p.text-center.text-muted Login to continue
-  form#loginForm(action='/login' method='post' novalidate='')
+  form#loginForm(action='/login' method='post' )
     .mb-3
       label.form-label(for='email') Email 
       input#email.form-control(type='text' name='email' placeholder='Enter email or username' required='')

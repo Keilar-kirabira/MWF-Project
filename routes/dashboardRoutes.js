@@ -23,12 +23,4 @@ router.post("/attendant-dashboard", (req, res)=>{
 
 
 
-
-
-
-
-
-
-
-
 module.exports = router;

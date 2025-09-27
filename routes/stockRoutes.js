@@ -17,6 +17,16 @@ router.post("/stock", async (req, res)=>{
         res.redirect("/stock");
     }
 });
+// getting stock from the database
+router.get("/stocklist", async (req, res)=>{
+    try {
+        let items = await StockModel.find().sort({ $natural: -1 })
+        res.render("stocktable", { items }) 
+    } catch (error) {
+       res.status(400).send("Unable to get data from the database."); 
+    }
+});
+
 
 
 

@@ -11,9 +11,34 @@ const signupSchema = new mongoose.Schema({
        unique:true,
        trim:true
     },
+    age:{
+      type:Number,
+      required:true,
+    },
+    gender:{
+      type:String,
+      required:true,
+    },
+    nin :{
+      type : String,
+      required : true,
+      unique:true,
+      trim : true,
+    },
+    phoneNumber:{
+       type: String,
+       required : true,
+       trim : true,
+    },
     role:{
         type:String,
         required:true
+    },
+    employeeId:{
+       type: String,
+       required : true,
+       unique:true,
+       trim : true,
     }
 });
 signupSchema.plugin(passportLocalMongoose,{

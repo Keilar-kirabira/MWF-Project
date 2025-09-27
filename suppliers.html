@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="CSS2/users.css" />
-    <title>MWF Suppliers</title>
+    <title>MWF | Suppliers</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -63,93 +63,101 @@
       </div>
     </nav>
     <div class="container mt-5">
-      <h2 class="mb-4">Supplier Management</h2>
-    <!-- Supplier Form -->
-    <form id="supplierForm" class="mb-4" >
-      <div class="row g-3">
-        <div class="col-md-4">
-          <input
-            type="text"
-            class="form-control"
-            id="supplierName"
-            placeholder="Supplier Name"
-            name="supplierName"
-            required
-          />
+      <h2 class="mb-4">Supplier Management Form</h2>
+      <form id="supplierForm" class="mb-4" action="/Addsupplier" method="post">
+        <div class="row g-3">
+          <div class="col-md-6">
+          <label for="supplierName" class="form-label"> Supplier Name</label>  
+            <input
+              type="text"
+              class="form-control"
+              id="supplierName"
+              placeholder="Supplier Name"
+              name="supplierName"
+              required
+            />
+          </div>
+            <div class="col-md-6">
+                <label for="supplierCategory" class="form-label">Supplier Category</label>  
+            <select class="form-select" id="" name="supplierCategory" required>
+              <option value="" selected disabled>Select Category</option>
+              <option value="Wood">Wood</option>
+              <option value="Furniture">Furniture</option>
+            </select>
+          </div>
+           <div class="col-md-6">
+                <label for="productName" class="form-label">Product Name</label>  
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              placeholder="Product Name"
+              name="productName"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              name="quantity"
+              min="1"
+              placeholder="Enter quantity"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+              <label for="phoneNumber" class="form-label"> Phone Number</label>    
+            <input
+              type="tel"
+              class="form-control"
+              id="phoneNumber"
+              placeholder="Phone Number"
+              name="phoneNumber"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+                <label for="email" class="form-label"> Email</label>  
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              name="email"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+                <label for="Physical address" class="form-label">Physical Address</label>  
+            <input
+              type="text"
+              class="form-control"
+              id=" physicaladdress"
+              placeholder="Physical Address"
+              name="physicaladdress"
+              required
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="status" class="form-label">Select Status</label> 
+            <select class="form-select" id="status" name="status" required>
+              <option value="" selected disabled>Select Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button id="addsupplier" type="submit" class="btn btn-dark">
+              Add Supplier
+            </button>
+          </div>
         </div>
-       
-        <div class="col-md-4">
-          <input
-            type="tel"
-            class="form-control"
-            id="phoneNumber"
-            placeholder="Phone Number"
-            name="phoneNumber"
-            required
-          />
-        </div>
-        <div class="col-md-4">
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="Email"
-            name="email"
-            required
-          />
-        </div>
-        <div class="col-md-4">
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            placeholder="Physical Address"
-            name="physicaladdress"
-            required
-          />
-        </div>
-
-          <div class="col-md-4">
-          <input
-            type="text"
-            class="form-control"
-            id="productsSupplied"
-            placeholder="Product Supplied"
-            name="productsSupplied"
-            required
-          />
-        </div>
-
-        <div class="col-md-4">
-          <select class="form-select" id="status"  name="status" required>
-            <option value="" selected disabled>Select Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-            <option value="Pending">Pending</option>
-          </select>
-        </div>
-        <div class="col-12">
-          <button id="addsupplier" type="submit" class="btn btn-primary">Add Supplier</button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Supplier List Table -->
-      <table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-          <th>Supplier Name</th>
-          <th>Contact Person</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody id="supplierTableBody"></tbody>
-      </table>
+      </form>
     </div>
-    <!-- Footer -->
     <footer class="text-center text-muted mt-5 mb-3">
       &copy; 2025 MWF Ltd. All rights reserved.
     </footer>
