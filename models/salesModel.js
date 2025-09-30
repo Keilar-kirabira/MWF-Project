@@ -37,8 +37,9 @@ paymentDate :{
     type : Date,
     required : true
 }, 
-salesagent:{
-    type : String,
+salesAgent:{
+    type : mongoose.Schema.Types.ObjectId,
+    ref:"UserModel",
     required : true
 }   
 });
