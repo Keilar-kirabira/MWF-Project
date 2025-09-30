@@ -1,4 +1,4 @@
-document.getElementById("unitPrice").addEventListener("change",function(){
+document.getElementById("unitPrice").addEventListener("change",function(){                                        //the event listener is listenning to a change
   const unitPrice = parseFloat(document.getElementById("unitPrice").value)
     const quantity = parseFloat(document.getElementById("quantity").value)
     const totalPrice = document.getElementById("totalPrice")
@@ -8,4 +8,4 @@ document.getElementById("unitPrice").addEventListener("change",function(){
     }else{
         totalPrice.value = ""
     }  
-})
+});
