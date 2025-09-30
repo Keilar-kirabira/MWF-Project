@@ -4,9 +4,13 @@ block content
   div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
     div(style="width: 25%; height: 100%;")
       include includes/sidebar.pug
+
     div(style="width: 75%; padding: 20px; overflow-y: auto;")
       .container.my-5.mt-6
-        h3 Products 
+        h3 Products Available
+        .d-flex.justify-content-between.align-items-center.mb-3
+          input.form-control.w-25(type="text" id="searchInput" placeholder="Search...")
+          a.btn.btn-dark(href='/stock') Add New Stock
         table.table.table-striped.table-bordered
           thead.table-dark
             tr
@@ -21,10 +25,9 @@ block content
               th(scope='col') Color
               th(scope='col') Measurements
               th(scope='col') Phone Number
-              th(scope='col') Status 
               th(scope='col') Update 
               th(scope='col') Delete
-          tbody
+          tbody#productTable
             if items.length 
               each item in items
                 tr
@@ -39,5 +42,16 @@ block content
                   td #{item.color}
                   td #{item.measurements}
                   td #{item.phoneNumber}
-        a.btn.btn-dark.mt-3(href='/stock') Add New Stock
+                  td 
+                    a.btn.btn-warning(href=`/editstock/${item._id}`)
+                      i.bi.bi-pencil-fill  
+                  td 
+                    form(method='post' action="/deletestock" onsubmit="return confirm('Are you sure you want to delete this stock?');")
+                      input(type="hidden" name='id' value=item._id)
+                      button.btn.btn-danger.p-2(type='submit')
+                        i.bi.bi-trash-fill
+
+
         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+
+       

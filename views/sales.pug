@@ -25,11 +25,14 @@ block content
               input#customerName.form-control(type='text' name='customerName' placeholder='Enter Customer Name' required='')
             .col-md-6
               label.form-label(for='productName') Product Name
-              input#productName.form-control(type='text' name='productName' required='')
+              select#productName.form-select(name='productName' required='')
+                if stocks.length 
+                  each stock in stocks 
+                    option(value=stock.productName)= stock.productName
             .col-md-6
               label.form-label(for='productType') Type of Product
               select#productType.form-select(name='productType' required='')
-                option(value='' selected='' disabled='') Choose...
+                option(value='' selected='' disabled='') Select Product Type...
                 option(value='Wood') Wood
                 option(value='Furniture') Furniture
             .col-md-6
@@ -54,9 +57,9 @@ block content
             .col-md-6
               label.form-label(for='paymentDate') Date
               input#paymentDate.form-control(type='date' name='paymentDate' required='')
-            .col-md-6
-              label.form-label(for='salesagent') Sales Agent Name
-              input#salesagent.form-control(type='text' name='salesagent' required='')
+            //- .col-md-6
+            //-   label.form-label(for='salesAgent') Sales Agent Name
+            //-   input#salesAgent.form-control(type='text' name='salesAgent' required='')
             .col-12
               button.btn.btn-dark(type='submit') Submit Sale
 

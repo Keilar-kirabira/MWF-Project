@@ -37,7 +37,7 @@ req.session.user = req.user;                 //user who has logged in is referre
 if(req.user.role === "Manager"){
  res.redirect("/dashboard")                  //redirect manage to dashboard
 }else if(req.user.role === "Sales Agent"){
-  res.redirect("/Addsale")           //redirect to attendant-dashboard
+  res.redirect("/attendant-dashboard")           //redirect to attendant-dashboard
 }else (res.render("noneuser"))  
 });
 
