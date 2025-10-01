@@ -21,6 +21,9 @@ const stockSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    totalCost:{
+        type: Number
+    },
     supplierName:{
         type:String,
         required:true
@@ -45,5 +48,10 @@ const stockSchema = new mongoose.Schema({
        trim : true,
     },
 });
+
+
+
+
+
 
 module.exports = mongoose.model("StockModel",stockSchema)
