@@ -7,6 +7,7 @@ const expressSession = require("express-session");
 const MongoStore = require("connect-mongo");
 const moment = require("moment"); 
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 
 require('dotenv').config();
 const UserModel = require("./models/userModel");
@@ -54,6 +55,16 @@ app.use(expressSession({
   store: MongoStore.create({mongoUrl:process.env.MONGODB_URL}),            // place to store our cookie
   cookie: {maxAge:24*60*60*1000}   //oneday
 }));
+
+//flash middleware
+app.use(flash());
+//make flash messages available in all templates
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
+
 // passport configs
 app.use(passport.initialize());
 app.use(passport.session()); 

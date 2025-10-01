@@ -1,0 +1,42 @@
+body{
+    background-color: #d93025 !important;
+}
+/* Main error message at top */
+.main-error-message {
+  display: none;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  background-color: #f8d7da; /* light red background */
+  color: #721c24; /* dark red text */
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Inline error messages below inputs */
+.error-message {
+  color: #d93025; /* bright red text */
+  font-size: 0.9rem;
+  margin-top: 3px;
+  min-height: 18px; /* reserve space to prevent layout shift */
+}
+
+#errorproductName {
+  color: #d93025; /* bright red text */
+  font-size: 0.9rem;
+  margin-top: 3px;
+  min-height: 18px; /* reserve space to prevent layout shift */
+}
+
+/* Highlight invalid input/select fields */
+input.invalid,
+select.invalid {
+  border-color: #d93025 !important; /* red border */
+  background-color: #ffe6e6; /* light red background */
+}
+
+/* Smooth transition for input highlight */
+input,
+select {
+  transition: border-color 0.3s, background-color 0.3s;
+}

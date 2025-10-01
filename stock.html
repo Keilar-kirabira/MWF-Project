@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="public/css/stock.css" />
+    <link rel="stylesheet" href="public/css/errors.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -66,7 +67,8 @@
     <div class="container mt-5">
       <h2 class="mb-4 text-center">Stock Entry Form</h2>
       <div id="mainError" class="main-error-message"></div>
-      <form id="stockForm" action="/stock" method="post">
+      <!-- <form id="stockForm" action="/stock" method="post"> -->
+        <form id="stockForm">
         <div class="row g-3">
           <div class="col-md-6">
             <label for="productName" class="form-label">Product Name</label>
@@ -89,6 +91,7 @@
               <option value="Office Chairs">Office Chairs</option>
               <option value="Dining Tables">Dining Tables</option>
             </select>
+            <div id="errorproductName" class="error-message"></div>
           </div>
           <div class="col-md-6">
             <label for="productType" class="form-label">Type of Product</label>
@@ -194,11 +197,12 @@
           </div>
         </div>
       </form>
+      <div id="successMessage" class="success-message"></div>
     </div>
     <footer class="text-center text-muted mt-5 mb-3">
       &copy; 2025 MWF Ltd. All rights reserved.
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="Scripts/stock.js"></script>
+    <script src="public/js/stock.js"></script>
   </body>
 </html>
