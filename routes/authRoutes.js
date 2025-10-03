@@ -48,7 +48,7 @@ router.get("/logout", (req, res) => {
     if (error) {
       return res.status(500).send("Error loggingout")
     }
-    res.redirect("/")
+    res.redirect("/login")          //redirect to the index page.
   })
  } 
 });

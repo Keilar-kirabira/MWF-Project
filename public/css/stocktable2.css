@@ -1,0 +1,5 @@
+.mb-4 button.active {
+  background-color: #333; /* Dark background for active button */
+  color: #fff;            /* White text */
+  border-color: #333;     /* Match border to background */
+}

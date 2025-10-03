@@ -4,10 +4,17 @@ const {ensureauthenticated,ensureManager} = require("../middleware/auth");
 
 const StockModel = require("../models/stockModel");
 const StockrecordModel = require("../models/stockrecordModel");
-
+const Supplier = require("../models/supplierModel");                  //supplier to helpme get their names and phonenumber
 // also here after the route ensureManager
-router.get("/stock", (req, res)=>{
-    res.render("stock");
+router.get("/stock", async (req, res)=>{
+  try {
+    const suppliers = await Supplier.find();
+    res.render("stock", {suppliers});         //getting info of the supplier
+  } catch (error) {
+    console.error(error);
+    res.redirect("/")
+  }
+    
 });
 
 // paste this before  the  sync ensureManager
@@ -27,6 +34,8 @@ router.post("/stock", async (req, res) => {
       stock.quantity += Number(quantity);
        stock.productPrice = productPrice;  // update to latest selling price
       stock.costPrice = Number(costPrice); // update latest cost 
+      stock.supplierName = supplierName;
+      stock.phoneNumber = phoneNumber;
       await stock.save();
     } else {
       // Otherwise, create a new stock entry
@@ -103,38 +112,187 @@ router.get("/stockrecords", async (req, res) => {
 });
 
 
-//updating stock
+// // //updating stock
+// router.get("/editstock/:id", async (req, res) => {
+//   // let item = await StockModel.findById(req.params.id);
+//    const item = await StockrecordModel.findById(req.params.id);
+//    const suppliers = await Supplier.find();
+//   // console.log(item)
+//   res.render(`editstock`, { item, suppliers });
+// });
+// router.put("/editstock/:id",  async (req, res) => {
+//   try {
+//     const product = await StockrecordModel.findByIdAndUpdate(
+//       req.params.id,
+//       req.body,                     //what has been changed, and thats the bodyform which was updated.
+//       { new: true }
+//     );
+//     if (!product) {
+//       return res.status(404).send("product not found.");
+//     }
+//     // res.redirect("/stocklist");
+//     res.redirect("/stockrecords");
+//   } catch (error) {}
+// });
+
 router.get("/editstock/:id", async (req, res) => {
-  let item = await StockModel.findById(req.params.id);
-  // console.log(item)
-  res.render(`editstock`, { item });
-});
-router.put("/editstock/:id",  async (req, res) => {
   try {
-    const product = await StockModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,                     //what has been changed, and thats the bodyform which was updated.
-      { new: true }
-    );
-    if (!product) {
-      return res.status(404).send("product not found.");
+    const item = await StockrecordModel.findById(req.params.id);
+    if (!item) {
+      req.flash('error_msg', 'Stock record not found.');
+      return res.redirect('/stockrecords');
     }
-    res.redirect("/stocklist");
-  } catch (error) {}
-});
 
-
-//deleting route
-router.post("/deletestock",   async(req, res)=>{
-  try {
-       await StockModel.deleteOne({_id:req.body.id});
-      res.redirect("/stocklist")
+    const suppliers = await Supplier.find();
+    res.render("editstock", { item, suppliers });
   } catch (error) {
-    console.log(error.message)
-    res.status(400).send('Unable to delete item from the database.')
+    console.error(error);
+    req.flash('error_msg', 'Error fetching stock record.');
+    res.redirect('/stockrecords');
   }
 });
 
+
+
+// Updating stock
+// // Updating stock
+router.put("/editstock/:id", async (req, res) => {
+  try {
+    const {
+      productName,
+      productType,
+      quantity,
+      costPrice,
+      productPrice,
+      supplierName,
+      phoneNumber,
+      dateBought,
+      quality,
+      color,
+      measurements
+    } = req.body;
+
+    // 1. Find the old stock record (historical record)
+    const oldRecord = await StockrecordModel.findById(req.params.id);
+    if (!oldRecord) return res.status(404).send("Stock record not found");
+
+    // 2. Calculate difference in quantity
+    const quantityDifference = Number(quantity) - oldRecord.quantity;
+
+    // 3. Update the stock record (historical log)
+    await StockrecordModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        productName,
+        productType,
+        quantity: Number(quantity),
+        costPrice: Number(costPrice),
+        productPrice: Number(productPrice),
+        supplierName,
+        phoneNumber,
+        dateBought,
+        quality,
+        color,
+        measurements
+      },
+      { new: true }
+    );
+
+    // 4. Update main stock table
+    let stock = await StockModel.findOne({ productName, productType });
+
+    if (stock) {
+      // Add/subtract difference instead of replacing
+      stock.quantity += quantityDifference;
+
+      // Optional: update other details
+      stock.costPrice = Number(costPrice);
+      stock.productPrice = Number(productPrice);
+      stock.supplierName = supplierName;
+      stock.phoneNumber = phoneNumber;
+
+      await stock.save();
+    } else {
+      // If product name/type changed, create new stock entry
+      stock = new StockModel({
+        productName,
+        productType,
+        quantity: Number(quantity),
+        costPrice: Number(costPrice),
+        productPrice: Number(productPrice),
+        supplierName,
+        phoneNumber,
+        dateBought,
+        quality,
+        color,
+        measurements
+      });
+      await stock.save();
+    }
+
+    req.flash('success_msg', `Stock for "${productName}" updated successfully!`);
+    res.redirect("/stockrecords");
+  } catch (error) {
+    console.error(error);
+    req.flash('error_msg', 'Error updating stock. Please try again.');
+    res.redirect("/stockrecords");
+  }
+});
+
+
+
+//deleting route
+// router.post("/deletestock",   async(req, res)=>{
+//   try {
+//        await StockrecordModel.deleteOne({_id:req.body.id});
+//       res.redirect("/stocklist")
+//   } catch (error) {
+//     console.log(error.message)
+//     res.status(400).send('Unable to delete item from the database.')
+//   }
+// });
+
+// Deleting a stock record
+router.post("/deletestock", async (req, res) => {
+  try {
+    const recordId = req.body.id;
+
+    // Find the stock record first
+    const record = await StockrecordModel.findById(recordId);
+    if (!record) {
+      req.flash('error_msg', 'Stock record not found.');
+      return res.redirect("/stockrecords");
+    }
+
+    //Update the main stock table
+    const stock = await StockModel.findOne({ 
+      productName: record.productName, 
+      productType: record.productType 
+    });
+
+    if (stock) {
+      // Reduce the quantity by the record's quantity
+      stock.quantity -= record.quantity;
+
+      // If quantity drops to zero or below, remove the stock completely
+      if (stock.quantity <= 0) {
+        await StockModel.deleteOne({ _id: stock._id });
+      } else {
+        await stock.save();
+      }
+    }
+
+    // Delete the stock record
+    await StockrecordModel.deleteOne({ _id: recordId });
+
+    req.flash('success_msg', `Stock record for "${record.productName}" deleted successfully.`);
+    res.redirect("/stockrecords");
+  } catch (error) {
+    console.error(error);
+    req.flash('error_msg', 'Unable to delete stock record. Please try again.');
+    res.redirect("/stockrecords");
+  }
+});
 
 
 

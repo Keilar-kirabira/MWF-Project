@@ -8,6 +8,33 @@
     priceInput.value = (cost * (1 + markup)).toFixed(2);
   });
 
+  
+
+//function for syncing supplier phone number and supplier name
+const supplierName = document.getElementById('supplierName');
+const supplierPhone = document.getElementById('supplierPhone');
+
+// When supplier name changes, update phone
+supplierName.addEventListener('change', function() {
+  const phone = this.options[this.selectedIndex].dataset.phone;
+  Array.from(supplierPhone.options).forEach(option => {
+    option.selected = option.value === phone;
+  });
+});
+
+// When supplier phone changes, update name
+supplierPhone.addEventListener('change', function() {
+  const name = this.options[this.selectedIndex].dataset.id;
+  Array.from(supplierName.options).forEach(option => {
+    option.selected = option.value === name;
+  });
+});
+
+
+
+
+
+
                                 //VALIDATION
 //form elements
 const mainError = document.getElementById("mainError");

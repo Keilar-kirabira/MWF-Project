@@ -7,29 +7,38 @@ block content
 
     div(style="width: 75%; padding: 20px; overflow-y: auto;")
       .container.my-5.mt-6
+        if success_msg && success_msg.length
+          .alert.alert-success.alert-dismissible.fade.show(role='alert' id='successAlert')
+            | #{success_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+        if error_msg && error_msg.length
+          .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='errorAlert')
+            | #{error_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
         h3.mb-4 Sales Records
         .d-flex.justify-content-between.mb-3
           input.form-control(type='text', placeholder='Search Sales...', id='searchInput', style='width: 50%;')
-          a.btn.btn-dark(href='/Addsale')
-            | Add Sale
+          a.btn.btn-dark(href='/Addsale') Add Sale
 
         table.table.table-striped.table-bordered
           thead.table-dark
             tr
-              th(scope='col') Customer Name
-              th(scope='col') Product Type
-              th(scope='col') Product Name
-              th(scope='col') Quantity
-              th(scope='col') Unit Price
-              th(scope='col') Transport
-              th(scope='col') Total Price 
-              th(scope='col') Sales Agent 
-              th(scope='col') Payment Type
-              th(scope='col') Date 
+              th Customer Name
+              th Product Type
+              th Product Name
+              th Quantity
+              th Unit Price
+              th Transport
+              //- th Total Price 
+              //- th Sales Agent 
+              //- th Payment Type
+              th Date 
               if currentUser.role === "Manager"
-                th(scope='col') Update 
-                th(scope='col') Delete
-              th(scope='col') Receipt 
+                th Update 
+                th Delete
+              th Receipt 
+              th View
           tbody
             if sales.length 
               each sale in sales 
@@ -40,23 +49,96 @@ block content
                   td #{sale.quantity}
                   td #{sale.unitPrice}
                   td #{sale.transportCheck}
-                  td #{sale.totalPrice}
-                  td #{sale.salesAgent.userName}
-                  td #{sale.paymentType}
+                  //- td #{sale.totalPrice}
+                  //- td #{sale.salesAgent.userName}
+                  //- td #{sale.paymentType}
                   td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
+                  
                   if currentUser.role === "Manager"
                     td
-                        a.btn.btn-warning.btn-sm(href=`/editsale/${sale._id}`)
+                      a.btn.btn-warning.btn-sm(href=`/editsales/${sale._id}`)
                         i.bi.bi-pencil-square
                     td
-                        form(method='post' action="/deletesale")
-                        input(type="hidden" name='id' value=sale._id)
-                        button.btn.btn-danger.btn-sm(type='submit')
-                            i.bi.bi-trash
+                      button.btn.btn-danger.btn-sm(
+                        type='button'
+                        data-bs-toggle="modal"
+                        data-bs-target=`#deleteModal-${sale._id}`
+                      )
+                        i.bi.bi-trash
+
                   td
                     a.btn.btn-info.btn-sm(href=`/getReceipt/${sale._id}`)
                       i.bi.bi-receipt
-           
 
-      script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+                  td
+                    button.btn.btn-info.btn-sm(
+                      type='button'
+                      data-bs-toggle="modal"
+                      data-bs-target=`#viewModal-${sale._id}`
+                    )
+                      i.bi.bi-eye-fill
+
+                //- Delete Modal
+                div.modal.fade(id=`deleteModal-${sale._id}` tabindex="-1" aria-hidden="true")
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        h5.modal-title Delete Confirmation
+                        button.btn-close(type="button" data-bs-dismiss="modal")
+                      .modal-body
+                        p Are you sure you want to delete the sale for "#{sale.customerName}"?
+                      .modal-footer
+                        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
+                        form(method='post' action="/deletesales")
+                          input(type="hidden" name='id' value=sale._id)
+                          button.btn.btn-danger(type='submit') Confirm Delete
+
+                //- View Modal
+                div.modal.fade(id=`viewModal-${sale._id}` tabindex="-1" aria-hidden="true")
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        h5.modal-title Sale Details
+                        button.btn-close(type="button" data-bs-dismiss="modal")
+                      .modal-body
+                        ul.list-group
+                          li.list-group-item
+                            strong Customer: 
+                            | #{sale.customerName}
+                          li.list-group-item
+                            strong Product Type: 
+                            | #{sale.productType}
+                          li.list-group-item
+                            strong Product Name: 
+                            | #{sale.productName}
+                          li.list-group-item
+                            strong Quantity: 
+                            | #{sale.quantity}
+                          li.list-group-item
+                            strong Unit Price: 
+                            | #{sale.unitPrice}
+                          li.list-group-item
+                            strong Transport: 
+                            | #{sale.transportCheck}
+                          li.list-group-item
+                            strong Total Price: 
+                            | #{sale.totalPrice}
+                          li.list-group-item
+                            strong Sales Agent: 
+                            | #{sale.salesAgent.userName}
+                          li.list-group-item
+                            strong Payment Type: 
+                            | #{sale.paymentType}
+                          li.list-group-item
+                            strong Date: 
+                            | #{moment(sale.paymentDate).format("DD-MM-YYYY")}
+                      .modal-footer
+                        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
+
+            else
+              tr
+                td(colspan="15" class="text-center text-muted")
+                  | No sales available.
+                  a(href='/Addsale' class='btn btn-sm btn-primary ms-2') Add Sale Now
     
+      script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

@@ -8,17 +8,17 @@ block content
     div(style="width: 25%; height: 100%;")
       include includes/sidebar.pug
 
-    
-
     // Main content (75%)
     div(style="width: 75%; padding: 20px; overflow:hidden;")
       h2.mb-4.text-center Stock Entry Form
       form#stockForm(action='/stock' method='post')
         .row.g-3
+
+          
           .col-md-6
             label.form-label(for='productName') Product Name
             select#productName.form-select(name='productName' required='')
-              option(value='' disabled='' selected='') Choose...
+              option(value='' disabled selected) Choose...
               option(value='Timber') Timber
               option(value='Pole') Pole
               option(value='Hardwood') Hardwood
@@ -30,58 +30,78 @@ block content
               option(value='Cupboards') Cupboards
               option(value='Office Chairs') Office Chairs
               option(value='Dining Tables') Dining Tables
-
           .col-md-6
             label.form-label(for='productType') Type of Product
             select#productType.form-select(name='productType' required='')
-              option(value='' disabled='' selected='') Choose...
+              option(value='' disabled selected) Choose...
               option(value='Wood') Wood
               option(value='Furniture') Furniture
-
           .col-md-4
             label.form-label(for='quantity') Quantity
             input#quantity.form-control(type='number' name='quantity' min='1' placeholder='Enter quantity' required='')
-
           .col-md-4
             label.form-label(for='costPrice') Cost Price (UGX)
             input#costPrice.form-control(type='number' name='costPrice' placeholder='Enter cost price' required='')
-
           .col-md-4
             label.form-label(for='productPrice') Product Price (UGX)
             input#productPrice.form-control(type='number' name='productPrice' readonly)
-
           .col-md-6
             label.form-label(for='supplierName') Supplier Name
-            input#supplierName.form-control(type='text' name='supplierName' placeholder='Enter supplier name' required='')
-
+            select#supplierName.form-select(name='supplierName' required='')
+              option(value='' selected disabled) --Select Supplier--
+              if suppliers.length
+                each supplier in suppliers
+                  option(value=supplier.supplierName data-phone=supplier.phoneNumber)= supplier.supplierName
           .col-md-6
             label.form-label(for='dateBought') Date
             input#dateBought.form-control(type='date' name='dateBought' required='')
-
           .col-md-6
             label.form-label(for='quality') Quality
             select#quality.form-select(name='quality' required='')
-              option(value='' disabled='' selected='') Choose...
+              option(value='' disabled selected) Choose...
               option(value='High') High
               option(value='Medium') Medium
               option(value='Low') Low
-
           .col-md-6
             label.form-label(for='color') Color
-            input#color.form-control(type='text' name='color' placeholder='Enter color')
-
+            select#color.form-select(name='color' required='')
+              option(value='' selected disabled) --Select Color--
+              optgroup(label='Raw Materials')
+                option(value='Natural') Natural
+                option(value='Light Brown') Light Brown
+                option(value='Dark Brown') Dark Brown
+                option(value='Beige') Beige
+                option(value='Oak') Oak
+                option(value='Mahogany') Mahogany
+                option(value='Walnut') Walnut
+                option(value='Cherry') Cherry
+                option(value='Pine') Pine
+                option(value='Maple') Maple
+              optgroup(label='Furniture')
+                option(value='White') White
+                option(value='Black') Black
+                option(value='Gray') Gray
+                option(value='Brown') Brown
+                option(value='Beige') Beige
+                option(value='Mahogany') Mahogany
+                option(value='Oak') Oak
+                option(value='Cherry') Cherry
+                option(value='Teak') Teak
+                option(value='Espresso') Espresso
           .col-md-6
             label.form-label(for='measurements') Measurements
             input#measurements.form-control(type='text' name='measurements' placeholder='Enter 200cm x 150cm x 90cm')
-
           .col-md-6
-            label.form-label(for="phoneNumber") Phone Number
-            input.form-control#phoneNumber(type="tel", name="phoneNumber", placeholder="Enter +256------", minlength="10", required)
-            .invalid-feedback Please enter a valid phone number.  
-
+            label.form-label(for='supplierPhone') Supplier Phone Number
+            select#supplierPhone.form-select(name='phoneNumber' required='')
+              option(value='' selected disabled) --Select Phone--
+              if suppliers.length
+                each supplier in suppliers
+                  option(value=supplier.phoneNumber data-id=supplier.supplierName)= supplier.phoneNumber
           .col-12
             button.btn.btn-dark(type='submit') Add Stock
 
+        
         footer.text-center.text-muted.mt-5.mb-3
           | © 2025 MWF Ltd. All rights reserved.
 
