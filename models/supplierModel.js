@@ -8,18 +8,7 @@ const supplierSchema = new mongoose.Schema({
    type : String,
    required : true
  },
-  productName: {
-   type : String,
-   required : true
- },
-  quantity: {
-   type : Number,
-   required : true
- },
-  dateSupplied:{
-        type:Date,
-        required:true
-    },
+ 
   phoneNumber: {
    type : Number,
    required : true
@@ -33,10 +22,7 @@ const supplierSchema = new mongoose.Schema({
    type: String,
    required : true,
   },
-  // status: {
-  //  type:String,
-  //  required : true
-  // }
+ 
    
 });
 

@@ -4,7 +4,7 @@ block content
   div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
     div(style="width: 25%; height: 100%;")
       include includes/sidebar.pug
-    div(style="width: 75%; padding: 20px; overflow-y: auto;")
+    div(style="width: 10%; padding: 10px; overflow-y: auto;")
     .container.my-5.mt-6
       .d-flex.justify-content-between.align-items-center.mb-3
         h3.mb-0 Suppliers
@@ -19,13 +19,9 @@ block content
           tr
             th(scope='col') Supplier Name
             th(scope='col') Supplier Category
-            th(scope='col') Product Name
-            th(scope='col') Quantity
-            th(scope='col') Date
             th(scope='col') Phone Number
             th(scope='col') Email
             th(scope='col') Physical Address
-            //- th(scope='col') Select Status
 
         tbody#supplierTable
           if suppliers.length 
@@ -33,13 +29,10 @@ block content
               tr 
                 td #{item.supplierName}
                 td #{item.supplierCategory}
-                td #{item.productName}
-                td #{item.quantity}
-                td #{moment(item.dateBought).format("DD-MM-YYYY")}
                 td #{item.phoneNumber}
                 td #{item.email}
                 td #{item.physicaladdress}
-                //- td #{item.status}
+      
 
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
     script(src="js/supplierstable.js")

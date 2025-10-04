@@ -13,39 +13,6 @@ p {
   color: #333333;
 }
 
-/* ========== Navbar ========== */
-.navbar {
-  background-color: #245A36; /* Deep Green */
-}
-
-.navbar-brand img {
-  margin-right: 10px;
-  border-radius: 8px;
-}
-
-.navbar .nav-link {
-  color: #fff !important;
-  transition: 0.3s;
-}
-
-.navbar .nav-link:hover {
-  color: #D4A373 !important; /* Soft Wood Tone on hover */
-}
-
-.navbar .nav-link.active {
-  font-weight: bold;
-  border-bottom: 2px solid #D4A373; /* Soft Wood Tone highlight */
-}
-
-/* Branding */
-.navbar-brand span {
-  font-weight: bold;
-  color: #D4A373; /* Soft Wood Tone */
-}
-
-.navbar-brand small {
-  color: #A85D26; /* Warm Brown slogan */
-}
 
 /* ========== Summary Cards ========== */
 .card {

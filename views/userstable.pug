@@ -4,31 +4,127 @@ block content
   div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
     div(style="width: 25%; height: 100%;")
       include includes/sidebar.pug
+
     div(style="width: 75%; padding: 20px; overflow-y: auto;")
       .container.my-5.mt-6
-        h3 Users list
+
+        if success_msg && success_msg.length
+          .alert.alert-success.alert-dismissible.fade.show(role='alert')
+            | #{success_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+        
+        if error_msg && error_msg.length
+          .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+            | #{error_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+        h3 Users List
+
+        .d-flex.justify-content-between.align-items-center.mb-3
+          input.form-control(type="text" id="searchInput" placeholder="Search..." style="max-width: 300px;")
+          a.btn.btn-dark(href='/registeruser') Register New User
+
         table.table.table-striped.table-bordered
           thead.table-dark
             tr
-              th(scope='col') UserName
-              th(scope='col') Email
-              //- th(scope='col') Age 
-              th(scope='col') Gender
-              th(scope='col') NIN
-              th(scope='col') PhoneNumber 
-              th(scope='col') Role
-              th(scope='col') EmployeeId  
+              th Profile Image
+              th UserName
+              th Email
+              th PhoneNumber 
+              th Role
+              th EmployeeId  
+              th View 
+              th Update 
+              th Delete
           tbody
             if users.length 
               each user in users 
-                tr 
+                tr
+                  td 
+                    img(src=`/uploads/${user.profileImage}` alt="Profile Image" width="60" height="60" style="object-fit:cover; border-radius:50%;")
                   td #{user.userName}
                   td #{user.email}
-                  //- td #{user.age}
-                  td #{user.gender}
-                  td #{user.nin}
                   td #{user.phoneNumber}
                   td #{user.role}
                   td #{user.employeeId}
-        a.btn.btn-dark.mt-3(href='/registeruser') Register New User
+
+                  td
+                    button.btn.btn-info.btn-sm(
+                      type='button'
+                      data-bs-toggle="modal"
+                      data-bs-target=`#viewUser-${user._id}`
+                    )
+                      i.bi.bi-eye-fill
+
+                  td
+                    a.btn.btn-warning.btn-sm(href=`/editusers/${user._id}`)
+                      i.bi.bi-pencil-fill    
+
+                  td  
+                    button.btn.btn-danger.btn-sm(
+                      type='button'
+                      data-bs-toggle="modal"
+                      data-bs-target=`#deleteUser-${user._id}`
+                    )
+                      i.bi.bi-trash-fill
+
+                    div.modal.fade(id=`deleteUser-${user._id}` tabindex="-1" aria-hidden="true")
+                      .modal-dialog
+                        .modal-content
+                          .modal-header
+                            h5.modal-title Delete User
+                            button.btn-close(type="button" data-bs-dismiss="modal")
+                          .modal-body
+                            p Are you sure you want to delete "#{user.userName}"?
+                          .modal-footer
+                            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
+                            form(method='post' action='/deleteusers')
+                              input(type='hidden' name='id' value=user._id)
+                              button.btn.btn-danger(type='submit') Confirm Delete
+
+                div.modal.fade(id=`viewUser-${user._id}` tabindex="-1" aria-hidden="true")
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        h5.modal-title User Details
+                        button.btn-close(type="button" data-bs-dismiss="modal")
+                      .modal-body
+                        ul.list-group
+                          li.list-group-item 
+                            strong Name: 
+                            | #{user.userName}
+                          li.list-group-item 
+                            strong Email: 
+                            | #{user.email}
+                          li.list-group-item 
+                            strong DOB: 
+                            | #{user.birthDate}
+                          li.list-group-item 
+                            strong Gender: 
+                            | #{user.gender}
+                          li.list-group-item 
+                            strong NIN: 
+                            | #{user.nin}
+                          li.list-group-item 
+                            strong Phone: 
+                            | #{user.phoneNumber}
+                          li.list-group-item 
+                            strong Role: 
+                            | #{user.role}
+                          li.list-group-item 
+                            strong Next of Kin: 
+                            | #{user.nextofKin}
+                          li.list-group-item 
+                            strong Next of Kin Number: 
+                            | #{user.nokNumber}  
+                          li.list-group-item 
+                            strong EmployeeId: 
+                            | #{user.employeeId}
+                      .modal-footer
+                        button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
+            else
+              tr
+                td(colspan="13" class="text-center text-muted")
+                  | No users found.        
+
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

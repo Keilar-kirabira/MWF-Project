@@ -70,6 +70,7 @@ router.post("/Addsale", async (req, res) => {
       });
       console.log("saving sale:", sale);
       console.log(userId);
+      console.log('Session user:', req.session.user)
       await sale.save();
 
       //decrease quantity from the stock collection

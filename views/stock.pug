@@ -10,11 +10,9 @@ block content
 
     // Main content (75%)
     div(style="width: 75%; padding: 20px; overflow:hidden;")
-      h2.mb-4.text-center Stock Entry Form
+      h2.mb-3.text-center Stock Entry Form
       form#stockForm(action='/stock' method='post')
         .row.g-3
-
-          
           .col-md-6
             label.form-label(for='productName') Product Name
             select#productName.form-select(name='productName' required='')
@@ -43,7 +41,7 @@ block content
             label.form-label(for='costPrice') Cost Price (UGX)
             input#costPrice.form-control(type='number' name='costPrice' placeholder='Enter cost price' required='')
           .col-md-4
-            label.form-label(for='productPrice') Product Price (UGX)
+            label.form-label(for='productPrice') Selling Price (UGX)
             input#productPrice.form-control(type='number' name='productPrice' readonly)
           .col-md-6
             label.form-label(for='supplierName') Supplier Name
@@ -102,8 +100,8 @@ block content
             button.btn.btn-dark(type='submit') Add Stock
 
         
-        footer.text-center.text-muted.mt-5.mb-3
-          | © 2025 MWF Ltd. All rights reserved.
+        //- footer.text-center.text-muted.mt-5.mb-3
+        //-   | © 2025 MWF Ltd. All rights reserved.
 
   // Scripts
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')

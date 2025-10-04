@@ -47,6 +47,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended: true })); // helps to pass data from forms
+
+//uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 //express session configs
 app.use(expressSession({
   secret: process.env.SESSION_SECRET,

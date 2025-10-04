@@ -1,7 +1,6 @@
 
 body {
   background-color:  #F9F6EF;
-  font-family: 'Segoe UI', sans-serif;
   color: #333333;
 }
 /*  Navbar  */
@@ -33,26 +32,14 @@ h2, h4 {
   background-color: #45a049;
 }
 
- /* Table Styles 
-table th {
-  background-color: #6B4226 !important;
-  color: #fff;
-}
 
-.bg-light {
-  background-color: #f0f0f0 !important;
-}
-
-.text-muted {
-  font-size: 14px;
-} */
-/*form*/
 #stockForm{
   border: 2px;
   background-color: #f8f9fa;
   border-radius: 10px;         /* Rounded corners */
-  padding: 20px;               /* Space inside the border */
+  padding: 10px;               /* Space inside the border */
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+ 
 }
 
 /*  Footer  */
