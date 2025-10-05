@@ -8,11 +8,11 @@ block content
     div(style="width: 75%; padding: 20px; overflow-y: auto;")
       .container.my-5.mt-6
         if success_msg && success_msg.length
-          .alert.alert-success.alert-dismissible.fade.show(role='alert' id='successAlert')
+          .alert.alert-success.alert-dismissible.fade.show(role='alert' id='flashMsg')
             | #{success_msg[0]}
             button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
         if error_msg && error_msg.length
-          .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='errorAlert')
+          .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='flashMsg')
             | #{error_msg[0]}
             button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
 
@@ -116,13 +116,13 @@ block content
                             | #{sale.quantity}
                           li.list-group-item
                             strong Unit Price: 
-                            | #{sale.unitPrice}
+                            | #{new Intl.NumberFormat().format(sale.unitPrice)}
                           li.list-group-item
                             strong Transport: 
                             | #{sale.transportCheck}
                           li.list-group-item
                             strong Total Price: 
-                            | #{sale.totalPrice}
+                            | #{new Intl.NumberFormat().format(sale.totalPrice)}
                           li.list-group-item
                             strong Sales Agent: 
                             | #{sale.salesAgent.userName}
@@ -139,6 +139,7 @@ block content
               tr
                 td(colspan="15" class="text-center text-muted")
                   | No sales available.
-                  a(href='/Addsale' class='btn btn-sm btn-primary ms-2') Add Sale Now
+                  
     
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+      script(src="js/salestable.js") 
