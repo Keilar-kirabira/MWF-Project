@@ -1,36 +1,18 @@
 
+
+
+
+
 body {
-  background-color:  #F9F6EF;
-  color: #333333;
-}
-/*  Navbar  */
-.navbar {
-  background-color: #245A36; /* Deep Green */
-}
+  background-color: #F9F6EF; /* Light Cream */
+  
+};
 
-.navbar-brand img {
-  margin-right: 10px;
-  border-radius: 8px;
+h2, h4, h3 {
+  color: #245A36; /* Deep Green */
 }
 
 
-.navbar .nav-link.active {
-  font-weight: bold;
-  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
-}
-
-h2, h4 {
-  color: #6B4226; /* Deep wood brown */
-}
-
-.btn-success {
-  background-color: #4CAF50;
-  border: none;
-}
-
-.btn-success:hover {
-  background-color: #45a049;
-}
 
 
 #stockForm{
@@ -40,7 +22,7 @@ h2, h4 {
   padding: 10px;               /* Space inside the border */
   box-shadow: 0px 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
  
-}
+};
 
 /*  Footer  */
 footer {

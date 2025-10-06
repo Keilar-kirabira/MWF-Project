@@ -1,54 +1,53 @@
-document.getElementById("loginForm") .addEventListener("submit",function(event) {
-  event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
 
-  const form = event.target;
-  const email = form.email.value.trim();
-  const role = form.role.value;
-
-  //bootsrap validation class reset
-    form.classList.remove('was-validated');
-
-  // Simple client-side validation
-  let valid = true;
-
-  // Email validation
-  if (!email || !validateEmail(email)) {
-    form.email.classList.add('is-invalid');
-    valid = false;
-  } else {
-    form.email.classList.remove('is-invalid');
-  }
-
-  // Password validation
-  if (!password || password.length < 6) {
-    form.password.classList.add('is-invalid');
-    valid = false;
-  } else {
-    form.password.classList.remove('is-invalid');
-  }
-
-  // Role selection validation
-  if (!role) {
-    form.role.classList.add('is-invalid');
-    valid = false;
-  } else {
-    form.role.classList.remove('is-invalid');
-  }
-
-  if (valid) {
-    // Redirect based on role selection
-    if (role === 'manager') {
-      window.location.href = 'dashboard.html'; // Replace with your manager dashboard URL
-    } else if (role === 'sales attendant') {
-      window.location.href = 'attendant-dashboard.html'; // Replace with your attendant dashboard URL
-    }
-  } else {
-    form.classList.add('was-validated'); // Bootstrap visual feedback
+  if (togglePassword && password) {
+    togglePassword.addEventListener('click', () => {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      togglePassword.innerHTML = type === 'password' 
+        ? '<i class="bi bi-eye"></i>' 
+        : '<i class="bi bi-eye-slash"></i>';
+    });
   }
 });
-  
-// Helper function to validate email format
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email.toLowerCase());
-}
+
+
+
+// //validations
+// document.addEventListener('DOMContentLoaded', function() {
+//     const form = document.getElementById("loginForm");
+//     const email = document.getElementById("email");
+//     const password = document.getElementById("password");
+// });
+// form.addEventListener('submit', function(e) {
+//     e.preventDefault();
+
+//     let valid = true;
+
+//     if (email.value.trim() === ""){
+//         email.classList.add("is-invalid");
+//         email.classList.remove("is-valid");
+//         valid = false;
+//     }else{
+//         email.classList.add("is-valid");
+//         email.classList.remove("is-invalid");
+//     }
+
+
+//     if (password.value.length < 6) {
+//       password.classList.add("is-invalid");
+//       password.classList.remove("is-valid");
+//       valid = false;
+//     } else {
+//       password.classList.add("is-valid");
+//       password.classList.remove("is-invalid");
+//     }
+//      const successMsg = document.getElementById("successMsg");
+//     if(valid) {
+//         successMsg.textContent = " Login successful!";
+//     } else {
+//         successMsg.textContent = ""; 
+//     }
+// })

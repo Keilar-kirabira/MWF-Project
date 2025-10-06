@@ -1,0 +1,152 @@
+
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: "Ubuntu", sans-serif;
+  background: #F9F6EF;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  background: white;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+/* Left side */
+.login-left {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.login-left h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-top: 100px; /* pushed down so it doesn't overlap logo */
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.logo img {
+  height: 60px;   /* adjust size as needed */
+  width: auto;
+  display: block;
+}
+
+/* Right side */
+.login-right {
+  flex: 1;
+  background: #24140390;
+  color: #fff;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.login-right h2 {
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.form-control {
+  background: #F9F6EF;
+  border: none;
+  color: #000;
+  border-radius: 20px;
+  padding: 12px 18px;
+  margin-bottom: 18px;
+}
+
+.form-control::placeholder {
+  color: #ddd;
+}
+
+.btn-light {
+  border-radius: 20px;
+  padding: 12px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-light:hover {
+  background: #eee;
+}
+
+.small-links {
+  font-size: 0.9rem;
+}
+
+.small-links a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.small-links a:hover {
+  text-decoration: underline;
+}
+
+/* SVG divider */
+.svg-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+
+.svg-divider svg {
+  height: 100%;
+  width: 100%;
+}
+/* Position eye icon inside input */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 2.5rem; /* Space for the eye icon */
+}
+
+.password-wrapper #togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.password-wrapper #togglePassword:hover {
+  color: #000;
+}
