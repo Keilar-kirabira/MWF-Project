@@ -39,10 +39,10 @@ block content
                 tr
                   td #{item.productName}
                   td #{item.productType} 
-                  td #{item.quantity}
+                  td.quantity #{item.quantity}
                   //- td #{item.costPrice}
                   //- td #{item.costPrice * item.quantity}
-                  td #{new Intl .NumberFormat().format(item.productPrice)}
+                  td.sellingPrice #{item.productPrice}
                  
                   //- td #{moment(item.dateBought).format("DD-MM-YYYY")}
                   //- td #{item.quality}
@@ -132,7 +132,12 @@ block content
               tr
                 td(colspan="11" class="text-center text-muted")
                   | No products available. 
-                 
+          tfoot
+            tr.table-dark
+              td(colspan="2") TOTAL
+              td#totalQuantity.text-end 0
+              td#totalSelling.text-end 0
+              td(colspan="2")       
 
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
       script(src="js/stocktable.js")

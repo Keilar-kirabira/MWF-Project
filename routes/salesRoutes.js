@@ -166,6 +166,17 @@ router.get("/getReceipt/:id", async (req, res) => {
   }
 });
 
+//SALES REPORTS ROUTE
+router.get("/salesreport", async (req, res) =>{
+  try {
+    const sale = await salesModel.find();
+    res.render("salesreport", {sale})
+  } catch (error) {
+    console.error(err);
+    res.status(500).send("server error")
+  }
+})
+
 
 
 

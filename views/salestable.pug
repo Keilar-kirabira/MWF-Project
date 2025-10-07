@@ -20,7 +20,7 @@ block content
 
         h3.mb-4 Sales Records
         .d-flex.justify-content-between.mb-3
-          input.form-control(type='text', placeholder='Search Sales...', id='searchInput', style='width: 50%;')
+          input.form-control(type='text', placeholder='Search customername and productname', id='searchInput', style='width: 50%;')
           a.btn.btn-dark(href='/Addsale') Add Sale
 
         table.table.table-striped.table-bordered
@@ -32,7 +32,7 @@ block content
               th Quantity
               th Unit Price
               th Transport
-              //- th Total Price 
+              th Total Price 
               //- th Sales Agent 
               //- th Payment Type
               th Date 
@@ -51,7 +51,7 @@ block content
                   td #{sale.quantity}
                   td #{sale.unitPrice}
                   td #{sale.transportCheck}
-                  //- td #{sale.totalPrice}
+                  td #{sale.totalPrice}
                   //- td #{sale.salesAgent.userName}
                   //- td #{sale.paymentType}
                   td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
@@ -141,7 +141,15 @@ block content
               tr
                 td(colspan="15" class="text-center text-muted")
                   | No sales available.
-                  
+          tfoot
+            tr.table-dark
+              td(colspan="3") TOTAL
+              td#totalQuantity.text-end 0
+              td
+              td
+              td#totalPrice.text-end 0
+              td(colspan= (currentUser.role === "Manager" ? "6" : "3"))
+        
     
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
       script(src="js/salestable.js") 

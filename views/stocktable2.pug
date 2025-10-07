@@ -29,7 +29,7 @@ block content
           button.btn.btn-outline-dark.btn-sm(data-filter="Furniture") Furniture
 
         .d-flex.justify-content-between.align-items-center.mb-3
-          input.form-control.w-25(type="text" id="searchInput" placeholder="Search...")
+          input.form-control.w-25(type="text" id="searchInput" placeholder="Search productname")
           a.btn.btn-dark(href='/stock') Add New Stock
 
         table.table.table-striped.table-bordered#stockTable
@@ -39,7 +39,7 @@ block content
               th(scope='col') Product Type
               th(scope='col') Quantity 
               th(scope='col') Cost Price (UGX)
-              th(scope='col') Product Price (UGX)
+              th(scope='col') Selling  Price (UGX)
               //- th(scope='col') Total Cost
               th(scope='col') Supplier Name 
               th(scope='col') Date
@@ -53,10 +53,10 @@ block content
                 tr(data-type=item.productType)
                   td #{item.productName}
                   td #{item.productType} 
-                  td #{item.quantity}
-                  td #{new Intl.NumberFormat().format(item.costPrice)}
-                  td #{new Intl.NumberFormat().format(item.productPrice)}
-                  //- td #{item.totalCost.toLocaleString()}
+                  td.quantity #{item.quantity}
+                  td.costPrice #{item.costPrice}
+                  td.sellingPrice #{item.productPrice}
+                  //- td #{new Intl.NumberFormat().format (item.totalCost)}
                   td #{item.supplierName}
                   td #{moment(item.dateBought).format("DD-MM-YYYY")}
 
@@ -149,7 +149,14 @@ block content
               tr
                 td(colspan="15" class="text-center text-muted")
                   | No products available. 
-                  
+          tfoot
+            tr.table-dark
+              td(colspan="2") TOTAL
+              td#totalQuantity.text-end 0
+              td#totalCost.text-end 0
+              td#totalSelling.text-end 0
+              td(colspan="5")
+        
 
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
       script(src='/js/stocktable2.js')

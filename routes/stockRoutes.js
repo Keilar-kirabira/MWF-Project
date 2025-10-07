@@ -296,8 +296,17 @@ router.post("/deletestock", async (req, res) => {
 
 
 
+//STOCK REPORT ROUTE
 
-
+router.get("/stockreport",  async (req, res)=>{
+  try {
+    const items = await StockrecordModel.find();
+    res.render("stockreport",{items})
+  } catch (error) {
+    console.error(err);
+    res.status(500).send('server error')
+  }
+})
 
 
 

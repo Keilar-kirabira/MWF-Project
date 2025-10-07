@@ -9,3 +9,15 @@ document.getElementById("unitPrice").addEventListener("change",function(){      
         totalPrice.value = ""
     }  
 });
+
+//flash message
+document.addEventListener("DOMContentLoaded", () => {
+  const flash = document.getElementById("flashMsg");
+  if (flash) {
+    // Use Bootstrap's alert method to fade out
+    setTimeout(() => {
+      const alert = new bootstrap.Alert(flash);
+      alert.close(); // fades out the alert
+    }, 3000); // 3000ms = 3 seconds
+  }
+});

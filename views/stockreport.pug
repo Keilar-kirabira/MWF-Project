@@ -1,0 +1,80 @@
+extends layout2.pug
+
+block styles
+  link(rel='stylesheet' href='/css/sidebar.css')
+  link(rel='stylesheet' href='/css/stock.css')
+  link(rel='stylesheet' href='/css/sales.css')
+
+block content
+  // Main wrapper
+  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
+    
+    // Sidebar (25%)
+    div(style="width: 25%; height: 100%;")
+      include includes/sidebar.pug
+
+    // Main content (75%)
+    div(style="width: 75%; padding: 20px; overflow-y:auto;")
+      h2.text-center Stock Report
+
+      // Date Filter Controls
+      .row.mb-3
+        .col-md-3
+          label(for="startDate") Start Date
+          input#startDate.form-control(type="date")
+        .col-md-3
+          label(for="endDate") End Date
+          input#endDate.form-control(type="date")
+        .col-md-3
+          label(for="typeFilter") Type
+          select#typeFilter.form-select
+            option(value="All") All
+            option(value="Wood") Wood
+            option(value="Furniture") Furniture
+        .col-md-3.align-self-end.d-flex.gap-2
+          button#filterBtn.btn.btn-dark Filter
+          button#resetBtn.btn.btn-dark Reset
+          button#downloadPDF.btn.btn-success Download PDF
+
+      // Stock Table
+      table#stockTable.table.table-bordered.table-striped
+        thead.table-dark
+          tr
+            th Product Name
+            th Type
+            th Cost Price
+            th Quantity
+            th Selling Price
+            th Supplier
+            th Date
+            th Quality
+            th Color
+            th Measurements
+        tbody#stockTableBody
+          if items.length
+            each item in items
+              tr(data-date=moment(item.dateBought).format("YYYY-MM-DD"))
+                td #{item.productName}
+                td #{item.productType}
+                td #{new Intl.NumberFormat().format(item.costPrice)}
+                td #{item.quantity}
+                td #{new Intl.NumberFormat().format(item.productPrice)}
+                td #{item.supplierName}
+                td #{moment(item.dateBought).format("DD-MM-YYYY")}
+                td #{item.quality}
+                td #{item.color || '-'}
+                td #{item.measurements || '-'}
+          else
+            tr
+              td(colspan="10" class="text-center text-muted") No stock available.
+        tfoot.table-dark
+          tr
+            td(colspan="2") TOTAL
+            td#totalCost 0
+            td#totalQty 0
+            td#totalSelling 0
+            td(colspan="5")
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js")
+  script(src="/js/stockreport.js")

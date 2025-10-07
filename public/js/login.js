@@ -15,39 +15,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// //validations
-// document.addEventListener('DOMContentLoaded', function() {
-//     const form = document.getElementById("loginForm");
-//     const email = document.getElementById("email");
-//     const password = document.getElementById("password");
-// });
-// form.addEventListener('submit', function(e) {
-//     e.preventDefault();
+//validations
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+});
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-//     let valid = true;
+    let valid = true;
 
-//     if (email.value.trim() === ""){
-//         email.classList.add("is-invalid");
-//         email.classList.remove("is-valid");
-//         valid = false;
-//     }else{
-//         email.classList.add("is-valid");
-//         email.classList.remove("is-invalid");
-//     }
+    if (email.value.trim() === ""){
+        email.classList.add("is-invalid");
+        email.classList.remove("is-valid");
+        valid = false;
+    }else{
+        email.classList.add("is-valid");
+        email.classList.remove("is-invalid");
+    }
 
 
-//     if (password.value.length < 6) {
-//       password.classList.add("is-invalid");
-//       password.classList.remove("is-valid");
-//       valid = false;
-//     } else {
-//       password.classList.add("is-valid");
-//       password.classList.remove("is-invalid");
-//     }
-//      const successMsg = document.getElementById("successMsg");
-//     if(valid) {
-//         successMsg.textContent = " Login successful!";
-//     } else {
-//         successMsg.textContent = ""; 
-//     }
-// })
+    if (password.value.length < 6) {
+      password.classList.add("is-invalid");
+      password.classList.remove("is-valid");
+      valid = false;
+    } else {
+      password.classList.add("is-valid");
+      password.classList.remove("is-invalid");
+    }
+     const successMsg = document.getElementById("successMsg");
+    if(valid) {
+        successMsg.textContent = " Login successful!";
+    } else {
+        successMsg.textContent = ""; 
+    }
+})

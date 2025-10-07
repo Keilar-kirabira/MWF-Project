@@ -13,13 +13,22 @@ html
     
     
    
-    //  scripts 
+    //- //- scripts 
+    //- script(src="/js/main.js")
+    //- script(src="/js/footer.js")
+    //- //- Ionicons
+    //- script(type="module", src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js")
+    //- script(nomodule, src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js")
+
+
+  body(style=" position:relative;")
+    block content
+
+    include includes/footer.pug
+
+    //- scripts 
     script(src="/js/main.js")
+    script(src="/js/footer.js")
     //- Ionicons
     script(type="module", src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js")
     script(nomodule, src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js")
-
-
-  body
-    block content
-
