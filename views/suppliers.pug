@@ -3,13 +3,7 @@ block styles
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
 block content
-  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
-    // Sidebar
-    div(style="width: 25%; height: 100%;")
-      include includes/sidebar.pug
-
-    // Main content
-    div(style="width: 75%; padding: 20px; overflow-y: auto;")  
+    .suppliers(style="min-width: 100%; padding: 20px; overflow-y: auto;")  
       .container.mt-5
         h2.mb-4 Supplier Management Form
         form#supplierForm.mb-4(action='/Addsupplier' method='post')

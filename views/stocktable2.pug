@@ -4,11 +4,7 @@ block styles
    link(rel='stylesheet' href='/css/sales.css')
    link(rel="stylesheet", href="/css/stocktable2.css")
 block content 
-  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
-    div(style="width: 25%; height: 100%;")
-      include includes/sidebar.pug
-
-    div(style="width: 75%; padding: 20px; overflow-y: auto;")
+    .stocktable(style="min-width: 100%; padding: 20px; ")
       .container.my-5.mt-6
         //- Flash messages
         if success_msg && success_msg.length

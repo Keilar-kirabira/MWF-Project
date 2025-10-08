@@ -22,7 +22,18 @@ html
 
 
   body(style=" position:relative;")
-    block content
+    // Main wrapper
+    div(style="width: 100%; height: 100vh; display: flex; flex-direction: row; ")
+    
+      // Sidebar (25%)
+      div(style="max-width: 25%; height: 100%;")
+
+        include includes/sidebar.pug
+
+      // Main content (75%)
+      div(style="min-width: 75%; position: relative; overflow-y:auto; height: 100vh; display: flex; flex-direction: column")
+        include includes/topbar.pug
+        block content
 
     include includes/footer.pug
 

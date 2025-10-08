@@ -3,56 +3,49 @@ block styles
   link(rel='stylesheet' href='/css/sidebar.css')
   link(rel='stylesheet' href='/css/sales.css')
 block content
-  // Main wrapper
-  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
-    // Sidebar (25%)
-    div(style="width: 25%; height: 100%;")
-      include includes/sidebar.pug
+ 
+  .dashboard.mt-5.p-4(style="overflow-y: auto;")
+    h2.mb-3 Welcome to MWF Dashboard, Manager
+    p.text-muted.
+      Manage your furniture and wood inventory with ease.
 
-    // Main content (75%)
-    div(style="width: 75%; padding: 20px; overflow-y: auto;")  
-      .container.mt-5
-        h2.mb-3 Welcome to MWF Dashboard, Manager
-        p.text-muted.
-          Manage your furniture and wood inventory with ease.
+    .row.mt-4
+      .col-md-3.mb-4
+        .card.text-black.bg-white.h-100
+          .card-body
+            h5.card-title Total Products
+            p.card-text 132 in stock
 
-        .row.mt-4
-          .col-md-3.mb-4
-            .card.text-black.bg-white.h-100
-              .card-body
-                h5.card-title Total Products
-                p.card-text 132 in stock
+      .col-md-3.mb-4
+        .card.text-dark.bg-white.h-100
+          .card-body
+            h5.card-title Total Sales
+            p.card-text UGX 12,000,000 in July
 
-          .col-md-3.mb-4
-            .card.text-dark.bg-white.h-100
-              .card-body
-                h5.card-title Total Sales
-                p.card-text UGX 12,000,000 in July
+      .col-md-3.mb-4
+        .card.text-black.bg-white.h-100
+          .card-body
+            h5.card-title Pending Deliveries
+            p.card-text 4 orders awaiting transport
 
-          .col-md-3.mb-4
-            .card.text-black.bg-white.h-100
-              .card-body
-                h5.card-title Pending Deliveries
-                p.card-text 4 orders awaiting transport
+      .col-md-3.mb-4
+        .card.text-danger.bg-white.h-100
+          .card-body
+            h5.card-title Low Stock
+            p.card-text 5 items below reorder level
+      //- .col-md-3.mb-4
+      //-   .card.text-danger.bg-white.h-100
+      //-     .card-body
+      //-       h5.card-title Raw Materials
+      //-       p.card-text 5 items below reorder level      
 
-          .col-md-3.mb-4
-            .card.text-danger.bg-white.h-100
-              .card-body
-                h5.card-title Low Stock
-                p.card-text 5 items below reorder level
-          //- .col-md-3.mb-4
-          //-   .card.text-danger.bg-white.h-100
-          //-     .card-body
-          //-       h5.card-title Raw Materials
-          //-       p.card-text 5 items below reorder level      
-
-        .row.mt-4
-          .col-md-4.mb-3
-            a.btn.btn-outline-dark.w-100(href="/stocklist") View Products
-          .col-md-4.mb-3
-            a.btn.btn-outline-dark.w-100(href="/supplierslist") Recent Suppliers
-          .col-md-4.mb-3
-            a.btn.btn-outline-dark.w-100(href="/stockreports") View Stock Reports
+    .row.mt-4
+      .col-md-4.mb-3
+        a.btn.btn-outline-dark.w-100(href="/stocklist") View Products
+      .col-md-4.mb-3
+        a.btn.btn-outline-dark.w-100(href="/supplierslist") Recent Suppliers
+      .col-md-4.mb-3
+        a.btn.btn-outline-dark.w-100(href="/stockreports") View Stock Reports
 
        
 

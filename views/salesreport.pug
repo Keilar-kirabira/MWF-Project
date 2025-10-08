@@ -1,8 +1,79 @@
 extends layout2 
+
 block styles
-     link(rel='stylesheet' href='/css/sidebar.css')
-    link(rel='stylesheet' href='/css/sales.css')
+  link(rel='stylesheet' href='/css/sidebar.css')
+  link(rel='stylesheet' href='/css/sales.css')
+
 block content
-    div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
-    div(style="width: 25%; height: 100%;")
-      include includes/sidebar.pug
+    .salesreport(style="min-width: 100%; padding: 20px; overflow-y: auto;")
+      .container
+        h2.text-center.mb-4 Sales Report
+
+        // Filter Form
+        .row.mb-3
+          .col-md-3
+            label(for="startDate") Start Date
+            input#startDate.form-control(type="date")
+          .col-md-3
+            label(for="endDate") End Date
+            input#endDate.form-control(type="date")
+          .col-md-3
+            label(for="SalesAgent") Sales Agent
+            input#SalesAgent.form-control(type="text" placeholder="Search....")  
+          .col-md-3
+            label(for="typeFilter") Type
+            select#typeFilter.form-select
+              option(value="All") All
+              option(value="Wood") Wood
+              option(value="Furniture") Furniture
+          .col-md-3.align-self-end.d-flex.gap-4
+            button#filterBtn.btn.btn-dark.me-2 Filter
+            button#resetBtn.btn.btn-dark.me-2 Reset
+            button#downloadPDF.btn.btn-success Download PDF
+
+        //- // Summary
+        //- .report-summary
+        //-   h5.text-primary Summary
+        //-   p#totalSalesCount Total Sales: 0
+        //-   p#totalQuantity Total Quantity Sold: 0
+        //-   p#totalRevenue Total Revenue (UGX): 0
+
+        // Sales Table
+        table#salesTable.table.table-striped.table-bordered.mt-4
+          thead.table-dark
+            tr
+              th Customer Name
+              th Product Type
+              th Product Name
+              th Quantity
+              th Unit Price (UGX)
+              th Total Price (UGX)
+              th Payment Type
+              th Payment Date
+              th Transport Included
+              th Sales Agent
+          tbody
+            if sales && sales.length
+              each sale in sales
+                tr(data-date=moment(sale.paymentDate).format("YYYY-MM-DD"))
+                  td #{sale.customerName}
+                  td #{sale.productType}
+                  td #{sale.productName}
+                  td #{sale.quantity}
+                  td #{new Intl.NumberFormat().format(sale.unitPrice)}
+                  td #{new Intl.NumberFormat().format(sale.totalPrice)}
+                  td #{sale.paymentType}
+                  td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
+                  td #{sale.transportCheck}
+                  td #{sale.salesAgent.userName}
+          tfoot.table-dark
+            tr
+              td(colspan="3") TOTALS
+              td#totalQuantity 0
+              td#totalUnitPrice 0
+              td#TotalPrice 0
+              td(colspan="4")
+      script(src="js/salesreport.js") 
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js")
+      script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js")
+

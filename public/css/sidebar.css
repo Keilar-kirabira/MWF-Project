@@ -1,5 +1,5 @@
 /* google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
 
 /* universal */
 * {
@@ -10,7 +10,7 @@
 }
 
 :root {
-  --brown: #81756E;
+  --brown: #81756e;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -20,13 +20,13 @@
 body {
   min-height: 100vh;
   overflow-x: hidden;
-
 }
 
 .container {
   position: relative;
   width: 100%;
   padding: 0;
+  margin: 0;
   overflow: hidden;
 }
 
@@ -39,7 +39,6 @@ body {
   transition: 0.5s;
   overflow: hidden;
   z-index: 999;
-
 }
 .navigation.active {
   width: 80px;
@@ -51,7 +50,6 @@ body {
   width: 100%;
   padding-bottom: 60px;
   padding-left: 12px;
- 
 }
 .navigation ul li {
   position: relative;
@@ -187,31 +185,64 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-#toggle{
-  position: absolute;
-  height:fit-content;
-  width:fit-content;
-  padding:2px;
-  border-radius:2px;
-  overflow: hidden;
-  z-index: 1000;
+#toggle {
+  margin: 10px 0 0 10px;
+  color: var(--brown);
 }
 
 @media (max-width: 480px) {
-
   .container {
-  position: fixed;
-  width: 0;
-  padding: 0;
-  overflow: hidden;
+    position: fixed;
+    
+    padding: 0;
+    overflow: auto;
   }
 
-  #toggle {
-    top: 10px;
-    left: 10px;
+  .navigation {
+    position: fixed;
+    display: none;
+    z-index: 999;
+  }
+  .dashboard{
+    z-index: -1;
+  }
+  .navigation.active {
+    display: block;
   }
 
   .main-content {
     padding: 10px;
   }
+
+  .stock-page{
+    z-index: -1;
+  }
+  .stocktable{
+    z-index: -1;
+  }
+  .userstable{
+    z-index: -1;
+  }
+  .registeruser{
+    z-index: -1;
+  }
+  .salestable{
+    z-index: -1;
+  }
+  .sales{
+    z-index: -1;
+  }
+  
+  .suppliers{
+    z-index: -1;
+  }
+   .stocktable1{
+    z-index: -1;
+  }
+    .stockreport{
+    z-index: -1;
+  }
 }
+salesreport{
+    z-index: -1;
+  }

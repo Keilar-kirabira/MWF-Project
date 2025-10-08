@@ -169,13 +169,14 @@ router.get("/getReceipt/:id", async (req, res) => {
 //SALES REPORTS ROUTE
 router.get("/salesreport", async (req, res) =>{
   try {
-    const sale = await salesModel.find();
-    res.render("salesreport", {sale})
+    const sales = await salesModel.find().populate("salesAgent", "userName");
+    const currentUser = req.session.user;
+    res.render("salesreport", {sales, currentUser})
   } catch (error) {
-    console.error(err);
-    res.status(500).send("server error")
+    console.error(error.message);
+    res.status(500).send("Sale not found")
   }
-})
+});
 
 
 
