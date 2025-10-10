@@ -242,7 +242,22 @@ body {
     .stockreport{
     z-index: -1;
   }
-}
-salesreport{
+  .salesreport{
     z-index: -1;
   }
+  .editstock{
+    z-index: -1;
+  }
+  .editregister{
+    z-index: -1;
+  }
+  .editsale{
+    z-index: -1;
+  }
+  .editsupplier{
+    z-index: -1;
+  }
+   .attendant-dashboard{
+    z-index: -1;
+  }
+}

@@ -65,7 +65,7 @@ router.post("/Addsale", async (req, res) => {
         totalPrice: total,
         transportCheck: !!transportCheck,
         paymentType,
-        paymentDate,
+        paymentDate:new Date(paymentDate + 'T00:00:00'),
         salesAgent: userId,
       });
       console.log("saving sale:", sale);

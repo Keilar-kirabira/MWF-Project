@@ -3,15 +3,7 @@ block styles
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
 block content
-  // Main wrapper
-  div(style="width: 100%; height: 100vh; display: flex; flex-direction: row;")
-
-    // Sidebar (25%)
-    div(style="width: 25%; height: 100%;")
-      include includes/sidebar.pug
-
-    // Main content (75%)
-    div(style="width: 75%; padding: 20px; overflow:hidden;")
+     .editstock(style="min-width: 100%; padding: 20px; overflow:hidden;")
       h2.mb-4.text-center Edit Stock Form
       form#stockForm(action=`/editstock/${item._id}?_method=PUT`, method='post')
         .row.g-3
@@ -150,6 +142,6 @@ block content
 
         
 
-  // Scripts
-  script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
-  script(src='js/stock.js')
+
+      script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
+      script(src='js/stock.js')
