@@ -1,0 +1,103 @@
+body {
+  background-color: #F9F6EF; /* Light Cream */
+ 
+}
+
+/* reports.css */
+
+/* Container for the cards */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Card style */
+.card {
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+}
+
+/* reports.css */
+.reports-page h2.text-center.mb-5 {
+    color: #245A36; /* Deep green */
+}
+
+
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Icons inside cards */
+.card i {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    color: #245A36;
+
+}
+
+/* Card paragraph text */
+.card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 10px 0 15px 0;
+}
+
+/* Buttons inside cards */
+.card a.btn {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Button hover effect */
+.card a.btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Page title */
+.reports-page h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+
+footer {
+  font-size: 14px;
+  color: #666;
+  background-color: #f1f1f1;
+  
+}

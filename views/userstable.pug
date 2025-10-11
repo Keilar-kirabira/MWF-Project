@@ -1,6 +1,7 @@
 extends layout2.pug 
 block styles 
    link(rel='stylesheet' href='/css/sidebar.css')
+   link(rel="stylesheet" href="/css/userstable.css")
    link(rel='stylesheet' href='/css/sales.css')
 block content 
     .userstable(style="min-width: 100%; padding: 20px; overflow-y: auto;")
@@ -47,7 +48,7 @@ block content
                   td #{user.employeeId}
 
                   td
-                    button.btn.btn-info.btn-sm(
+                    button.btn.btn-sm(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#viewUser-${user._id}`
@@ -55,11 +56,11 @@ block content
                       i.bi.bi-eye-fill
 
                   td
-                    a.btn.btn-warning.btn-sm(href=`/editusers/${user._id}`)
+                    a.btn.btn-sm(href=`/editusers/${user._id}`)
                       i.bi.bi-pencil-fill    
 
                   td  
-                    button.btn.btn-danger.btn-sm(
+                    button.btn.btn-sm(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#deleteUser-${user._id}`
@@ -126,3 +127,4 @@ block content
                   | No users found.        
 
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
+      script(src="/js/userstable.js") 

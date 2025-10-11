@@ -24,7 +24,7 @@ block content
             option(value="Wood") Wood
             option(value="Furniture") Furniture
         .col-md-3.align-self-end.d-flex.gap-2
-          button#filterBtn.btn.btn-dark Filter
+          button#filterBtn.btn.btn-dark Search
           button#resetBtn.btn.btn-dark Reset
           button#downloadPDF.btn.btn-success Download PDF
 
@@ -52,7 +52,7 @@ block content
                 td #{item.quantity}
                 td #{new Intl.NumberFormat().format(item.productPrice)}
                 td #{item.supplierName}
-                td #{moment(item.dateBought).format("DD-MM-YYYY")}
+                td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
                 td #{item.quality}
                 td #{item.color || '-'}
                 td #{item.measurements || '-'}

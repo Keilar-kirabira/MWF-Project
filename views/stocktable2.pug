@@ -54,7 +54,11 @@ block content
                   td.sellingPrice #{item.productPrice}
                   //- td #{new Intl.NumberFormat().format (item.totalCost)}
                   td #{item.supplierName}
-                  td #{moment(item.dateBought).format("DD-MM-YYYY")}
+                  //- td #{moment(item.dateBought).format("DD-MM-YYYY")}
+                  td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
+
+                  
+
 
                   //- View Button
                   td
@@ -126,7 +130,11 @@ block content
                               | #{item.supplierName}
                             li.list-group-item
                               strong Date: 
-                              | #{moment(item.dateBought).format("DD-MM-YYYY")}
+                              //- | #{moment(item.dateBought).format("DD-MM-YYYY")}
+                              |td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
+
+                             
+
                             li.list-group-item
                               strong Quality: 
                               | #{item.quality}

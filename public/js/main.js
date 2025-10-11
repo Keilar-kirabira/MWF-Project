@@ -35,4 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
     main.classList.toggle('active');
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const logoutLink = document.getElementById('logoutLink');
+  const logoutModalElement = document.getElementById('logoutModal');
+  const logoutModal = new bootstrap.Modal(logoutModalElement);
+
+  logoutLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    logoutModal.show();
+  });
+});
 

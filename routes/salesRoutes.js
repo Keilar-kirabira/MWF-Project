@@ -178,7 +178,10 @@ router.get("/salesreport", async (req, res) =>{
   }
 });
 
-
+//report page route
+router.get("/report", (req, res) => {
+   res.render("reports" );  
+});
 
 
 module.exports = router;

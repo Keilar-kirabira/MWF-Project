@@ -1,0 +1,26 @@
+extends layout2
+
+block styles
+  link(rel='stylesheet' href='/css/sidebar.css')
+  link(rel='stylesheet' href='/css/reports.css')
+
+block content
+  .reports-page(style="min-width: 100%; padding: 40px; margin-top: 60px;")
+    h2.text-center.mb-5 Reports Dashboard
+    .cards-container(style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;")
+      
+      
+      .card(style="width: 250px; padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px; transition: transform 0.3s;")
+        ion-icon(name="bar-chart-outline" style="font-size: 40px; color:#4CAF50;")
+        h3.mt-3 Sales Report
+        p Generate periodical sales report
+        a.btn.btn-dark.mt-2(href='/salesreport') Generate
+
+      
+      .card(style="width: 250px; padding: 20px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px; transition: transform 0.3s;")
+        ion-icon(name="cube-outline" style="font-size: 40px; color:#2196F3;")
+        h3.mt-3 Stock Report
+        p Generate stock report
+        a.btn.btn-dark.mt-2(href='/stockreport') Generate
+         script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
+         
