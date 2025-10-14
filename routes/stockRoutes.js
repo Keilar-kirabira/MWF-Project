@@ -173,7 +173,7 @@ router.put("/editstock/:id",ensureauthenticated,  ensureManager, async (req, res
       // Add/subtract difference instead of replacing
       stock.quantity += quantityDifference;
 
-      // Optional: update other details
+      
       stock.costPrice = Number(costPrice);
       stock.productPrice = Number(productPrice);
       stock.supplierName = supplierName;

@@ -61,9 +61,9 @@ router.post("/Addsale", ensureauthenticated, async (req, res) => {
         paymentDate:new Date(paymentDate + 'T00:00:00'),
         salesAgent: userId,
       });
-      console.log("saving sale:", sale);
-      console.log(userId);
-      console.log('Session user:', req.session.user)
+      // console.log("saving sale:", sale);
+      // console.log(userId);
+      // console.log('Session user:', req.session.user)
       await sale.save();
 
       //decrease quantity from the stock collection
