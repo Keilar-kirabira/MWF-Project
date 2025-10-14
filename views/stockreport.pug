@@ -52,8 +52,8 @@ block content
                 td #{item.quantity}
                 td #{new Intl.NumberFormat().format(item.productPrice)}
                 td #{item.supplierName}
-                //- td #{moment(item.dateBought).utcOffset(2).format("DD-MM-YYYY")}
-                td #{moment(item.dateBought).format("DD-MM-YYYY")}
+                td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
+                //- td #{moment(item.dateBought).format("DD-MM-YYYY")}
                 td #{item.quality}
                 td #{item.color || '-'}
                 td #{item.measurements || '-'}

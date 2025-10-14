@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
     
-    // Check if it's a valid email
+    // Check if it's a valid email for regex
     if (!emailRegex.test(value)) {
       emailInput.classList.add('is-invalid');
       emailInput.classList.remove('is-valid');
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (successMsg) {
           successMsg.textContent = 'Validation successful! Logging in...';
           
-          // Submit form after brief delay
+          // Submit form after one second.
           setTimeout(() => {
             form.submit();
           }, 1000);
