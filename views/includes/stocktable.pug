@@ -6,75 +6,133 @@ table.table.table-striped.table-bordered
       th(scope='col') Quantity 
       th(scope='col') Selling Price (UGX)
       th(scope='col') Status
-      th(scope='col') View 
+      th(scope='col') Actions
+      
   tbody#productTable
     if items.length 
       each item in items
         tr
-          td #{item.productName}
+          td 
+            strong #{item.productName}
           td #{item.productType} 
           td.quantity #{item.quantity}
-          td.sellingPrice #{item.productPrice}
-          td    
+          td.sellingPrice #{new Intl.NumberFormat().format(item.productPrice)}
+          td.text-center
             if item.quantity <= 50
-              span.badge.bg-warning Low Stock 
+              span.badge.bg-warning 
+                i.bi.bi-exclamation-triangle.me-1
+                | Low Stock 
             else 
-              span.badge.bg-success In Stock  
-          td 
-            button.btn.btn-info.p-2(
+              span.badge.bg-success 
+                i.bi.bi-check-circle.me-1
+                | In Stock  
+          td.text-center
+            button.btn.btn-info(
               type='button'
               data-bs-toggle="modal"
               data-bs-target=`#viewModal-${item._id}`
+              title="View Details"
             )  
               i.bi.bi-eye-fill   
 
           //- View Modal
           div.modal.fade(id=`viewModal-${item._id}` tabindex="-1" aria-hidden="true")
-            .modal-dialog
+            .modal-dialog.modal-lg
               .modal-content
                 .modal-header
-                  h5.modal-title Stock Details
-                  button.btn-close(type="button" data-bs-dismiss="modal")
+                  h5.modal-title
+                    i.bi.bi-box-seam.me-2
+                    | Stock Details
+                  button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
                 .modal-body
-                  ul.list-group
-                    li.list-group-item
-                      strong Name: 
-                      | #{item.productName}
-                    li.list-group-item
-                      strong Type: 
-                      | #{item.productType}
-                    li.list-group-item
-                      strong Quantity: 
-                      | #{item.quantity}
-                    li.list-group-item
-                      strong Cost Price: 
-                      | #{new Intl.NumberFormat().format(item.costPrice)}
-                    li.list-group-item
-                      strong Total Cost: 
-                      | #{new Intl.NumberFormat().format(item.costPrice * item.quantity)}
-                    li.list-group-item
-                      strong Selling Price: 
-                      | #{new Intl.NumberFormat().format(item.productPrice)}
-                    li.list-group-item
-                      strong Supplier: 
-                      | #{item.supplierName}
-                    li.list-group-item
-                      strong Status: 
-                      if item.quantity <= 50
-                        span.btn.btn-warning Low Stock
-                      else
-                        span.btn.btn-success In Stock  
+                  //- Product header
+                  .row.mb-4.text-center
+                    .col-12
+                      .bg-light.rounded-circle.d-inline-flex.align-items-center.justify-content-center(
+                        style="width: 80px; height: 80px; border: 3px solid #81756e;"
+                      )
+                        i.bi.bi-box-seam.fs-1(style="color: #81756e;")
+                      h5.mt-2.mb-0 #{item.productName}
+                      p.text-muted.mb-0 #{item.productType}
+                  
+                  //- Two-column layout
+                  .row
+                    .col-md-6
+                      ul.list-group.list-group-flush
+                        li.list-group-item
+                          i.bi.bi-tag.me-2.text-muted
+                          strong Product Name:
+                          br
+                          | #{item.productName}
+                        li.list-group-item
+                          i.bi.bi-folder.me-2.text-muted
+                          strong Type:
+                          br
+                          | #{item.productType}
+                        li.list-group-item
+                          i.bi.bi-calculator.me-2.text-muted
+                          strong Quantity:
+                          br
+                          span.badge.bg-primary.fs-6 #{item.quantity} units
+                        li.list-group-item
+                          i.bi.bi-cash-coin.me-2.text-muted
+                          strong Cost Price:
+                          br
+                          | UGX #{new Intl.NumberFormat().format(item.costPrice)}
+                    .col-md-6
+                      ul.list-group.list-group-flush
+                        li.list-group-item
+                          i.bi.bi-currency-dollar.me-2.text-muted
+                          strong Selling Price:
+                          br
+                          span.text-success.fw-bold.fs-6 UGX #{new Intl.NumberFormat().format(item.productPrice)}
+                        li.list-group-item
+                          i.bi.bi-receipt.me-2.text-muted
+                          strong Total Cost:
+                          br
+                          | UGX #{new Intl.NumberFormat().format(item.costPrice * item.quantity)}
+                        li.list-group-item
+                          i.bi.bi-building.me-2.text-muted
+                          strong Supplier:
+                          br
+                          | #{item.supplierName}
+                        li.list-group-item.bg-light
+                          i.bi.bi-info-circle.me-2.text-muted
+                          strong Status:
+                          br
+                          if item.quantity <= 50
+                            span.btn.btn-warning.btn-sm
+                              i.bi.bi-exclamation-triangle.me-1
+                              | Low Stock
+                          else
+                            span.btn.btn-success.btn-sm
+                              i.bi.bi-check-circle.me-1
+                              | In Stock
+                  
+                  //- Stock alert if low
+                  if item.quantity <= 50
+                    .alert.alert-warning.mt-3.mb-0(role="alert")
+                      i.bi.bi-exclamation-triangle-fill.me-2
+                      strong Warning: 
+                      | This product is running low on stock. Consider reordering soon.
+                      
                 .modal-footer
                   button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
     else
       tr
-        td(colspan="11" class="text-center text-muted")
-          | No products available. 
+        td(colspan="6" class="text-center text-muted")
+          i.bi.bi-inbox.fs-1.d-block.mb-2(style="opacity: 0.3;")
+          | No products available.
+          br
+          small Start by adding products to your inventory.
+          
   tfoot
-    tr.table
-      td(colspan="2") TOTAL
+    tr.table(style="background-color: #81756e")
+      td(colspan="2") 
+        i.bi.bi-calculator.me-2
+        | TOTAL
       td#totalQuantity.text-end 0
-      td#totalSelling.text-end 0
+      td#totalSelling.text-end UGX 0
       td(colspan="2")       
 
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

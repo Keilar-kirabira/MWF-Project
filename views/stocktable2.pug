@@ -3,9 +3,9 @@ block styles
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
    link(rel="stylesheet", href="/css/stocktable2.css")
-   link(rel="stylesheet", href="/css/style.css")
+
 block content 
-    .stocktable(style="min-width: 100%; padding: 20px; ")
+    .stocktable(style="min-width: 100%; padding: 20px;")
       .container.my-5.mt-6
       
         if success_msg && success_msg.length
@@ -19,7 +19,6 @@ block content
 
         h3 Stock Records
 
-        
         .mb-4.text-center
           button.btn.btn-sm.me-2(data-filter="All") All
           button.btn.btn-sm.me-2(data-filter="Wood") Wood Products
@@ -36,12 +35,10 @@ block content
               th(scope='col') Product Type
               th(scope='col') Quantity 
               th(scope='col') Cost Price (UGX)
-              th(scope='col') Selling  Price (UGX)
+              th(scope='col') Selling Price (UGX)
               th(scope='col') Supplier Name 
               th(scope='col') Date
-              th(scope='col') View
-              th(scope='col') Update 
-              th(scope='col') Delete
+              th(scope='col') Actions
 
           tbody#productTable
             if items.length 
@@ -52,34 +49,30 @@ block content
                   td.quantity #{item.quantity}
                   td.costPrice #{item.costPrice}
                   td.sellingPrice #{item.productPrice}
-                  //- td #{new Intl.NumberFormat().format (item.totalCost)}
                   td #{item.supplierName}
-                  //- td #{moment(item.dateBought).format("DD-MM-YYYY")}
                   td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
 
-                  
-
-
-                  //- View Button
-                  td
-                    button.btn.btn-info.p-2(
+                  //- IMPROVED ACTION BUTTONS - Combined in one column
+                  td.text-center.action-buttons
+                    button.btn.view-btn(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#viewModal-${item._id}`
+                      title="View Details"
                     )
                       i.bi.bi-eye-fill
 
-                  //- Update Button
-                  td 
-                    a.btn.btn-warning(href=`/editstock/${item._id}`)
+                    a.btn.btn-warning(
+                      href=`/editstock/${item._id}`
+                      title="Edit"
+                    )
                       i.bi.bi-pencil-fill  
 
-                  //- Delete Button
-                  td 
-                    button.btn.btn-danger.p-2(
+                    button.btn.btn-danger(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#deleteModal-${item._id}`
+                      title="Delete"
                     )
                       i.bi.bi-trash-fill  
 
@@ -91,76 +84,85 @@ block content
                           h5.modal-title Delete Confirmation
                           button.btn-close(type="button" data-bs-dismiss="modal")
                         .modal-body
-                          p Are you sure you want to delete "#{item.productName}"?
+                          p.mb-0 Are you sure you want to delete 
+                            strong "#{item.productName}"
+                            | ?
+                          p.text-muted.small.mt-2 This action cannot be undone.
                         .modal-footer
                           button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
-                          form(method='post' action="/deletestock")
+                          form(method='post' action="/deletestock" style="display: inline;")
                             input(type="hidden" name='id' value=item._id)
                             button.btn.btn-danger(type='submit') Confirm Delete    
 
                   //- View Modal
                   div.modal.fade(id=`viewModal-${item._id}` tabindex="-1" aria-hidden="true")
-                    .modal-dialog
+                    .modal-dialog.modal-lg
                       .modal-content
                         .modal-header
-                          h5.modal-title Stock Details
+                          h5.modal-title
+                            i.bi.bi-box-seam.me-2
+                            | Stock Details
                           button.btn-close(type="button" data-bs-dismiss="modal")
                         .modal-body
-                          ul.list-group
-                            li.list-group-item
-                              strong Name: 
-                              | #{item.productName}
-                            li.list-group-item
-                              strong Type: 
-                              | #{item.productType}
-                            li.list-group-item
-                              strong Quantity: 
-                              | #{item.quantity}
-                            li.list-group-item
-                              strong Cost Price: 
-                              | #{new Intl.NumberFormat().format(item.costPrice)}
-                            li.list-group-item
-                              strong Total Cost: 
-                              | #{new Intl.NumberFormat().format(item.totalCost)}
-                            li.list-group-item
-                              strong Selling Price: 
-                              | #{new Intl.NumberFormat().format(item.productPrice)}
-                            li.list-group-item
-                              strong Supplier: 
-                              | #{item.supplierName}
-                            li.list-group-item
-                              strong Date: 
-                              //- | #{moment(item.dateBought).format("DD-MM-YYYY")}
-                              |td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
-
-                             
-
-                            li.list-group-item
-                              strong Quality: 
-                              | #{item.quality}
-                            li.list-group-item
-                              strong Color: 
-                              | #{item.color}
-                            li.list-group-item
-                              strong Measurements: 
-                              | #{item.measurements}
-                            li.list-group-item
-                              strong Phone: 
-                              | #{item.phoneNumber}
+                          .row
+                            .col-md-6
+                              ul.list-group.list-group-flush
+                                li.list-group-item
+                                  strong Product Name: 
+                                  | #{item.productName}
+                                li.list-group-item
+                                  strong Type: 
+                                  | #{item.productType}
+                                li.list-group-item
+                                  strong Quantity: 
+                                  span.badge.bg-primary.ms-2 #{item.quantity}
+                                li.list-group-item
+                                  strong Cost Price: 
+                                  | UGX #{new Intl.NumberFormat().format(item.costPrice)}
+                                li.list-group-item
+                                  strong Selling Price: 
+                                  | UGX #{new Intl.NumberFormat().format(item.productPrice)}
+                                li.list-group-item
+                                  strong Total Cost: 
+                                  | UGX #{new Intl.NumberFormat().format(item.totalCost)}
+                            .col-md-6
+                              ul.list-group.list-group-flush
+                                li.list-group-item
+                                  strong Supplier: 
+                                  | #{item.supplierName}
+                                li.list-group-item
+                                  strong Date Bought: 
+                                  | #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
+                                li.list-group-item
+                                  strong Quality: 
+                                  | #{item.quality}
+                                li.list-group-item
+                                  strong Color: 
+                                  | #{item.color}
+                                li.list-group-item
+                                  strong Measurements: 
+                                  | #{item.measurements}
+                                li.list-group-item
+                                  strong Phone: 
+                                  | #{item.phoneNumber}
                         .modal-footer
                           button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
+                          a.btn.btn-warning(href=`/editstock/${item._id}`)
+                            i.bi.bi-pencil-fill.me-1
+                            | Edit
             else
               tr
-                td(colspan="15" class="text-center text-muted")
+                td(colspan="8" class="text-center text-muted py-4")
+                  i.bi.bi-inbox.fs-1.d-block.mb-2
                   | No products available. 
+          
           tfoot
-            tr.table(style="background-color: #81756e")
+            tr(style="background-color: #81756e")
               td(colspan="2") TOTAL
               td#totalQuantity.text-end 0
               td#totalCost.text-end 0
               td#totalSelling.text-end 0
-              td(colspan="5")
-        
+              td(colspan="3")
 
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
       script(src='/js/stocktable2.js')

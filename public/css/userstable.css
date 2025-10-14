@@ -1,26 +1,319 @@
+:root {
+    --brown: #81756e;
+    --brown-dark: #5c514c;
+    --brown-light: #a39891;
+}
 
+
+
+.userstable h3 {
+    color: #245A36;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Search Input */
+.userstable #searchInput {
+    border: 2px solid #81756e;
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+.userstable #searchInput:focus {
+    outline: none;
+    border-color: #5c514c;
+    box-shadow: 0 0 8px rgba(129, 117, 110, 0.3);
+}
+
+/* Register Button */
 .userstable a.btn-dark {
-  background-color: #81756e;
-  border: 2px solid #81756e;
-  transition: all 0.3s ease;
+    background-color: #81756e;
+    border: 2px solid #81756e;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .userstable a.btn-dark:hover {
-  background-color: #5c514c;
-  border-color: #5c514c;
-  transform: scale(1.05);
+    background-color: #5c514c;
+    border-color: #5c514c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(92, 81, 76, 0.3);
 }
-table td{
-  font-size: 15px;
+
+/* Table Styling */
+.userstable table {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .userstable table thead th {
-  background-color: #81756e;
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
+    background-color: #81756e;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    padding: 14px 12px;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Reduce width of action columns */
+.userstable table thead th:nth-last-child(-n+3) {
+    width: 80px;
 }
 
 .userstable table tbody td {
-  vertical-align: middle;
+    vertical-align: middle;
+    padding: 12px;
+    font-size: 15px;
+    border-color: #f0f0f0;
 }
+
+.userstable table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.userstable table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.005);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Profile Image Styling */
+.userstable table tbody td img {
+    border: 3px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.userstable table tbody td img:hover {
+    border-color: #81756e;
+    transform: scale(1.1);
+}
+
+
+
+/* Remove default Bootstrap button styles */
+.userstable table tbody .btn {
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* View Button - Blue/Info */
+.userstable table tbody .btn-info {
+    color: #17a2b8;
+}
+
+.userstable table tbody .btn-info:hover {
+    background-color: #d1ecf1;
+    color: #117a8b;
+}
+
+/* Edit Button - Orange/Warning */
+.userstable table tbody .btn-warning {
+    color: #f39c12;
+}
+
+.userstable table tbody .btn-warning:hover {
+    background-color: #fff3cd;
+    color: #e67e22;
+}
+
+/* Delete Button - Red/Danger */
+.userstable table tbody .btn-danger {
+    color: #dc3545;
+}
+
+.userstable table tbody .btn-danger:hover {
+    background-color: #f8d7da;
+    color: #c82333;
+}
+
+/* Icon sizing */
+.userstable table tbody .btn i {
+    font-size: 16px;
+}
+
+/* Remove btn-sm extra padding */
+.userstable table tbody .btn-sm {
+    padding: 6px 10px;
+}
+
+
+.userstable .modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.userstable .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 24px;
+}
+
+.userstable .modal-title {
+    color: #333;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.userstable .modal-body {
+    padding: 24px;
+}
+
+.userstable .modal-footer {
+    border-top: 2px solid #e9ecef;
+    background-color: #f8f9fa;
+    padding: 16px 24px;
+    border-radius: 0 0 12px 12px;
+}
+
+/* List Group Styling in Modals */
+.userstable .list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 14px 20px;
+    transition: background-color 0.2s ease;
+}
+
+.userstable .list-group-item:first-child {
+    border-top: none;
+    border-radius: 0;
+}
+
+.userstable .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.userstable .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.userstable .list-group-item strong {
+    color: #495057;
+    margin-right: 10px;
+    min-width: 150px;
+    display: inline-block;
+}
+
+/* Delete Modal Specific Styling */
+.userstable .modal-body p {
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 0;
+}
+
+/* Alert Messages */
+.userstable .alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.userstable .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.userstable .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Empty State */
+.userstable .text-center.text-muted {
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 992px) {
+    .userstable table {
+        font-size: 14px;
+    }
+    
+    .userstable table thead th {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+    
+    .userstable table tbody td {
+        padding: 10px 8px;
+    }
+    
+    .userstable table tbody td img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .userstable table tbody .btn {
+        padding: 4px 8px;
+    }
+    
+    .userstable table tbody .btn i {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .userstable #searchInput {
+        max-width: 100% !important;
+        margin-bottom: 10px;
+    }
+    
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+    
+    .userstable a.btn-dark {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* ============================================
+   ALTERNATIVE: COMPACT ACTIONS COLUMN
+   Uncomment to combine all actions into one column
+   ============================================ */
+/*
+.userstable table thead th:nth-last-child(-n+3) {
+    display: none;
+}
+
+.userstable table thead tr th:last-child {
+    display: table-cell;
+}
+
+.userstable table tbody td:nth-last-child(-n+3) {
+    display: none;
+}
+
+.userstable table tbody tr td:last-child {
+    display: table-cell;
+    white-space: nowrap;
+}
+
+.userstable table tbody .btn {
+    margin: 0 2px;
+}
+*/

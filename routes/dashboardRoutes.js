@@ -91,8 +91,8 @@ router.get("/dashboard",ensureauthenticated, ensureManager, async (req, res) => 
       }
     });
 
-    console.log("Today's date range:", startOfDayUTC, "to", endOfDayUTC);
-    console.log("Today's new stock entries found:", todaysNewStockTotal);
+    // console.log("Today's date range:", startOfDayUTC, "to", endOfDayUTC);
+    // console.log("Today's new stock entries found:", todaysNewStockTotal);
 
   
   
@@ -157,7 +157,7 @@ router.get("/dashboard",ensureauthenticated, ensureManager, async (req, res) => 
       };
     }
 
-    // SIMPLE PIE CHART DATA: Sales Distribution between Wood and Furniture
+    //  PIE CHART DATA for Sales Distribution between Wood and Furniture
     const salesDistribution = await salesModel.aggregate([
       {
         $group: {
@@ -168,7 +168,7 @@ router.get("/dashboard",ensureauthenticated, ensureManager, async (req, res) => 
       }
     ]);
 
-    console.log("Sales Distribution Result:", JSON.stringify(salesDistribution));
+    // console.log("Sales Distribution Result:", JSON.stringify(salesDistribution));
 
     // Extract wood and furniture sales
     let woodSales = 0;

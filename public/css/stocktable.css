@@ -1,70 +1,377 @@
-
-.productstable table thead th {
-  background-color: #81756e;  
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
+:root {
+    --brown: #81756e;
+    --brown-dark: #5c514c;
+    --brown-light: #a39891;
+    --success-green: #198754;
+    --warning-orange: #fd7e14;
 }
 
-/* Table Body */
-.productstable table tbody td {
-  vertical-align: middle;
+/* Container Styling */
+.productstable,
+.stockreport {
+    background-color: #fafafa;
 }
 
+.productstable h3,
+.stockreport h3 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
 
+/* Table Styling */
+.productstable table,
+.stockreport table {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.productstable table thead th,
+.stockreport table thead th {
+    background-color: #81756e;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    padding: 14px 12px;
+    border: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Reduce width of view column */
+.productstable table thead th:last-child,
+.stockreport table thead th:last-child {
+    width: 80px;
+}
+
+.productstable table tbody td,
+.stockreport table tbody td {
+    vertical-align: middle;
+    padding: 14px 12px;
+    font-size: 15px;
+    border-color: #f0f0f0;
+}
+
+.productstable table tbody tr,
+.stockreport table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.productstable table tbody tr:hover,
+.stockreport table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.002);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Quantity Column Styling */
 td.quantity {
-  font-weight: 600;
-  text-align: center;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
 }
 
+/* Selling Price Column Styling */
 td.sellingPrice {
-  font-weight: 600;
-  color: #198754; /* green */
-  text-align: right;
+    font-weight: 600;
+    color: var(--success-green);
+    text-align: right;
+    font-size: 16px;
+}
+
+/* Status Badges */
+.productstable table tbody .badge,
+.stockreport table tbody .badge {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.productstable table tbody .badge.bg-success,
+.stockreport table tbody .badge.bg-success {
+    background-color: #d4edda !important;
+    color: #155724;
+}
+
+.productstable table tbody .badge.bg-warning,
+.stockreport table tbody .badge.bg-warning {
+    background-color: #fff3cd !important;
+    color: #856404;
 }
 
 
-/* Filter Buttons */
+.productstable table tbody .btn-info,
+.stockreport table tbody .btn-info {
+    background: none;
+    border: none;
+    color: #17a2b8;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.productstable table tbody .btn-info:hover,
+.stockreport table tbody .btn-info:hover {
+    background-color: #d1ecf1;
+    color: #117a8b;
+}
+
+.productstable table tbody .btn-info i,
+.stockreport table tbody .btn-info i {
+    font-size: 16px;
+}
+
+
 .stockreport .filter-btn {
-  border: 2px solid #81756e;
-  background-color: transparent;
-  color: #81756e;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+    border: 2px solid #81756e;
+    background-color: transparent;
+    color: #81756e;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.stockreport .filter-btn:hover,
+.stockreport .filter-btn:hover {
+    background-color: rgba(129, 117, 110, 0.1);
+    transform: translateY(-2px);
+}
+
 .stockreport .filter-btn.active {
-  background-color: #81756e;
-  color: #fff;
-  transform: scale(1.05);
+    background-color: #81756e;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(129, 117, 110, 0.3);
 }
 
 /* Add Stock Button */
 .stockreport .add-stock-btn {
-  border: 2px solid #81756e;
-  background-color: #81756e;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+    border: 2px solid #81756e;
+    background-color: #81756e;
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .stockreport .add-stock-btn:hover {
-  background-color: #5c514c;
-  border-color: #5c514c;
-  transform: scale(1.05);
+    background-color: #5c514c;
+    border-color: #5c514c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(92, 81, 76, 0.3);
 }
 
 
-
-.modal-header {
-  background-color: #81756e;
-  color: #fff;
+.productstable tfoot td,
+.stockreport tfoot td {
+    background-color: #81756e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 12px;
+    border: none;
 }
 
-.modal-footer .btn-secondary {
-  background-color: #6c757d;
-  border: none;
+.productstable tfoot td:first-child,
+.stockreport tfoot td:first-child {
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
+
+.productstable tfoot .text-end,
+.stockreport tfoot .text-end {
+    font-size: 16px;
+}
+
+
+.productstable .modal-content,
+.stockreport .modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.productstable .modal-header,
+.stockreport .modal-header {
+    background-color: #81756e;
+    color: #fff;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    padding: 20px 24px;
+}
+
+.productstable .modal-title,
+.stockreport .modal-title {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.productstable .modal-body,
+.stockreport .modal-body {
+    padding: 24px;
+}
+
+.productstable .modal-footer,
+.stockreport .modal-footer {
+    border-top: 2px solid #e9ecef;
+    background-color: #f8f9fa;
+    padding: 16px 24px;
+    border-radius: 0 0 12px 12px;
+}
+
+.productstable .modal-footer .btn-secondary,
+.stockreport .modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.productstable .modal-footer .btn-secondary:hover,
+.stockreport .modal-footer .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* List Group in Modal */
+.productstable .list-group-item,
+.stockreport .list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 14px 20px;
+    transition: background-color 0.2s ease;
+}
+
+.productstable .list-group-item:first-child,
+.stockreport .list-group-item:first-child {
+    border-top: none;
+}
+
+.productstable .list-group-item:last-child,
+.stockreport .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.productstable .list-group-item:hover,
+.stockreport .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.productstable .list-group-item strong,
+.stockreport .list-group-item strong {
+    color: #495057;
+    margin-right: 10px;
+    min-width: 130px;
+    display: inline-block;
+}
+
+/* Status buttons in modal */
+.productstable .list-group-item .btn,
+.stockreport .list-group-item .btn {
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 20px;
+    border: none;
+}
+
+.productstable .list-group-item .btn-success,
+.stockreport .list-group-item .btn-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.productstable .list-group-item .btn-warning,
+.stockreport .list-group-item .btn-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Empty State */
+.productstable .text-center.text-muted,
+.stockreport .text-center.text-muted {
+    padding: 3rem 1rem;
+    color: #6c757d;
+    font-size: 16px;
+}
+
+
+.productstable #searchInput,
+.stockreport #searchInput {
+    border: 2px solid #81756e;
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+.productstable #searchInput:focus,
+.stockreport #searchInput:focus {
+    outline: none;
+    border-color: #5c514c;
+    box-shadow: 0 0 8px rgba(129, 117, 110, 0.3);
+}
+
+
+@media (max-width: 992px) {
+    .productstable table,
+    .stockreport table {
+        font-size: 14px;
+    }
+    
+    .productstable table thead th,
+    .stockreport table thead th {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+    
+    .productstable table tbody td,
+    .stockreport table tbody td {
+        padding: 10px 8px;
+    }
+    
+    td.quantity,
+    td.sellingPrice {
+        font-size: 15px;
+    }
+    
+    .productstable table tbody .btn,
+    .stockreport table tbody .btn {
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stockreport .filter-btn {
+        font-size: 13px;
+        padding: 6px 15px;
+        margin-bottom: 8px;
+    }
+    
+    .productstable table,
+    .stockreport table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    .productstable .badge,
+    .stockreport .badge {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+

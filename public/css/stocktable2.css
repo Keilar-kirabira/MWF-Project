@@ -1,65 +1,209 @@
-:root{
-    --brown:#81756e;
+:root {
+    --brown: #81756e;
+    --brown-dark: #5c514c;
+    --brown-light: #a39891;
 }
 
+/* Filter Buttons */
 .mb-4 button.active {
-  background-color: #333; 
-  color: #fff;            
-  border-color: #333;     
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
 }
 
-/* Search input styling */
+/* Search Input */
 #searchInput {
-  border: 2px solid #81756e;
-  border-radius: 8px;
-  padding: 6px 12px;
-  transition: all 0.3s ease;
-}
-table td{
-  font-size: 15px;
+    border: 2px solid #81756e;
+    border-radius: 8px;
+    padding: 6px 12px;
+    transition: all 0.3s ease;
 }
 
 #searchInput:focus {
-  outline: none;
-  border-color: #5c514c;  /* darker shade when focused */
-  box-shadow: 0 0 6px rgba(129, 117, 110, 0.6);
+    outline: none;
+    border-color: #5c514c;
+    box-shadow: 0 0 6px rgba(129, 117, 110, 0.6);
 }
 
+/* Add Stock Button */
 .stocktable a.btn[href="/stock"] {
-  background-color: #81756e;
-  color: #fff;
-  transition: all 0.3s ease;
+    background-color: #81756e;
+    color: #fff;
+    transition: all 0.3s ease;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
-/* Hover effect */
 .stocktable a.btn[href="/stock"]:hover {
-  background-color: #5c514c;  /* darker brown */
-  border-color: #5c514c;
-  color: #fff;
-  transform: scale(1.05);     /* subtle zoom */
+    background-color: #5c514c;
+    border-color: #5c514c;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Styling */
+table td {
+    font-size: 15px;
+    vertical-align: middle;
 }
 
 #stockTable thead th {
-  background-color:  #6f665f;   /* same brown shade */
-  color: #fff;                 /* white text for contrast */
-  text-align: center;
-  font-weight: 400;
-  vertical-align: middle;
-  border: 1px solid #ddd;
+    background-color: #6f665f;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    padding: 12px 8px;
 }
 
+/* Reduce width of action columns */
+#stockTable thead th:nth-last-child(-n+3),
+#stockTable tbody td:nth-last-child(-n+3) {
+    width: 60px;
+    text-align: center;
+}
 
-/* Style the table footer */
+/* Table Footer */
 #stockTable tfoot td {
-  background-color: #81756e;
-  color: #fff;
-  font-weight: 700;
-  text-align: right;
-  border-top: 2px solid #555;
+    background-color: #81756e;
+    color: #fff;
+    font-weight: 700;
+    text-align: right;
+    border-top: 2px solid #555;
 }
 
-/* First cell in footer (TOTAL label) align left */
 #stockTable tfoot td:first-child {
-  text-align: left;
-  padding-left: 10px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* Row Hover Effect */
+#stockTable tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+#stockTable tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+
+#stockTable tbody .btn {
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* View Button - Neutral Gray */
+#stockTable tbody .view-btn {
+    color: #6c757d;
+}
+
+#stockTable tbody .view-btn:hover {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+/* Edit Button - Soft Orange */
+#stockTable tbody .btn-warning {
+    color: #f39c12;
+}
+
+#stockTable tbody .btn-warning:hover {
+    background-color: #fff3cd;
+    color: #e67e22;
+}
+
+/* Delete Button - Soft Red */
+#stockTable tbody .btn-danger {
+    color: #dc3545;
+}
+
+#stockTable tbody .btn-danger:hover {
+    background-color: #f8d7da;
+    color: #c82333;
+}
+
+/* Icon sizing */
+#stockTable tbody .btn i {
+    font-size: 16px;
+}
+
+
+
+
+/* Modal Improvements */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 12px 12px 0 0;
+}
+
+.modal-title {
+    color: #333;
+    font-weight: 600;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 12px 20px;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item strong {
+    color: #495057;
+    margin-right: 8px;
+}
+
+/* Alert Messages */
+#flashMsg {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #stockTable {
+        font-size: 14px;
+    }
+    
+    #stockTable thead th:nth-last-child(-n+3),
+    #stockTable tbody td:nth-last-child(-n+3) {
+        width: 50px;
+    }
+    
+    #stockTable tbody .btn {
+        padding: 4px 8px;
+    }
+    
+    #stockTable tbody .btn i {
+        font-size: 14px;
+    }
 }
