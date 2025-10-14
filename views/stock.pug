@@ -1,12 +1,14 @@
 extends layout2.pug
-block styles 
-   link(rel='stylesheet' href='/css/sidebar.css')
-   link(rel='stylesheet' href='/css/stock.css')
-   link(rel='stylesheet' href='/css/sales.css')
-block content 
+
+block styles
+  link(rel='stylesheet' href='/css/sidebar.css')
+  link(rel='stylesheet' href='/css/stock.css')
+  link(rel='stylesheet' href='/css/sales.css')
+
+block content
   .stock-page(style="min-width: 100%; padding: 20px; margin-top: 52px;")
     h2.mb-3.text-center Stock Entry Form
-    form#stockForm(action='/stock' method='post')
+    form#stockForm(action='/stock' method='post' novalidate)
       .row.g-3
         .col-md-6
           label.form-label(for='productName') Product Name
@@ -23,21 +25,30 @@ block content
             option(value='Cupboards') Cupboards
             option(value='Office Chairs') Office Chairs
             option(value='Dining Tables') Dining Tables
+          .invalid-feedback Please select a product.
+
         .col-md-6
           label.form-label(for='productType') Type of Product
           select#productType.form-select(name='productType' required='')
             option(value='' disabled selected) Choose...
             option(value='Wood') Wood
             option(value='Furniture') Furniture
+          .invalid-feedback Please select product type.
+
         .col-md-4
           label.form-label(for='quantity') Quantity
           input#quantity.form-control(type='number' name='quantity' min='1' placeholder='Enter quantity' required='')
+          .invalid-feedback Quantity must be 1 or more.
+
         .col-md-4
           label.form-label(for='costPrice') Cost Price (UGX)
           input#costPrice.form-control(type='number' name='costPrice' placeholder='Enter cost price' required='')
+          .invalid-feedback Cost Price must be 100 UGX or more.
+
         .col-md-4
           label.form-label(for='productPrice') Selling Price (UGX)
           input#productPrice.form-control(type='number' name='productPrice' readonly)
+
         .col-md-6
           label.form-label(for='supplierName') Supplier Name
           select#supplierName.form-select(name='supplierName' required='')
@@ -45,9 +56,13 @@ block content
             if suppliers.length
               each supplier in suppliers
                 option(value=supplier.supplierName data-phone=supplier.phoneNumber)= supplier.supplierName
+          .invalid-feedback Please select a supplier.
+
         .col-md-6
           label.form-label(for='dateBought') Date
           input#dateBought.form-control(type='date' name='dateBought' required='')
+          .invalid-feedback Date must be today's date.
+
         .col-md-6
           label.form-label(for='quality') Quality
           select#quality.form-select(name='quality' required='')
@@ -55,8 +70,10 @@ block content
             option(value='High') High
             option(value='Medium') Medium
             option(value='Low') Low
+          .invalid-feedback Please select quality.
+
         .col-md-6
-          label.form-label(for='color') Color
+          label.form-label(for='color') Color (Optional)
           select#color.form-select(name='color')
             option(value='' selected disabled) --Select Color--
             optgroup(label='Raw Materials')
@@ -81,26 +98,25 @@ block content
               option(value='Cherry') Cherry
               option(value='Teak') Teak
               option(value='Espresso') Espresso
+
         .col-md-6
-          label.form-label(for='measurements') Measurements
+          label.form-label(for='measurements') Measurements (Optional)
           input#measurements.form-control(type='text' name='measurements' placeholder='Enter 200cm x 150cm x 90cm')
+          .invalid-feedback Measurements must include 'cm'
+
         .col-md-6
           label.form-label(for='supplierPhone') Supplier Phone Number
           select#supplierPhone.form-select(name='phoneNumber' required='')
-            option(value='' selected disabled) --Select Phone--
+            option(value='' selected disabled) Phone number is autofilled.
             if suppliers.length
               each supplier in suppliers
                 option(value=supplier.phoneNumber data-id=supplier.supplierName)= supplier.phoneNumber
+          .invalid-feedback Please select supplier phone.
+
         .col-12
           button.btn.btn-dark(type='submit') Add Stock
-    
-   
 
-        
-       
-
-  
   script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js')
   script(src='js/stock.js')
   script(type='module' src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js')
-  script(nomodule='' src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js') 
+  script(nomodule='' src='https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js')

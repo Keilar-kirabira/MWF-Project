@@ -8,6 +8,7 @@ html
     link(rel='stylesheet' href='	https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css')
     link(href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css' rel='stylesheet')
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css")
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.css')
   block styles  
    
     
@@ -25,7 +26,7 @@ html
         include includes/sidebar.pug
 
       // Main content (75%)
-      div(style="min-width: 75%; position: relative; overflow-y:auto; height: 100vh; display: flex; flex-direction: column")
+      div(style="min-width: 75%; position: relative; overflow-y:auto; height: 100vh; display: flex; flex-direction: column; padding-top:60px")
         include includes/topbar.pug
         block content
 

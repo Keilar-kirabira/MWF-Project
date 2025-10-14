@@ -11,40 +11,47 @@ block content
             .col-md-6
               label.form-label(for='customerName') Customer Name
               input#customerName.form-control(type='text' name='customerName' value=`${sale.customerName}` placeholder='Enter Customer Name' required='')
+              .invalid-feedback Name must contain minimum 3 characters.
             .col-md-6
               label.form-label(for='productName') Product Name
               select#productName.form-select(name='productName' required='' value=`${sale.productName}`)
                 if stocks.length 
                   each stock in stocks 
                     option(value=stock.productName)= stock.productName
+              .invalid-feedback Please select a product.      
             .col-md-6
               label.form-label(for='productType') Type of Product
               select#productType.form-select(name='productType' required='')
                 option(value=`${sale.productType}` selected='') #{sale.productType}
                 option(value='Wood') Wood
                 option(value='Furniture') Furniture
+              .invalid-feedback Please select product type.  
             .col-md-6
               label.form-label(for='quantity') Quantity
               input#quantity.form-control(type='number' name='quantity' min='1'  value=`${sale.quantity}` placeholder='Enter quantity' required='')
+              .invalid-feedback Quantity must be 1 or more.
             .col-md-6
               label.form-label(for='unitPrice') Unit Price (UGX)
               input#unitPrice.form-control(type='number' name='unitPrice' min="1" value=`${sale.unitPrice}` placeholder='Enter unit price' required='')
+              .invalid-feedback Unit Price must be 100 UGX or more.
             .col-md-6
               label.form-label(for='totalPrice') Total Price (UGX)
               input#totalPrice.form-control(type='text' name='totalPrice' readonly='' value=`${sale.totalPrice}`)
-            .col-md-6
+            .col-md-4
               label.form-check-label(for='transportCheck') Add 5% Transport Fee
               input#transportCheck.form-check-input(type='checkbox' name='transportCheck' checked=sale.transportCheck ? true : false )
-            .col-md-6
+            .col-md-4
               label.form-label(for='paymentType') Type of Payment
               select#paymentType.form-select(name='paymentType' required='')
                 option(value=`${sale.paymentType}` selected='' ) #{sale.paymentType}
                 option(value='Cash') Cash
                 option(value='Cheque') Cheque
                 option(value='Bank Overdraft') Bank Overdraft
-            .col-md-6
+            .invalid-feedback Please select type of payment.    
+            .col-md-4
               label.form-label(for='paymentDate') Date
               input#paymentDate.form-control(type='date' name='paymentDate' value=`${moment(sale.paymentDate).format("YYYY-MM-DD")}`   required='')
+              .invalid-feedback Date must be today's date.
             .col-12
               button.btn.btn-dark(type='submit') Update Sale
 

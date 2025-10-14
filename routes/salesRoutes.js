@@ -4,7 +4,7 @@ const { ensureauthenticated, ensureManager } = require("../middleware/auth");
 const salesModel = require("../models/salesModel");
 const stockModel = require("../models/stockModel");
 
-router.get("/Addsale", async (req, res) => {
+router.get("/Addsale", ensureauthenticated, async (req, res) => {
   try {
     const stocks = await stockModel.find(); //get all stock from the database.
     res.render("sales", { stocks }); //pass them to view
@@ -13,7 +13,7 @@ router.get("/Addsale", async (req, res) => {
   }
 });
 
-router.post("/Addsale", async (req, res) => {
+router.post("/Addsale", ensureauthenticated, async (req, res) => {
   try {
     const {
       customerName,
@@ -31,14 +31,7 @@ router.post("/Addsale", async (req, res) => {
       productType: productType,
       productName: productName,
     }); // the 1st productType and name come from the stock module and the2nd from the sales module.
-    // if (!stock) {
-    //   return res.status(400).send("Stock not found.");
-    // }
-    // if (stock.quantity < Number(quantity)) {
-    //   return res
-    //     .status(400)
-    //     .send(`Insufficent stock, only${stock.quantity} available.`); //to avoid selling little stock or nothing
-    // }
+   
     if (!stock) {
       req.flash("error_msg", "Stock not found.");
       return res.redirect("/Addsale");
@@ -90,7 +83,7 @@ router.post("/Addsale", async (req, res) => {
 });
 
 //route for getting sales data from the db to the table
-router.get("/saleslist", async (req, res) => {
+router.get("/saleslist", ensureauthenticated, async (req, res) => {
   try {
     const sales = await salesModel.find().populate("salesAgent", "userName"); //populate method helps to expose details about the salesAgent forexample userName.and . find brings back everthing
     const currentUser = req.session.user;
@@ -103,7 +96,7 @@ router.get("/saleslist", async (req, res) => {
 });
 
 // //updating sales
-router.get("/editsales/:id", async (req, res) => {
+router.get("/editsales/:id",  ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const sale = await salesModel.findById(req.params.id);
     const stocks = await stockModel.find();
@@ -116,7 +109,7 @@ router.get("/editsales/:id", async (req, res) => {
   }
   
 });
-router.put("/editsales/:id",  async (req, res) => {
+router.put("/editsales/:id", ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const updatedSale = await salesModel.findByIdAndUpdate(
       req.params.id,
@@ -139,7 +132,7 @@ router.put("/editsales/:id",  async (req, res) => {
 
 
 //delete
-router.post("/deletesales",   async(req, res)=>{
+router.post("/deletesales",  ensureauthenticated, ensureManager, async(req, res)=>{
   try {
        await salesModel.deleteOne({_id:req.body.id});
        req.flash("success_msg", "Sale deleted successfully!"); 
@@ -155,7 +148,7 @@ router.post("/deletesales",   async(req, res)=>{
 
 
 //receipt
-router.get("/getReceipt/:id", async (req, res) => {
+router.get("/getReceipt/:id",ensureauthenticated, async (req, res) => {
   try {
     //Sales agent only sees their own sales
     const sale = await salesModel.findOne({_id:req.params.id}).populate("salesAgent", "userName");
@@ -167,7 +160,7 @@ router.get("/getReceipt/:id", async (req, res) => {
 });
 
 //SALES REPORTS ROUTE
-router.get("/salesreport", async (req, res) =>{
+router.get("/salesreport", ensureauthenticated, ensureManager, async (req, res) =>{
   try {
     const sales = await salesModel.find().populate("salesAgent", "userName");
     const currentUser = req.session.user;
@@ -179,7 +172,7 @@ router.get("/salesreport", async (req, res) =>{
 });
 
 //report page route
-router.get("/report", (req, res) => {
+router.get("/report", ensureauthenticated, ensureManager, (req, res) => {
    res.render("reports" );  
 });
 

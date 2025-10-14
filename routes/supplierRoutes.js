@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const {ensureauthenticated,ensureManager} = require("../middleware/auth");
 
 const suppliersModel = require("../models/supplierModel")
-router.get("/Addsupplier", (req, res)=>{
+router.get("/Addsupplier", ensureauthenticated, ensureManager, (req, res)=>{
     res.render("suppliers");
 });
 
-router.post("/Addsupplier",async(req, res)=>{
+router.post("/Addsupplier", ensureauthenticated, ensureManager, async(req, res)=>{
     try {
         const supplier = new suppliersModel(req.body)
         console.log(req.body);
@@ -21,7 +22,7 @@ router.post("/Addsupplier",async(req, res)=>{
 });
 
 // getting suppliers from the database
-router.get("/supplierslist", async (req, res)=>{
+router.get("/supplierslist",ensureauthenticated, ensureManager, async (req, res)=>{
     try {
         let suppliers = await suppliersModel.find().sort({ $natural: -1 })
         res.render("supplierstable", { suppliers }) 
@@ -32,7 +33,7 @@ router.get("/supplierslist", async (req, res)=>{
 
 
 //updating route
-router.get("/editsuppliers/:id", async (req, res) => {
+router.get("/editsuppliers/:id", ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const supplier = await suppliersModel.findById(req.params.id);
 
@@ -45,7 +46,7 @@ router.get("/editsuppliers/:id", async (req, res) => {
   
 });
 
-router.put("/editsuppliers/:id",  async (req, res) => {
+router.put("/editsuppliers/:id", ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const updatedSupplier = await suppliersModel.findByIdAndUpdate(
       req.params.id,
@@ -67,7 +68,7 @@ router.put("/editsuppliers/:id",  async (req, res) => {
 });
 
 //delete
-router.post("/deletesuppliers",   async(req, res)=>{
+router.post("/deletesuppliers", ensureauthenticated, ensureManager,  async(req, res)=>{
   try {
        await suppliersModel.deleteOne({_id:req.body.id});
        req.flash("success_msg", "Supplier deleted successfully!"); 

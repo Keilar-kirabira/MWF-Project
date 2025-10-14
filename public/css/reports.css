@@ -80,6 +80,17 @@ body {
     margin-bottom: 40px;
     text-align: center;
 }
+.reports-page .card a.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #81756e;   /* brown */
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
 
 /* Responsive adjustments */
 @media (max-width: 600px) {

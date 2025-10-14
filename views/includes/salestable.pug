@@ -1,5 +1,5 @@
 table.table.table-striped.table-bordered
-  thead.table-dark
+  thead.table
     tr
       th Customer Name
       th Product Type
@@ -8,8 +8,6 @@ table.table.table-striped.table-bordered
       th Unit Price
       th Transport
       th Total Price 
-      //- th Sales Agent 
-      //- th Payment Type
       th Date 
       if currentUser.role === "Manager"
         th Update 
@@ -28,8 +26,6 @@ table.table.table-striped.table-bordered
           td #{sale.unitPrice}
           td #{sale.transportCheck}
           td #{sale.totalPrice}
-          //- td #{sale.salesAgent.userName}
-          //- td #{sale.paymentType}
           td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
 
           if currentUser.role === "Manager"

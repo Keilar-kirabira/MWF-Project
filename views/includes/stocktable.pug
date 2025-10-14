@@ -1,21 +1,12 @@
 table.table.table-striped.table-bordered
-  thead.table-dark
+  thead.table
     tr
       th(scope='col') Product Name
       th(scope='col') Product Type
       th(scope='col') Quantity 
-      //- th(scope='col') Cost Price (UGX)
-      //- th(scope='col') Total Cost (UGX)
       th(scope='col') Selling Price (UGX)
-      //- th(scope='col') Date
-      //- th(scope='col') Quality 
-      //- th(scope='col') Color
-      //- th(scope='col') Measurements
-      //- th(scope='col') Phone Number
       th(scope='col') Status
       th(scope='col') View 
-      //- th(scope='col') Update 
-      //- th(scope='col') Delete
   tbody#productTable
     if items.length 
       each item in items
@@ -23,14 +14,7 @@ table.table.table-striped.table-bordered
           td #{item.productName}
           td #{item.productType} 
           td.quantity #{item.quantity}
-          //- td #{item.costPrice}
-          //- td #{item.costPrice * item.quantity}
           td.sellingPrice #{item.productPrice}
-          //- td #{moment(item.dateBought).format("DD-MM-YYYY")}
-          //- td #{item.quality}
-          //- td #{item.color}
-          //- td #{item.measurements}
-          //- td #{item.phoneNumber}
           td    
             if item.quantity <= 50
               span.badge.bg-warning Low Stock 
@@ -42,32 +26,7 @@ table.table.table-striped.table-bordered
               data-bs-toggle="modal"
               data-bs-target=`#viewModal-${item._id}`
             )  
-              i.bi.bi-eye-fill
-          //- td 
-          //-   a.btn.btn-warning(href=`/editstock/${item._id}`)
-          //-     i.bi.bi-pencil-fill  
-          //- td 
-          //-   button.btn.btn-danger.p-2(
-          //-     type='button'
-          //-     data-bs-toggle="modal"
-          //-     data-bs-target=`#deleteModal-${item._id}`
-          //-   )
-          //-     i.bi.bi-trash-fill  
-
-          //- Delete Modal
-          //- div.modal.fade(id=`deleteModal-${item._id}` tabindex="-1" aria-hidden="true")
-          //-   .modal-dialog
-          //-     .modal-content
-          //-       .modal-header
-          //-         h5.modal-title Delete Confirmation
-          //-         button.btn-close(type="button" data-bs-dismiss="modal")
-          //-       .modal-body
-          //-         p Are you sure you want to delete "#{item.productName}"?
-          //-       .modal-footer
-          //-         button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
-          //-         form(method='post' action="/deletestock")
-          //-           input(type="hidden" name='id' value=item._id)
-          //-           button.btn.btn-danger(type='submit') Confirm Delete    
+              i.bi.bi-eye-fill   
 
           //- View Modal
           div.modal.fade(id=`viewModal-${item._id}` tabindex="-1" aria-hidden="true")
@@ -99,9 +58,6 @@ table.table.table-striped.table-bordered
                     li.list-group-item
                       strong Supplier: 
                       | #{item.supplierName}
-                    //- li.list-group-item
-                    //-   strong Date: 
-                    //-   | #{moment(item.dateBought).format("DD-MM-YYYY")}
                     li.list-group-item
                       strong Status: 
                       if item.quantity <= 50
@@ -115,7 +71,7 @@ table.table.table-striped.table-bordered
         td(colspan="11" class="text-center text-muted")
           | No products available. 
   tfoot
-    tr.table-dark
+    tr.table
       td(colspan="2") TOTAL
       td#totalQuantity.text-end 0
       td#totalSelling.text-end 0

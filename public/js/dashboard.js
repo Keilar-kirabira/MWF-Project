@@ -1,4 +1,4 @@
-// dashboard.js (or any JS file you include in your dashboard page)
+
 
 // Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {

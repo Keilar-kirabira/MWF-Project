@@ -3,13 +3,12 @@ extends layout2
 block styles
   link(rel='stylesheet' href='/css/sidebar.css')
   link(rel='stylesheet' href='/css/sales.css')
+  link(rel='stylesheet' href='/css/salesreport.css')
 
 block content
     .salesreport(style="min-width: 100%; padding: 20px; overflow-y: auto;")
       .container
         h2.text-center.mb-4 Sales Report
-
-        // Filter Form
         .row.mb-3
           .col-md-3
             label(for="startDate") Start Date
@@ -27,20 +26,15 @@ block content
               option(value="Wood") Wood
               option(value="Furniture") Furniture
           .col-md-3.align-self-end.d-flex.gap-4
-            button#filterBtn.btn.btn-dark.me-2 Filter
+            button#filterBtn.btn.btn-dark.me-2 Search 
             button#resetBtn.btn.btn-dark.me-2 Reset
             button#downloadPDF.btn.btn-success Download PDF
 
-        //- // Summary
-        //- .report-summary
-        //-   h5.text-primary Summary
-        //-   p#totalSalesCount Total Sales: 0
-        //-   p#totalQuantity Total Quantity Sold: 0
-        //-   p#totalRevenue Total Revenue (UGX): 0
+      
 
-        // Sales Table
+        
         table#salesTable.table.table-striped.table-bordered.mt-4
-          thead.table-dark
+          thead.table
             tr
               th Customer Name
               th Product Type
@@ -66,7 +60,7 @@ block content
                   td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
                   td #{sale.transportCheck}
                   td #{sale.salesAgent.userName}
-          tfoot.table-dark
+          tfoot.table
             tr
               td(colspan="3") TOTALS
               td#totalQuantity 0

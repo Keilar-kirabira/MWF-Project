@@ -1,0 +1,70 @@
+
+.productstable table thead th {
+  background-color: #81756e;  
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Table Body */
+.productstable table tbody td {
+  vertical-align: middle;
+}
+
+
+td.quantity {
+  font-weight: 600;
+  text-align: center;
+}
+
+td.sellingPrice {
+  font-weight: 600;
+  color: #198754; /* green */
+  text-align: right;
+}
+
+
+/* Filter Buttons */
+.stockreport .filter-btn {
+  border: 2px solid #81756e;
+  background-color: transparent;
+  color: #81756e;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.stockreport .filter-btn:hover,
+.stockreport .filter-btn.active {
+  background-color: #81756e;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Add Stock Button */
+.stockreport .add-stock-btn {
+  border: 2px solid #81756e;
+  background-color: #81756e;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.stockreport .add-stock-btn:hover {
+  background-color: #5c514c;
+  border-color: #5c514c;
+  transform: scale(1.05);
+}
+
+
+
+.modal-header {
+  background-color: #81756e;
+  color: #fff;
+}
+
+.modal-footer .btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}

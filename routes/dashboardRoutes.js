@@ -1,33 +1,32 @@
 const express = require("express");
-const mongoose = require("mongoose"); // am importing mongoose to us objectid
+const mongoose = require("mongoose");
 const router = express.Router();
 const StockModel = require("../models/stockModel");
 const StockrecordModel = require("../models/stockrecordModel");
 const salesModel = require("../models/salesModel");
 const UserModel = require("../models/userModel");
-router.get("/dashboard", async (req, res) => {
+const {ensureauthenticated,ensureManager} = require("../middleware/auth");
+
+router.get("/dashboard",ensureauthenticated, ensureManager, async (req, res) => {
   try {
-    const sales = await salesModel.find().populate("salesAgent", "userName"); //populate method helps to expose details about the salesAgent forexample userName.and . find brings back everthing;
+    const sales = await salesModel.find().populate("salesAgent", "userName");
     const currentUser = req.session.user;
 
-    //total raw materials
+    // Total raw materials
     const rawMaterialsAgg = await StockModel.aggregate([
-      { $match: { productType: "Wood" } }, // raw materials
+      { $match: { productType: "Wood" } },
       { $group: { _id: null, totalQty: { $sum: "$quantity" } } },
     ]);
-    const rawMaterialsTotal =
-      rawMaterialsAgg.length > 0 ? rawMaterialsAgg[0].totalQty : 0;
+    const rawMaterialsTotal = rawMaterialsAgg.length > 0 ? rawMaterialsAgg[0].totalQty : 0;
 
-    //total finished products
+    // Total finished products
     const finishedProductsAgg = await StockModel.aggregate([
       { $match: { productType: "Furniture" } },
       { $group: { _id: null, totalQty: { $sum: "$quantity" } } },
     ]);
-    const finishedProductsTotal =
-      finishedProductsAgg.length > 0 ? finishedProductsAgg[0].totalQty : 0;
+    const finishedProductsTotal = finishedProductsAgg.length > 0 ? finishedProductsAgg[0].totalQty : 0;
 
-    //low stock items
-    // Low stock furniture (quantity <= 50)
+    // Low stock items
     const lowStockFurnitureAgg = await StockModel.aggregate([
       { $match: { productType: "Furniture", quantity: { $lte: 50 } } },
       {
@@ -38,14 +37,13 @@ router.get("/dashboard", async (req, res) => {
         },
       },
     ]);
-    const lowStockFurniture =
-      lowStockFurnitureAgg.length > 0
-        ? lowStockFurnitureAgg[0]
-        : { totalQty: 0, count: 0 };
-    const lowStockFurnitureItems = await StockModel.find({ productType: "Furniture", quantity: { $lte: 50 } })
-      .select("productName quantity");    
+    const lowStockFurniture = lowStockFurnitureAgg.length > 0 ? lowStockFurnitureAgg[0] : { totalQty: 0, count: 0 };
+    
+    const lowStockFurnitureItems = await StockModel.find({ 
+      productType: "Furniture", 
+      quantity: { $lte: 50 } 
+    }).select("productName quantity");
 
-    // Low stock raw materials (Wood) (quantity <= 50)
     const lowStockWoodAgg = await StockModel.aggregate([
       { $match: { productType: "Wood", quantity: { $lte: 50 } } },
       {
@@ -56,101 +54,162 @@ router.get("/dashboard", async (req, res) => {
         },
       },
     ]);
-    const lowStockWood =
-      lowStockWoodAgg.length > 0
-        ? lowStockWoodAgg[0]
-        : { totalQty: 0, count: 0 };
-    const lowStockWoodItems = await StockModel.find({ productType: "Wood", quantity: { $lte: 50 } })
-      .select("productName quantity");  
-      
-     // Create tooltip strings
+    const lowStockWood = lowStockWoodAgg.length > 0 ? lowStockWoodAgg[0] : { totalQty: 0, count: 0 };
+    
+    const lowStockWoodItems = await StockModel.find({ 
+      productType: "Wood", 
+      quantity: { $lte: 50 } 
+    }).select("productName quantity");
+
+    // Create tooltip strings
     const lowStockFurnitureTooltip = lowStockFurnitureItems.map(i => `${i.productName}: ${i.quantity}`).join("\n");
     const lowStockWoodTooltip = lowStockWoodItems.map(i => `${i.productName}: ${i.quantity}`).join("\n");
+
+    // Today's New Stock Entries - FIXED
+    const today = new Date();
+    const startOfDay = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      0, 0, 0
+    );
+    // Convert to UTC by subtracting the timezone offset
+    const startOfDayUTC = new Date(startOfDay.getTime() - (startOfDay.getTimezoneOffset() * 60000));
+
+    const endOfDay = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      23, 59, 59, 999
+    );
+     const endOfDayUTC = new Date(endOfDay.getTime() - (endOfDay.getTimezoneOffset() * 60000));
+    // Check StockrecordModel for today's entries (this is where new stock is recorded)
+    const todaysNewStockTotal = await StockrecordModel.countDocuments({
+      dateBought: { 
+        $gte: startOfDayUTC, 
+        $lte: endOfDayUTC 
+      }
+    });
+
+    console.log("Today's date range:", startOfDayUTC, "to", endOfDayUTC);
+    console.log("Today's new stock entries found:", todaysNewStockTotal);
+
   
-    //Today's New Stock Entries
-const today = new Date();
+  
 
-// Force UTC start and end of today
-const startOfDay = new Date(Date.UTC(
-  today.getUTCFullYear(),
-  today.getUTCMonth(),
-  today.getUTCDate(),
-  0, 0, 0
-));
+    // Monthly stock expenses
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0);
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
 
-const endOfDay = new Date(Date.UTC(
-  today.getUTCFullYear(),
-  today.getUTCMonth(),
-  today.getUTCDate(),
-  23, 59, 59, 999
-));
+    const monthlyStockAgg = await StockrecordModel.aggregate([
+      {
+        $match: {
+          dateBought: { $gte: startOfMonth, $lte: endOfMonth }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalExpenses: { $sum: { $multiply: ["$costPrice", "$quantity"] } }
+        }
+      }
+    ]);
 
-const todaysNewStockTotal = await StockModel.countDocuments({
-  dateBought: { $gte: startOfDay, $lte: endOfDay }
-});
+    const totalMonthlyStockExpenses = monthlyStockAgg.length > 0 ? monthlyStockAgg[0].totalExpenses : 0;
 
-    
-//logic for total stock expenses
-// Get first and last day of current month in UTC
-const now = new Date();
-const startOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1, 0, 0, 0));
-const endOfMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 0, 23, 59, 59, 999));
-
-// Aggregate monthly stock expenses
-const monthlyStockAgg = await StockrecordModel.aggregate([
-  {
-    $match: {
-      dateBought: { $gte: startOfMonth, $lte: endOfMonth }
-    }
-  },
-  {
-    $group: {
-      _id: null,
-      totalExpenses: { $sum: { $multiply: ["$costPrice", "$quantity"] } }
-    }
-  }
-]);
-
-const totalMonthlyStockExpenses = monthlyStockAgg.length > 0 ? monthlyStockAgg[0].totalExpenses : 0;
-
-
-//aggregation for monthly sales revenue
-//  we are using the first code up to get first and last day.
- const monthlySalesAgg = await salesModel.aggregate([
+    // Monthly sales revenue
+    const monthlySalesAgg = await salesModel.aggregate([
       { $match: { paymentDate: { $gte: startOfMonth, $lte: endOfMonth } } },
       { $group: { _id: null, totalRevenue: { $sum: "$totalPrice" } } },
     ]);
     const totalMonthlyRevenue = monthlySalesAgg.length > 0 ? monthlySalesAgg[0].totalRevenue : 0;
 
-// Top Sales Agent for the current month
-const topSalesAgentAgg = await salesModel.aggregate([
-  {
-    $match: {
-      paymentDate: { $gte: startOfMonth, $lte: endOfMonth }
-    }
-  },
-  {
-    $group: {
-      _id: "$salesAgent",            // group by sales agent
-      totalRevenue: { $sum: "$totalPrice" },
-      salesCount : {$sum: 1}
-    }
-  },
-  { $sort: { totalRevenue: -1 } },   // sort descending
-  { $limit: 1 }                       // take the top one
-]);
+    // Calculate profit margin for the template
+    const profit = totalMonthlyRevenue - totalMonthlyStockExpenses;
+    const profitMargin = totalMonthlyRevenue > 0 ? ((profit / totalMonthlyRevenue) * 100).toFixed(1) : 0;
 
-let topSalesAgent = null;
-if (topSalesAgentAgg.length > 0) {
-  const user = await UserModel.findById(topSalesAgentAgg[0]._id)
-    .select("userName");
-  topSalesAgent = {
-    userName: user ? user.userName : "Unknown",
-    totalRevenue: topSalesAgentAgg[0].totalRevenue,
-    salesCount: topSalesAgentAgg[0].salesCount
-  };
-}
+    // Top Sales Agent
+    const topSalesAgentAgg = await salesModel.aggregate([
+      {
+        $match: {
+          paymentDate: { $gte: startOfMonth, $lte: endOfMonth }
+        }
+      },
+      {
+        $group: {
+          _id: "$salesAgent",
+          totalRevenue: { $sum: "$totalPrice" },
+          salesCount: { $sum: 1 }
+        }
+      },
+      { $sort: { totalRevenue: -1 } },
+      { $limit: 1 }
+    ]);
 
+    let topSalesAgent = null;
+    if (topSalesAgentAgg.length > 0 && topSalesAgentAgg[0]._id) {
+      const user = await UserModel.findById(topSalesAgentAgg[0]._id).select("userName");
+      topSalesAgent = {
+        userName: user ? user.userName : "Unknown",
+        totalRevenue: topSalesAgentAgg[0].totalRevenue,
+        salesCount: topSalesAgentAgg[0].salesCount
+      };
+    }
+
+    // SIMPLE PIE CHART DATA: Sales Distribution between Wood and Furniture
+    const salesDistribution = await salesModel.aggregate([
+      {
+        $group: {
+          _id: "$productType",
+          totalSales: { $sum: "$totalPrice" },
+          salesCount: { $sum: 1 }
+        }
+      }
+    ]);
+
+    console.log("Sales Distribution Result:", JSON.stringify(salesDistribution));
+
+    // Extract wood and furniture sales
+    let woodSales = 0;
+    let furnitureSales = 0;
+    let woodSalesCount = 0;
+    let furnitureSalesCount = 0;
+
+    salesDistribution.forEach(item => {
+      if (item._id === "Wood") {
+        woodSales = item.totalSales;
+        woodSalesCount = item.salesCount;
+      } else if (item._id === "Furniture") {
+        furnitureSales = item.totalSales;
+        furnitureSalesCount = item.salesCount;
+      }
+    });
+
+    // Stock Distribution Data
+    const stockDistribution = await StockModel.aggregate([
+      {
+        $group: {
+          _id: "$productType",
+          totalQuantity: { $sum: "$quantity" }
+        }
+      }
+    ]);
+
+
+    // Format chart data
+    const chartData = {
+      salesDistribution: {
+        wood: woodSales,
+        furniture: furnitureSales,
+        woodCount: woodSalesCount,
+        furnitureCount: furnitureSalesCount
+      },
+      stockDistribution: stockDistribution.map(item => ({
+        type: item._id || 'Unknown',
+        quantity: item.totalQuantity
+      })),
+    };
 
     res.render("dashboard", {
       sales,
@@ -164,24 +223,27 @@ if (topSalesAgentAgg.length > 0) {
       todaysNewStockTotal,
       totalMonthlyStockExpenses,
       totalMonthlyRevenue,
-      topSalesAgent
-      
+      topSalesAgent,
+      chartData: JSON.stringify(chartData),
+      // Also pass individual values for easy access
+      woodSales,
+      furnitureSales,
+      woodSalesCount,
+      furnitureSalesCount,
+      // Pass profit margin to template
+      profit,
+      profitMargin
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Server error")
+    console.error("Dashboard error:", error);
+    res.status(500).send("Server error: " + error.message);
   }
 });
-
-router.post("/dashboard", (req, res) => {
-  console.log(req.body);
-});
-
 
 
 // ATTENDANT DASH BOARD
 
-router.get("/attendant-dashboard", async (req, res) => {
+router.get("/attendant-dashboard", ensureauthenticated,  async (req, res) => {
   try {
     const items = await StockModel.find(); //this is for the stock table in the dashboard.
 

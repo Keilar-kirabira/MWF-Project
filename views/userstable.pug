@@ -24,7 +24,7 @@ block content
           a.btn.btn-dark(href='/registeruser') Register New User
 
         table.table.table-striped.table-bordered
-          thead.table-dark
+          thead.table
             tr
               th Profile Image
               th UserName
@@ -48,7 +48,7 @@ block content
                   td #{user.employeeId}
 
                   td
-                    button.btn.btn-sm(
+                    button.btn.btn-info.btn-sm(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#viewUser-${user._id}`
@@ -56,11 +56,11 @@ block content
                       i.bi.bi-eye-fill
 
                   td
-                    a.btn.btn-sm(href=`/editusers/${user._id}`)
+                    a.btn.btn-warning.btn-sm(href=`/editusers/${user._id}`)
                       i.bi.bi-pencil-fill    
 
                   td  
-                    button.btn.btn-sm(
+                    button.btn.btn-danger.btn-sm(
                       type='button'
                       data-bs-toggle="modal"
                       data-bs-target=`#deleteUser-${user._id}`

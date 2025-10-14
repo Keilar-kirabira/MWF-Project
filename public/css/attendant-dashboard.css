@@ -1,8 +1,5 @@
-
-body {
-  background-color: #F9F6EF; /* Light Cream */
-  font-family: 'Segoe UI', sans-serif;
-  color: #333333;
+:root{
+    --brown:#81756e;
 }
 
 h2, h4, h5 {
@@ -13,49 +10,105 @@ p {
   color: #333333;
 }
 
-
-/* ========== Summary Cards ========== */
-.card {
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.attendant-dashboard {
+  border-radius: 12px;
+  padding: 25px;
 }
 
-.card.bg-success {
-  background-color: #245A36 !important; /* Deep Green */
-  color: #fff !important;
+
+.attendant-dashboard h2.welcome {
+  font-weight: 700;
+  
 }
 
-.card.bg-primary {
-  background-color: #A85D26 !important; /* Warm Brown */
-  color: #fff !important;
+.attendant-dashboard p.text-muted {
+  font-size: 15px;
+  margin-bottom: 15px;
 }
 
-.card.bg-warning {
-  background-color: #D4A373 !important; /* Gold / Wood Tone */
-  color: #000 !important;
+/* Cards Styling */
+.attendant-dashboard .card {
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card.bg-danger {
-  background-color: #a83232 !important; /* Red for alerts */
-  color: #fff !important;
+.attendant-dashboard .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-/* ========== Buttons ========== */
-.btn-outline-dark {
-  border-color: #245A36;
-  color: #245A36;
-  transition: 0.3s;
+.attendant-dashboard .card h5 {
+  color: #81756e;
+  font-weight: 600;
 }
 
-.btn-outline-dark:hover {
-  background-color: #245A36;
-  color: white;
+.attendant-dashboard .card p.display-6 {
+  font-weight: bold;
+  color: #333;
 }
 
-/* ========== Footer ========== */
-footer {
+/* Search Input */
+#searchInput {
+  border: 2px solid #81756e;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #5e524c;
+  box-shadow: 0 0 6px rgba(129,117,110,0.5);
+}
+
+
+.table {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Table Header */
+.table thead th {
+  background-color: #81756e;
+  color: #fff;
+  text-align: center;
+
   font-size: 14px;
-  color: #A85D26 ;
-  /* background-color: black;
-  border-top: 2px solid #D4A373; Accent wood tone */
 }
+
+/* Table Rows */
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Table Cells */
+.table td {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 15px;
+}
+
+/* Table Footer */
+.table tfoot td {
+  background-color: #81756e;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* Modal Footer Button */
+.modal-footer .btn-secondary {
+  background-color: #81756e;
+  border: none;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #5e524c;
+}
+

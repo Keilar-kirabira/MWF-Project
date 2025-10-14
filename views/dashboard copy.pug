@@ -1,0 +1,96 @@
+extends layout2.pug 
+block styles 
+  link(rel='stylesheet' href='/css/sidebar.css')
+  link(rel='stylesheet' href='/css/sales.css')
+  link(rel='stylesheet' href='/css/dashboard.css')
+block content
+ 
+  .dashboard.mt-5.p-4(style="overflow-y: auto;")
+    h2.mb-3 Welcome to MWF Dashboard, Manager
+    p.text-muted.
+      Manage your furniture and wood inventory with ease.
+
+    .row.mt-4
+      .col-md-3.mb-4
+        .card.text-black.bg-white.h-100
+          .card-body
+            h5.card-title Raw materials
+            p.card-text #{rawMaterialsTotal} in stock
+
+      .col-md-3.mb-4
+        .card.text-dark.bg-white.h-100
+          .card-body
+            h5.card-title Products
+            p.card-text #{finishedProductsTotal} finished products in stock
+
+      .col-md-3.mb-4
+        .card.text-danger.bg-white.h-100(
+            data-bs-toggle="tooltip"
+            title=`Furniture:\n${lowStockFurnitureTooltip}\nRaw Materials:\n${lowStockWoodTooltip}`
+          )
+          .card-body
+            h5.card-title Low Stock
+            .d-flex.align-items-center.justify-content-between
+              .low-stock-section.text-center
+                h6 Furniture
+                p #{lowStockFurniture.count} products / #{lowStockFurniture.totalQty} units
+              .separator
+              .low-stock-section.text-center
+                h6 Raw Materials
+                p #{lowStockWood.count} products / #{lowStockWood.totalQty} units
+
+
+
+      .col-md-3.mb-4
+        .card.text-black.bg-white.h-100
+          .card-body
+            h5.card-title Today's New Stock Entries
+            p.card-text #{todaysNewStockTotal} new items added 
+
+    .row.mt-4 
+      .col-md-3.mb-4 
+        .card.text-black.bg-white.h-100.shadow-sm 
+          .card-body 
+            h5.card-title Total Monthly Stock Expenses 
+            p.card-text #{new Intl.NumberFormat().format(totalMonthlyStockExpenses)} UGX     
+      
+      .col-md-3.mb-4 
+        .card.text-black.bg-white.h-100.shadow-sm 
+          .card-body 
+            h5.card-title Total Monthly Revenue 
+            p.card-text  #{new Intl.NumberFormat().format(totalMonthlyRevenue)} UGX
+    
+      .col-md-3.mb-4 
+        .card.text-black.bg-white.h-100.shadow-sm 
+          .card-body 
+            h5.card-title Top Sales Agent
+            if topsalesAgent 
+             p.card-text #{topSalesAgent.userName} - UGX#{new Intl.NumberFormat().format(topSalesAgent.totalRevenue)} (#{topSalesAgent.salesCount} sales)
+            else 
+                p.card-text No sales yet
+
+      .col-md-3.mb-4 
+        .card.text-black.bg-white.h-100.shadow-sm 
+          .card-body 
+            h5.card-title Suppliers 
+            p.card-text  active suppliers for wood
+
+      .container.my-5.mt-6
+        if success_msg && success_msg.length
+          .alert.alert-success.alert-dismissible.fade.show(role='alert' id='flashMsg')
+            | #{success_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+        if error_msg && error_msg.length
+          .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='flashMsg')
+            | #{error_msg[0]}
+            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+        h3.mb-4 Sales Records
+        .d-flex.justify-content-between.mb-3
+          input.form-control(type='text', placeholder='Search customername and productname', id='searchInput', style='width: 50%;')
+          a.btn.btn-dark(href='/Addsale') Add Sale
+      include includes/salestable.pug   
+
+  
+  script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js")
+  script(src="js/dashboard.js")

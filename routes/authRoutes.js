@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("passport");
 const multer = require("multer");
 const path = require("path");
+const {ensureauthenticated,ensureManager} = require("../middleware/auth");
 
 const UserModel = require("../models/userModel");
 
@@ -33,7 +34,7 @@ router.get("/registeruser", (req, res) => {
   res.render("registeruser");
 });
 
-router.post("/registeruser", upload.single("profileImage"), async (req, res) => {
+router.post("/registeruser", upload.single("profileImage"), ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const user = new UserModel({
       userName: req.body.userName,
@@ -48,7 +49,7 @@ router.post("/registeruser", upload.single("profileImage"), async (req, res) => 
       employeeId: req.body.employeeId,
       profileImage: req.file ? req.file.filename : "default.png"
     });
-    console.log(req.body);
+    // console.log(req.body);
     let existingUser = await UserModel.findOne({email:req.body.email});
     if(existingUser){
       return res.status(400).send("Already registered email.")
@@ -72,9 +73,9 @@ router.get("/login", (req, res) => {
 router.post("/login", passport.authenticate("local" ,{failureRedirect:"/login"}), (req, res) => {
 req.session.user = req.user;                 //user who has logged in is referred to as req.user 
 if(req.user.role === "Manager"){
- res.redirect("/dashboard")                  //redirect manage to dashboard
+ res.redirect("/dashboard")                  
 }else if(req.user.role === "Sales Agent"){
-  res.redirect("/attendant-dashboard")           //redirect to attendant-dashboard
+  res.redirect("/attendant-dashboard")           
 }else (res.render("noneuser"))  
 });
 
@@ -85,13 +86,13 @@ router.get("/logout", (req, res) => {
     if (error) {
       return res.status(500).send("Error loggingout")
     }
-    res.redirect("/login")          //redirect to the index page.
+    res.redirect("/")          
   })
  } 
 });
 
 // getting users from the database
-router.get("/getusers", async (req, res)=>{
+router.get("/getusers",ensureauthenticated, ensureManager, async (req, res)=>{
     try {
         let users = await UserModel.find().sort({ $natural: -1 })
         res.render("userstable", { users , success_msg: req.flash("success_msg"), error_msg: req.flash("error_msg")}); 
@@ -102,7 +103,7 @@ router.get("/getusers", async (req, res)=>{
 });
 
 //updating user route
-router.get("/editusers/:id", async (req, res) => {
+router.get("/editusers/:id",ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.id);
 
@@ -114,7 +115,7 @@ router.get("/editusers/:id", async (req, res) => {
   }
   
 });
-router.put("/editusers/:id",  async (req, res) => {
+router.put("/editusers/:id", ensureauthenticated, ensureManager, async (req, res) => {
   try {
     const updatedUser = await UserModel.findByIdAndUpdate(
       req.params.id,
@@ -137,7 +138,7 @@ router.put("/editusers/:id",  async (req, res) => {
 
 
 //delete
-router.post("/deleteusers",   async(req, res)=>{
+router.post("/deleteusers", ensureauthenticated, ensureManager,  async(req, res)=>{
   try {
        await UserModel.deleteOne({_id:req.body.id});
        req.flash("success_msg", "User deleted successfully!"); 

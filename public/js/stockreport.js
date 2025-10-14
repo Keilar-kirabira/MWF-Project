@@ -23,14 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
     let totalSelling = 0;
 
     visibleRows.forEach((row) => {
-      const cells = row.querySelectorAll("td");
-      const cost = parseFloat(cells[2].innerText.replace(/,/g, "")) || 0;
-      const qty = parseFloat(cells[3].innerText.replace(/,/g, "")) || 0;
-      const selling = parseFloat(cells[4].innerText.replace(/,/g, "")) || 0;
+      if (row.style.display !== 'none') {
+        const cells = row.querySelectorAll("td");
+        const cost = parseFloat(cells[2].innerText.replace(/,/g, "")) || 0;
+        const qty = parseFloat(cells[3].innerText.replace(/,/g, "")) || 0;
+        const selling = parseFloat(cells[4].innerText.replace(/,/g, "")) || 0;
 
-      totalCost += cost;
-      totalQty += qty;
-      totalSelling += selling;
+        totalCost += cost;
+        totalQty += qty;
+        totalSelling += selling;
+      }
     });
 
     totalCostEl.textContent = formatNum(totalCost);
@@ -38,12 +40,10 @@ document.addEventListener("DOMContentLoaded", () => {
     totalSellingEl.textContent = formatNum(totalSelling);
   }
 
-  // Filter rows by date and type
+  // Filter rows by date and type - FIXED VERSION
   function filterRows() {
-    const startDate = startDateInput.value
-      ? new Date(startDateInput.value)
-      : null;
-    const endDate = endDateInput.value ? new Date(endDateInput.value) : null;
+    const startDate = startDateInput.value;
+    const endDate = endDateInput.value;
     const type = typeFilter.value;
 
     const visibleRows = [];
@@ -52,14 +52,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const dateAttr = row.getAttribute("data-date");
       if (!dateAttr) return;
 
-      const rowDate = new Date(dateAttr);
+      const rowDateStr = dateAttr; // This is already in "YYYY-MM-DD" format
       const rowType = row.children[1].innerText.trim();
 
       let show = true;
 
-      // Date filter
-      if (startDate && rowDate < startDate) show = false;
-      if (endDate && rowDate > endDate) show = false;
+      // Date filter - compare as strings to avoid timezone issues
+      if (startDate && rowDateStr < startDate) show = false;
+      if (endDate && rowDateStr > endDate) show = false;
 
       // Type filter
       if (type !== "All" && rowType !== type) show = false;
@@ -84,20 +84,38 @@ document.addEventListener("DOMContentLoaded", () => {
   // Apply filters
   filterBtn.addEventListener("click", filterRows);
 
-  // Download PDF
+  // Download PDF - IMPROVED VERSION
   downloadPDF.addEventListener("click", () => {
-    const { jsPDF } = window.jspdf; // get jsPDF from global
+    const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
+    // Add filter info to PDF
+    const startDate = startDateInput.value || 'All';
+    const endDate = endDateInput.value || 'All';
+    const type = typeFilter.value;
+    
     doc.text("Stock Report", 14, 15);
+    doc.text(`Date Range: ${startDate} to ${endDate} | Type: ${type}`, 14, 22);
 
-    // Generate table from HTML
-    doc.autoTable({
-      html: "#stockTable",
-      startY: 20,
-      theme: "grid",
-      headStyles: { fillColor: [0, 0, 0] }, // black header
-    });
+    // Get only visible rows for PDF
+    const visibleRows = rows.filter(row => row.style.display !== 'none');
+    
+    if (visibleRows.length === 0) {
+      doc.text("No data to display", 14, 35);
+    } else {
+      const tableData = visibleRows.map(row => {
+        const cells = Array.from(row.querySelectorAll('td'));
+        return cells.map(cell => cell.innerText);
+      });
+
+      doc.autoTable({
+        head: [['Product Name', 'Type', 'Cost Price', 'Quantity', 'Selling Price', 'Supplier', 'Date', 'Quality', 'Color', 'Measurements']],
+        body: tableData,
+        startY: 30,
+        theme: "grid",
+        headStyles: { fillColor: [0, 0, 0] },
+      });
+    }
 
     doc.save("stock_report.pdf");
   });

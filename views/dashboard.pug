@@ -1,20 +1,24 @@
 extends layout2.pug 
+
 block styles 
   link(rel='stylesheet' href='/css/sidebar.css')
   link(rel='stylesheet' href='/css/sales.css')
+  link(rel='stylesheet' href='/css/salestable.css')
   link(rel='stylesheet' href='/css/dashboard.css')
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
 block content
- 
   .dashboard.mt-5.p-4(style="overflow-y: auto;")
     h2.mb-3 Welcome to MWF Dashboard, Manager
     p.text-muted.
       Manage your furniture and wood inventory with ease.
 
+    
     .row.mt-4
       .col-md-3.mb-4
         .card.text-black.bg-white.h-100
           .card-body
-            h5.card-title Raw materials
+            h5.card-title Raw Materials
             p.card-text #{rawMaterialsTotal} in stock
 
       .col-md-3.mb-4
@@ -39,14 +43,13 @@ block content
                 h6 Raw Materials
                 p #{lowStockWood.count} products / #{lowStockWood.totalQty} units
 
-
-
       .col-md-3.mb-4
         .card.text-black.bg-white.h-100
           .card-body
             h5.card-title Today's New Stock Entries
             p.card-text #{todaysNewStockTotal} new items added 
 
+    // Financial Cards Row
     .row.mt-4 
       .col-md-3.mb-4 
         .card.text-black.bg-white.h-100.shadow-sm 
@@ -64,33 +67,147 @@ block content
         .card.text-black.bg-white.h-100.shadow-sm 
           .card-body 
             h5.card-title Top Sales Agent
-            if topsalesAgent 
-             p.card-text #{topSalesAgent.userName} - UGX#{new Intl.NumberFormat().format(topSalesAgent.totalRevenue)} (#{topSalesAgent.salesCount} sales)
+            if topSalesAgent 
+              p.card-text #{topSalesAgent.userName} - UGX #{new Intl.NumberFormat().format(topSalesAgent.totalRevenue)} (#{topSalesAgent.salesCount} sales)
             else 
-                p.card-text No sales yet
+              p.card-text No sales yet
 
       .col-md-3.mb-4 
         .card.text-black.bg-white.h-100.shadow-sm 
           .card-body 
-            h5.card-title Suppliers 
-            p.card-text  active suppliers for wood
+            h5.card-title Profit Margin
+            - const profit = totalMonthlyRevenue - totalMonthlyStockExpenses
+            - const profitMargin = totalMonthlyRevenue > 0 ? ((profit / totalMonthlyRevenue) * 100).toFixed(1) : 0
+            - const profitColor = profit >= 0 ? 'text-success' : 'text-danger'
+            - const marginColor = profitMargin >= 0 ? 'text-success' : 'text-danger'
+            
+            if totalMonthlyRevenue > 0
+              p.card-text 
+                span(class=profitColor) #{new Intl.NumberFormat().format(profit)} UGX
+                br
+                span(class=marginColor) (#{profitMargin}% margin)
+            else
+              p.card-text.text-muted No revenue data
+    // Charts Section - Sales Distribution Pie Chart First
+    .row.mt-4
+      .col-md-6.mb-4
+        .card
+          .card-header
+            h5.mb-0 Sales Distribution (Wood vs Furniture)
+          .card-body
+            canvas#salesDistributionChart(height="250")
+            .mt-3.text-center
+              .row
+                .col-6
+                  .d-flex.align-items-center.justify-content-center
+                    .color-indicator(style="background-color: #5A514D; width: 15px; height: 15px; border-radius: 50%; margin-right: 8px;")
+                    span Wood: #{new Intl.NumberFormat().format(woodSales)} UGX
+                .col-6
+                  .d-flex.align-items-center.justify-content-center
+                    .color-indicator(style="background-color: #191716; width: 15px; height: 15px; border-radius: 50%; margin-right: 8px;")
+                    span Furniture: #{new Intl.NumberFormat().format(furnitureSales)} UGX
 
-      .container.my-5.mt-6
-        if success_msg && success_msg.length
-          .alert.alert-success.alert-dismissible.fade.show(role='alert' id='flashMsg')
-            | #{success_msg[0]}
-            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
-        if error_msg && error_msg.length
-          .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='flashMsg')
-            | #{error_msg[0]}
-            button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+      .col-md-6.mb-4
+        .card
+          .card-header
+            h5.mb-0 Stock Distribution
+          .card-body
+            canvas#stockDistributionChart(height="250")
 
-        h3.mb-4 Sales Records
-        .d-flex.justify-content-between.mb-3
-          input.form-control(type='text', placeholder='Search customername and productname', id='searchInput', style='width: 50%;')
-          a.btn.btn-dark(href='/Addsale') Add Sale
+
+    .container.my-5.mt-6
+      if success_msg && success_msg.length
+        .alert.alert-success.alert-dismissible.fade.show(role='alert' id='flashMsg')
+          | #{success_msg[0]}
+          button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+      if error_msg && error_msg.length
+        .alert.alert-danger.alert-dismissible.fade.show(role='alert' id='flashMsg')
+          | #{error_msg[0]}
+          button.btn-close(type='button' data-bs-dismiss='alert' aria-label='Close')
+
+      h3.mb-4 Sales Records
+      .d-flex.justify-content-between.mb-3
+        input.form-control(type='text', placeholder='Search customer name and product name', id='searchInput', style='width: 50%;')
+        a.btn.custom-btn(href='/Addsale') Add Sale
       include includes/salestable.pug   
 
-  
   script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js")
-  script(src="js/dashboard.js")
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Bootstrap tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+
+      // Parse chart data
+      const chartData = !{chartData || '{}'};
+      
+      console.log('Chart Data:', chartData); // Debug log
+
+      // SALES DISTRIBUTION PIE CHART (Wood vs Furniture)
+      if (chartData.salesDistribution && document.getElementById('salesDistributionChart')) {
+        const salesCtx = document.getElementById('salesDistributionChart').getContext('2d');
+        new Chart(salesCtx, {
+          type: 'pie',
+          data: {
+            labels: ['Wood', 'Furniture'],
+            datasets: [{
+              data: [chartData.salesDistribution.wood, chartData.salesDistribution.furniture],
+              backgroundColor: ['#5A514D', '#191716'],
+              borderWidth: 2,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  padding: 20,
+                  usePointStyle: true
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    const label = context.label || '';
+                    const value = context.parsed || 0;
+                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                    const percentage = Math.round((value / total) * 100);
+                    return `${label}: ${new Intl.NumberFormat().format(value)} UGX (${percentage}%)`;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // Stock Distribution Chart (Donut)
+      if (chartData.stockDistribution && document.getElementById('stockDistributionChart')) {
+        const stockCtx = document.getElementById('stockDistributionChart').getContext('2d');
+        new Chart(stockCtx, {
+          type: 'doughnut',
+          data: {
+            labels: chartData.stockDistribution.map(item => item.type),
+            datasets: [{
+              data: chartData.stockDistribution.map(item => item.quantity),
+              backgroundColor: ['#191716', '#5A514D', '#FFCE56', '#4BC0C0'],
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+      }
+
+     
+    });

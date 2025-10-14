@@ -1,0 +1,101 @@
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
+body {
+  /* background-color:#81756E; */
+  background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1500&q=80");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 80%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.content {
+  flex: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #4a3223;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #7b5e3b;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none; /* removes underline */
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #60492a;
+  transform: scale(1.05);
+  text-decoration: none; /* keep it clean when hovered */
+}
+
+.side-images {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-images img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .side-images {
+    flex-direction: row;
+  }
+
+  .side-images img {
+    width: 100px;
+    height: 100px;
+  }
+}

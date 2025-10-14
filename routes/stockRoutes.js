@@ -5,8 +5,8 @@ const {ensureauthenticated,ensureManager} = require("../middleware/auth");
 const StockModel = require("../models/stockModel");
 const StockrecordModel = require("../models/stockrecordModel");
 const Supplier = require("../models/supplierModel");                  //supplier to helpme get their names and phonenumber
-// also here after the route ensureManager
-router.get("/stock", async (req, res)=>{
+ 
+router.get("/stock", ensureauthenticated,  ensureManager, async (req, res)=>{
   try {
     const suppliers = await Supplier.find();
     res.render("stock", {suppliers});         //getting info of the supplier
@@ -17,8 +17,8 @@ router.get("/stock", async (req, res)=>{
     
 });
 
-// paste this before  the  sync ensureManager
-router.post("/stock", async (req, res) => {
+
+router.post("/stock", ensureauthenticated,  ensureManager, async (req, res) => {
   try {
     const { productName, productType, quantity, costPrice, supplierName , dateBought,quality,color,measurements,phoneNumber } = req.body;
    
@@ -46,7 +46,7 @@ router.post("/stock", async (req, res) => {
         costPrice : Number(costPrice) ,   // costPrice is sent like a number to the db
         productPrice,
       supplierName,
-      dateBought,
+      dateBought:new Date(dateBought),
       quality,
       color,
       measurements,
@@ -63,7 +63,7 @@ router.post("/stock", async (req, res) => {
       costPrice : Number(costPrice),
       productPrice,
       supplierName,
-      dateBought,
+      dateBought: new Date(dateBought),
       quality,
       color,
       measurements,
@@ -83,7 +83,7 @@ router.post("/stock", async (req, res) => {
 });
 
 // getting stock from the database
-router.get("/stocklist", async (req, res)=>{
+router.get("/stocklist", ensureauthenticated, async (req, res)=>{
     try {
         let items = await StockModel.find().sort({ $natural: -1 });
 
@@ -93,16 +93,7 @@ router.get("/stocklist", async (req, res)=>{
     }
 });
 //getting stock records from the database
-// router.get("/stockrecords", async (req, res)=>{
-//     try {
-//         let items = await StockModel.find().sort({ $natural: -1 })
-//         res.render("stocktable2", { items }) 
-//     } catch (error) {
-//        res.status(400).send("Unable to get data from the database."); 
-//     }
-// });
-// getting stock records from the database
-router.get("/stockrecords", async (req, res) => {
+router.get("/stockrecords", ensureauthenticated,  ensureManager, async (req, res) => {
   try {
     let items = await StockrecordModel.find().sort({ dateBought: -1 });
     res.render("stocktable2", { items });
@@ -112,30 +103,7 @@ router.get("/stockrecords", async (req, res) => {
 });
 
 
-// // //updating stock
-// router.get("/editstock/:id", async (req, res) => {
-//   // let item = await StockModel.findById(req.params.id);
-//    const item = await StockrecordModel.findById(req.params.id);
-//    const suppliers = await Supplier.find();
-//   // console.log(item)
-//   res.render(`editstock`, { item, suppliers });
-// });
-// router.put("/editstock/:id",  async (req, res) => {
-//   try {
-//     const product = await StockrecordModel.findByIdAndUpdate(
-//       req.params.id,
-//       req.body,                     //what has been changed, and thats the bodyform which was updated.
-//       { new: true }
-//     );
-//     if (!product) {
-//       return res.status(404).send("product not found.");
-//     }
-//     // res.redirect("/stocklist");
-//     res.redirect("/stockrecords");
-//   } catch (error) {}
-// });
-
-router.get("/editstock/:id", async (req, res) => {
+router.get("/editstock/:id", ensureauthenticated,  ensureManager, async (req, res) => {
   try {
     const item = await StockrecordModel.findById(req.params.id);
     if (!item) {
@@ -156,7 +124,7 @@ router.get("/editstock/:id", async (req, res) => {
 
 // Updating stock
 // // Updating stock
-router.put("/editstock/:id", async (req, res) => {
+router.put("/editstock/:id",ensureauthenticated,  ensureManager, async (req, res) => {
   try {
     const {
       productName,
@@ -190,7 +158,7 @@ router.put("/editstock/:id", async (req, res) => {
         productPrice: Number(productPrice),
         supplierName,
         phoneNumber,
-        dateBought,
+        dateBought: new Date(dateBought),
         quality,
         color,
         measurements
@@ -241,19 +209,9 @@ router.put("/editstock/:id", async (req, res) => {
 
 
 
-//deleting route
-// router.post("/deletestock",   async(req, res)=>{
-//   try {
-//        await StockrecordModel.deleteOne({_id:req.body.id});
-//       res.redirect("/stocklist")
-//   } catch (error) {
-//     console.log(error.message)
-//     res.status(400).send('Unable to delete item from the database.')
-//   }
-// });
 
 // Deleting a stock record
-router.post("/deletestock", async (req, res) => {
+router.post("/deletestock", ensureauthenticated,  ensureManager, async (req, res) => {
   try {
     const recordId = req.body.id;
 
@@ -298,7 +256,7 @@ router.post("/deletestock", async (req, res) => {
 
 //STOCK REPORT ROUTE
 
-router.get("/stockreport",  async (req, res)=>{
+router.get("/stockreport", ensureauthenticated, ensureManager, async (req, res)=>{
   try {
     const items = await StockrecordModel.find();
     res.render("stockreport",{items})

@@ -16,3 +16,36 @@
   background-color: #C49E61;
   border-color: #C49E61;
 }
+
+/* Password Toggle Styles */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input.form-control {
+    padding-right: 45px;
+}
+
+.password-wrapper #togglePassword {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+    color: #6c757d;
+    font-size: 1.1rem;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.password-wrapper #togglePassword:hover {
+    color: #495057;
+}
+
+.password-wrapper #togglePassword:active {
+    color: #212529;
+}
+:root{
+    --brown:#81756e;
+}

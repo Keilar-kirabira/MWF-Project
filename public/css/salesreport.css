@@ -1,0 +1,103 @@
+/* Heading */
+.salesreport h2 {
+  color: #2e5d49;   /* deep green */
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* Form Fields */
+.salesreport input.form-control,
+.salesreport select.form-select {
+  border: 2px solid #81756e;   
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.salesreport input.form-control:focus,
+.salesreport select.form-select:focus {
+  outline: none;
+  border-color: #5c514c;       
+  box-shadow: 0 0 6px rgba(129, 117, 110, 0.5);
+}
+
+/* Search Fields Row */
+.salesreport .row.mb-3 {
+  gap: 15px; /* space between fields */
+  margin-bottom: 20px; /* space before buttons */
+}
+
+/* Buttons */
+.salesreport button#filterBtn,
+.salesreport button#resetBtn,
+.salesreport button#downloadPDF {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease, transform 0.2s;
+}
+
+.salesreport button#filterBtn,
+.salesreport button#resetBtn {
+  background-color: #81756e;   
+  color: #fff;
+}
+
+.salesreport button#filterBtn:hover,
+.salesreport button#resetBtn:hover {
+  background-color: #5c514c;   
+  transform: scale(1.05);
+}
+
+.salesreport button#downloadPDF {
+  background-color: #28a745;   
+  color: #fff;
+}
+
+.salesreport button#downloadPDF:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* Add spacing above buttons row */
+.salesreport .col-md-3.align-self-end {
+  margin-top: 10px;
+}
+
+
+
+
+#salesTable {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-top: 15px;
+}
+
+/* Table Head */
+#salesTable thead th {
+  background-color: #81756e !important;  
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Table Body */
+#salesTable tbody td {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+#salesTable tbody tr:hover {
+  background-color: #f7f5f4;  
+}
+
+/* Table Footer */
+#salesTable tfoot td {
+  background-color: #5c514c !important;  
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}

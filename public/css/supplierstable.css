@@ -1,0 +1,53 @@
+.supplierstable a.btn-dark {
+  background-color: #81756e;
+  border: 2px solid #81756e;
+  transition: all 0.3s ease;
+}
+.supplierstable a.btn-dark:hover {
+  background-color: #5c514c;
+  border-color: #5c514c;
+  transform: scale(1.05);
+}
+.supplierstable table thead th {
+  background-color: #81756e;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+table td{
+  font-size: 15px;
+}
+#supplierForm{
+  border: 2px;
+  background-color: #f8f9fa;
+  border-radius: 10px;         /* Rounded corners */
+  padding: 10px;               /* Space inside the border */
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1); /* Subtle shadow */
+  overflow-y: auto;
+  margin-bottom: 36px;
+};
+/* Custom Add Supplier Button */
+#addsupplier {
+  background-color: #81756e !important;       /* your brown theme */
+  color: #fff;                     /* white text */
+  border: 2px solid #81756e;       /* match border to background */
+  border-radius: 8px;               
+  padding: 8px 20px;                
+  font-weight: 600;                 
+  font-size: 14px;
+  transition: all 0.3s ease;       
+  cursor: pointer;
+}
+
+/* Hover effect */
+#addsupplier:hover {
+  background-color: #5c514c;       /* darker brown on hover */
+  border-color: #5c514c;
+  transform: scale(1.05);          /* subtle lift effect */
+}
+
+/* Active/Clicked effect */
+#addsupplier:active {
+  transform: scale(1);
+  box-shadow: none;
+}

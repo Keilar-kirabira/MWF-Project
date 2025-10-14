@@ -4,12 +4,12 @@ block styles
   link(rel='stylesheet' href='/css/sidebar.css')
   link(rel='stylesheet' href='/css/stock.css')
   link(rel='stylesheet' href='/css/sales.css')
+  link(rel='stylesheet' href='/css/stockreport.css')
 
 block content
     .stockreport(style="min-width:100%; padding: 20px; overflow-y:auto;")
       h2.text-center Stock Report
 
-      // Date Filter Controls
       .row.mb-3
         .col-md-3
           label(for="startDate") Start Date
@@ -28,9 +28,9 @@ block content
           button#resetBtn.btn.btn-dark Reset
           button#downloadPDF.btn.btn-success Download PDF
 
-      // Stock Table
+  
       table#stockTable.table.table-bordered.table-striped
-        thead.table-dark
+        thead.table
           tr
             th Product Name
             th Type
@@ -52,14 +52,15 @@ block content
                 td #{item.quantity}
                 td #{new Intl.NumberFormat().format(item.productPrice)}
                 td #{item.supplierName}
-                td #{moment(item.dateBought).utcOffset(3).format("DD-MM-YYYY")}
+                //- td #{moment(item.dateBought).utcOffset(2).format("DD-MM-YYYY")}
+                td #{moment(item.dateBought).format("DD-MM-YYYY")}
                 td #{item.quality}
                 td #{item.color || '-'}
                 td #{item.measurements || '-'}
           else
             tr
               td(colspan="10" class="text-center text-muted") No stock available.
-        tfoot.table-dark
+        tfoot.table
           tr
             td(colspan="2") TOTAL
             td#totalCost 0

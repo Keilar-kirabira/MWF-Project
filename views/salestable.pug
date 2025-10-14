@@ -2,6 +2,7 @@ extends layout.pug
 block styles 
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
+   link(rel='stylesheet' href='/css/salestable.css')
 block content 
     .salestable(style="min-width: 100%; padding: 20px;")
       .container.my-5.mt-6
@@ -17,135 +18,8 @@ block content
         h3.mb-4 Sales Records
         .d-flex.justify-content-between.mb-3
           input.form-control(type='text', placeholder='Search customername and productname', id='searchInput', style='width: 50%;')
-          a.btn.btn-dark(href='/Addsale') Add Sale
+          a.btn.custom-btn(href='/Addsale') Add Sale
       include includes/salestable.pug
-        //- table.table.table-striped.table-bordered
-        //-   thead.table-dark
-        //-     tr
-        //-       th Customer Name
-        //-       th Product Type
-        //-       th Product Name
-        //-       th Quantity
-        //-       th Unit Price
-        //-       th Transport
-        //-       th Total Price 
-        //-       //- th Sales Agent 
-        //-       //- th Payment Type
-        //-       th Date 
-        //-       if currentUser.role === "Manager"
-        //-         th Update 
-        //-         th Delete
-        //-       th Receipt 
-        //-       th View
-        //-   tbody
-        //-     if sales.length 
-        //-       each sale in sales 
-        //-         tr 
-        //-           td #{sale.customerName}
-        //-           td #{sale.productType}
-        //-           td #{sale.productName}
-        //-           td #{sale.quantity}
-        //-           td #{sale.unitPrice}
-        //-           td #{sale.transportCheck}
-        //-           td #{sale.totalPrice}
-        //-           //- td #{sale.salesAgent.userName}
-        //-           //- td #{sale.paymentType}
-        //-           td #{moment(sale.paymentDate).format("DD-MM-YYYY")}
-                  
-        //-           if currentUser.role === "Manager"
-        //-             td
-        //-               a.btn.btn-warning.btn-sm(href=`/editsales/${sale._id}`)
-        //-                 i.bi.bi-pencil-square
-        //-             td
-        //-               button.btn.btn-danger.btn-sm(
-        //-                 type='button'
-        //-                 data-bs-toggle="modal"
-        //-                 data-bs-target=`#deleteModal-${sale._id}`
-        //-               )
-        //-                 i.bi.bi-trash
-
-        //-           td
-        //-             a.btn.btn-info.btn-sm(href=`/getReceipt/${sale._id}`)
-        //-               i.bi.bi-receipt
-
-        //-           td
-        //-             button.btn.btn-info.btn-sm(
-        //-               type='button'
-        //-               data-bs-toggle="modal"
-        //-               data-bs-target=`#viewModal-${sale._id}`
-        //-             )
-        //-               i.bi.bi-eye-fill
-
-        //-         //- Delete Modal
-        //-         div.modal.fade(id=`deleteModal-${sale._id}` tabindex="-1" aria-hidden="true")
-        //-           .modal-dialog
-        //-             .modal-content
-        //-               .modal-header
-        //-                 h5.modal-title Delete Confirmation
-        //-                 button.btn-close(type="button" data-bs-dismiss="modal")
-        //-               .modal-body
-        //-                 p Are you sure you want to delete the sale for "#{sale.customerName}"?
-        //-               .modal-footer
-        //-                 button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Cancel
-        //-                 form(method='post' action="/deletesales")
-        //-                   input(type="hidden" name='id' value=sale._id)
-        //-                   button.btn.btn-danger(type='submit') Confirm Delete
-
-        //-         //- View Modal
-        //-         div.modal.fade(id=`viewModal-${sale._id}` tabindex="-1" aria-hidden="true")
-        //-           .modal-dialog
-        //-             .modal-content
-        //-               .modal-header
-        //-                 h5.modal-title Sale Details
-        //-                 button.btn-close(type="button" data-bs-dismiss="modal")
-        //-               .modal-body
-        //-                 ul.list-group
-        //-                   li.list-group-item
-        //-                     strong Customer: 
-        //-                     | #{sale.customerName}
-        //-                   li.list-group-item
-        //-                     strong Product Type: 
-        //-                     | #{sale.productType}
-        //-                   li.list-group-item
-        //-                     strong Product Name: 
-        //-                     | #{sale.productName}
-        //-                   li.list-group-item
-        //-                     strong Quantity: 
-        //-                     | #{sale.quantity}
-        //-                   li.list-group-item
-        //-                     strong Unit Price: 
-        //-                     | #{new Intl.NumberFormat().format(sale.unitPrice)}
-        //-                   li.list-group-item
-        //-                     strong Transport: 
-        //-                     | #{sale.transportCheck}
-        //-                   li.list-group-item
-        //-                     strong Total Price: 
-        //-                     | #{new Intl.NumberFormat().format(sale.totalPrice)}
-        //-                   li.list-group-item
-        //-                     strong Sales Agent: 
-        //-                     | #{sale.salesAgent.userName}
-        //-                   li.list-group-item
-        //-                     strong Payment Type: 
-        //-                     | #{sale.paymentType}
-        //-                   li.list-group-item
-        //-                     strong Date: 
-        //-                     | #{moment(sale.paymentDate).format("DD-MM-YYYY")}
-        //-               .modal-footer
-        //-                 button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
-
-        //-     else
-        //-       tr
-        //-         td(colspan="15" class="text-center text-muted")
-        //-           | No sales available.
-        //-   tfoot
-        //-     tr.table-dark
-        //-       td(colspan="3") TOTAL
-        //-       td#totalQuantity.text-end 0
-        //-       td
-        //-       td
-        //-       td#totalPrice.text-end 0
-        //-       td(colspan= (currentUser.role === "Manager" ? "6" : "3"))
         
-    
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
       script(src="js/salestable.js") 

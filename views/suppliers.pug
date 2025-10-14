@@ -2,41 +2,47 @@ extends layout2.pug
 block styles 
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
+   link(rel='stylesheet' href='/css/supplierstable.css')
 block content
     .suppliers(style="min-width: 100%; padding: 20px; overflow-y: auto;")  
       .container.mt-5
         h2.mb-4 Supplier Management Form
-        form#supplierForm.mb-4(action='/Addsupplier' method='post')
+        
+        if error_msg && error_msg.length
+          div#flashMsg.alert.alert-danger(role='alert')= error_msg
+
+        if success_msg && success_msg.length
+          div#flashMsg.alert.alert-success(role='alert')= success_msg
+          
+        form#supplierForm.mb-4(action='/Addsupplier' method='post' novalidate)
           .row.g-3
             .col-md-6
               label.form-label(for='supplierName') Supplier Name
               input#supplierName.form-control(type='text' placeholder='Supplier Name' name='supplierName' required='')
-
+              .invalid-feedback  Name  must contain minimum 3 characters.
             .col-md-6
               label.form-label(for='supplierCategory') Supplier Category
-              select.form-select(name='supplierCategory' required='')
+              select#supplierCategory.form-select(name='supplierCategory' required='')
                 option(value='' selected='' disabled='') Select Category
                 option(value='Wood') Wood
                 option(value='Furniture') Furniture
-
+              .invalid-feedback Please select a supplier category.
 
             .col-md-6
               label.form-label(for='phoneNumber') Phone Number
-              input#phoneNumber.form-control(type='tel' placeholder='Phone Number' name='phoneNumber' required='')
-
+              input#phoneNumber.form-control(type='tel' placeholder='Phone Number' name='phoneNumber' min="10" required='')
+              .invalid-feedback Enter a valid phone number atleast 10 characters.
             .col-md-6
               label.form-label(for='email') Email
               input#email.form-control(type='email' placeholder='Email' name='email' required='')
-
+              .invalid-feedback Please enter a valid email address.
             .col-md-6
               label.form-label(for='physicaladdress') Physical Address
               input#physicaladdress.form-control(type='text' placeholder='Physical Address' name='physicaladdress' required='')
-
+              .invalid-feedback Physical address is required and must be at least 5 characters long.
+    
             .col-12
               button#addsupplier.btn.btn-dark(type='submit') Add Supplier
 
-      
-
-      // Scripts
       script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')
-      script(src='Scripts/suppliers.js')
+      script(src='js/suppliers.js')

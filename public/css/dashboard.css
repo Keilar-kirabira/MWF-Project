@@ -1,48 +1,92 @@
- /* General Layout 
-body {
-  background-color: #F9F6EF;
-  
-  color: #333333;
-} */
-
-
-/* 
-h2, h4, h5 {
-  color: #245A36;      Deep green titles 
+:root{
+    --brown:#81756e;
 }
-
-p {
-  color: #333333;
-}
-
-
-
-
-
-/*  Buttons  */
-/* .btn-outline-dark {
-  border-color: #245A36;
-  color: #245A36;
-}
-
-.btn-outline-dark:hover {
-  background-color: #245A36;
-  color: white;
-} */
-
-
-/*  Footer */
-/* footer {
-  font-size: 14px;
-  color: #666;
-} */
  
 
 
 /* styles for low stock card */
-.separator {
+/* .separator {
   width: 1px;
   background-color: #ccc;
   margin: 0 10px;
   align-self: stretch; /* makes it stretch vertically */
+/* }  */
+/* dashboard.css */
+
+/* General card styling */
+.dashboard .card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Card header */
+.dashboard .card-header {
+  background: linear-gradient(135deg, #191716, #5A514D);
+  color: #fff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-weight: 600;
+}
+
+/* Card body */
+.dashboard .card-body {
+  padding: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Titles */
+.dashboard .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #191716;
+}
+
+/* Text inside cards */
+.dashboard .card-text {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* Low stock card special style */
+.dashboard .card.text-danger {
+  border-left: 5px solid #dc3545;
+}
+
+/* Separator in low stock section */
+.low-stock-section h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.low-stock-section p {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0;
+}
+
+.separator {
+  width: 2px;
+  background: #ddd;
+  margin: 0 10px;
+}
+
+/* Shadow + spacing for financial cards */
+.dashboard .shadow-sm {
+  background: #fff;
+  border-radius: 15px;
+}
+
+/* Color indicators in chart legends */
+.color-indicator {
+  display: inline-block;
+  margin-right: 6px;
 }

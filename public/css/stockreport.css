@@ -1,45 +1,108 @@
-/*  General Layout  */
-body {
-  background-color: #F9F6EF;
-  font-family: 'Segoe UI', sans-serif;
-  color: #333333;
+:root {
+  --brown: #81756e;
+  --brown-dark: #5c514c;
+  --green: #245A36;
+  --green-dark: #157347;
+  --light-brown: #e6e2df;
 }
 
-/* ---- Navbar ---- */
-.navbar {
-  background-color: #245A36; /* Deep Green */
-}
-
-.navbar-brand img {
-  margin-right: 10px;
-  border-radius: 8px;
-}
-
-.navbar .nav-link.active {
-  font-weight: bold;
-  border-bottom: 2px solid #D4A373; /* Gold/wood tone highlight */
-}
-
+/* Headings */
 h2, h4, h5 {
-  color: #245A36; /* Deep green titles */
+  color: var(--green); /* Deep green titles */
 }
 
-p {
-  color: #333333;
+/* Labels */
+.stockreport label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
 }
 
-/*  Navbar Branding  */
-.navbar-brand span {
+/* Inputs and select dropdown */
+.stockreport .form-control,
+.stockreport .form-select {
+  border: 2px solid var(--brown);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.stockreport .form-control:focus,
+.stockreport .form-select:focus {
+  outline: none;
+  border-color: var(--brown-dark);
+  box-shadow: 0 0 6px rgba(129, 117, 110, 0.5);
+}
+
+/* Buttons */
+.stockreport .btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+#filterBtn {
+  background-color: var(--brown);
+  border: 2px solid var(--brown);
+  color: #fff;
+}
+#filterBtn:hover {
+  background-color: var(--brown-dark);
+  border-color: var(--brown-dark);
+  transform: scale(1.05);
+}
+
+#resetBtn {
+  background-color: transparent;
+  border: 2px solid var(--brown);
+  color: var(--brown);
+}
+#resetBtn:hover {
+  background-color: var(--light-brown);
+  transform: scale(1.05);
+}
+
+#downloadPDF {
+  border: 2px solid #198754;  /* Bootstrap green */
+  font-weight: 600;
+}
+#downloadPDF:hover {
+  background-color: var(--green-dark);  /* darker green */
+  border-color: var(--green-dark);
+  transform: scale(1.05);
+}
+
+/* Table Header */
+#stockTable thead th {
+  background-color: var(--brown);
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+/* Table Body - Solid Brown */
+#stockTableBody {
+  background-color: var(--light-brown) !important; /* light brown background */
+}
+
+#stockTableBody td {
+  color: #333; /* text stays readable */
+}
+
+/* Table Footer */
+#stockTable tfoot td {
+  background-color: var(--brown);
+  color: #fff;
   font-weight: bold;
-  color: #D4A373; /* Soft wood tone */
+  text-align: right;
 }
-
-.navbar-brand small {
-  color: #A85D26; /* Warm brown slogan */
+#stockTableBody td {
+  font-size: 15px;  
+  color: #333;
+  text-align: center; 
 }
-
-
-/*  Footer */
+/* Footer */
 footer {
   font-size: 14px;
   color: #666;

@@ -2,8 +2,9 @@ extends layout2.pug
 block styles 
    link(rel='stylesheet' href='/css/sidebar.css')
    link(rel='stylesheet' href='/css/sales.css')
+   link(rel='stylesheet' href='/css/stock.css')
 block content
-     .editstock(style="min-width: 100%; padding: 20px; overflow:hidden;")
+     .editstock(style="min-width: 100%; padding: 20px; ")
       h2.mb-4.text-center Edit Stock Form
       form#stockForm(action=`/editstock/${item._id}?_method=PUT`, method='post')
         .row.g-3
@@ -22,13 +23,14 @@ block content
               option(value='Cupboards') Cupboards
               option(value='Office Chairs') Office Chairs
               option(value='Dining Tables') Dining Tables
-
+            .invalid-feedback Please select a product.
           .col-md-6
             label.form-label(for='productType') Type of Product
             select#productType.form-select(name='productType' required='')
               option(value=`${item.productType}` selected) #{item.productType}
               option(value='Wood') Wood
               option(value='Furniture') Furniture
+            .invalid-feedback Please select product type.  
 
           .col-md-4
             label.form-label(for='quantity') Quantity
@@ -40,7 +42,7 @@ block content
               value=`${item.quantity}` 
               required=''
             )
-
+            .invalid-feedback Quantity must be 1 or more.
           .col-md-4
             label.form-label(for='costPrice') Cost Price (UGX)
             input#costPrice.form-control(
@@ -50,9 +52,9 @@ block content
               value=`${item.costPrice}` 
               required=''
             )
-
+            .invalid-feedback Cost Price must be 100 UGX or more.
           .col-md-4
-            label.form-label(for='productPrice') Product Price (UGX)
+            label.form-label(for='productPrice') Selling Price (UGX)
             input#productPrice.form-control(
               type='number' 
               name='productPrice' 
@@ -71,16 +73,16 @@ block content
                       value=supplier.supplierName 
                       data-phone=supplier.phoneNumber
                     )= supplier.supplierName
-
+            .invalid-feedback Please select a supplier.
           .col-md-6
             label.form-label(for='dateBought') Date
             input#dateBought.form-control(
               type='date' 
               name='dateBought' 
-              value=`${moment(item.dateBought).format("YYYY-MM-DD")}` 
+              value=`${moment(item.dateBought).utcOffset(3).format("YYYY-MM-DD")}` 
               required=''
             )
-
+            .invalid-feedback Date must be today's date.
           .col-md-6
             label.form-label(for='quality') Quality
             select#quality.form-select(name='quality' required='')
@@ -88,7 +90,7 @@ block content
               option(value='High') High
               option(value='Medium') Medium
               option(value='Low') Low
-
+            .invalid-feedback Please select quality.
           .col-md-6
             label.form-label(for='color') Color
             select#color.form-select(name='color' required='')
@@ -124,7 +126,7 @@ block content
               value=`${item.measurements}` 
               placeholder='Enter 200cm x 150cm x 90cm'
             )
-
+            .invalid-feedback Measurements must include 'cm'
           .col-md-6
             label.form-label(for='supplierPhone') Supplier Phone Number
             select#supplierPhone.form-select(name='phoneNumber' required='')
@@ -136,7 +138,7 @@ block content
                       value=supplier.phoneNumber 
                       data-id=supplier.supplierName
                     )= supplier.phoneNumber
-
+            .invalid-feedback Please select supplier phone.
           .col-12
             button.btn.btn-dark(type='submit') Update Stock
 

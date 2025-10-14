@@ -1,5 +1,65 @@
+:root{
+    --brown:#81756e;
+}
+
 .mb-4 button.active {
-  background-color: #333; /* Dark background for active button */
-  color: #fff;            /* White text */
-  border-color: #333;     /* Match border to background */
+  background-color: #333; 
+  color: #fff;            
+  border-color: #333;     
+}
+
+/* Search input styling */
+#searchInput {
+  border: 2px solid #81756e;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+}
+table td{
+  font-size: 15px;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: #5c514c;  /* darker shade when focused */
+  box-shadow: 0 0 6px rgba(129, 117, 110, 0.6);
+}
+
+.stocktable a.btn[href="/stock"] {
+  background-color: #81756e;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.stocktable a.btn[href="/stock"]:hover {
+  background-color: #5c514c;  /* darker brown */
+  border-color: #5c514c;
+  color: #fff;
+  transform: scale(1.05);     /* subtle zoom */
+}
+
+#stockTable thead th {
+  background-color:  #6f665f;   /* same brown shade */
+  color: #fff;                 /* white text for contrast */
+  text-align: center;
+  font-weight: 400;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+
+
+/* Style the table footer */
+#stockTable tfoot td {
+  background-color: #81756e;
+  color: #fff;
+  font-weight: 700;
+  text-align: right;
+  border-top: 2px solid #555;
+}
+
+/* First cell in footer (TOTAL label) align left */
+#stockTable tfoot td:first-child {
+  text-align: left;
+  padding-left: 10px;
 }

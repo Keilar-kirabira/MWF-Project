@@ -1,0 +1,60 @@
+/* Table Head */
+.table thead.table th {
+  background-color: #81756e;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Table Foot */
+.table tfoot td {
+  background-color: #81756e;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+table td{
+  font-size: 15px;
+}
+/* Search Field */
+input[type="search"], 
+input[type="text"] {
+  border: 2px solid #81756e !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+  outline: none;
+}
+
+input[type="search"]:focus, 
+input[type="text"]:focus {
+  border-color: #5e524c; /* darker shade on focus */
+  box-shadow: 0 0 5px rgba(129, 117, 110, 0.6);
+}
+
+/* Custom Button */
+.custom-btn {
+  display: inline-block;
+  border: 2px solid #81756e;
+  background-color: #81756e;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none; /* remove underline */
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.custom-btn:hover {
+  background-color: #fff;
+  color: #81756e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Active Click Effect */
+.custom-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
